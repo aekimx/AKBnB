@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       return User.scope("currentUser").findByPk(id);
     };
     // static login method to find the user, and if found validate password
-    static async login({credential, password}) {
-      const {Op} = require('sequelize');
+    static async login({ credential, password }) {
+      const { Op } = require('sequelize');
       const user = await User.scope('loginUser').findOne({
         where: {
           [Op.or]: {
@@ -31,8 +31,10 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       });
-      if (user && user.validatePassword(password)) await User.scope('currentUser').findByPk(user.id)
-    };
+      if (user && user.validatePassword(password)) {
+        return await User.scope('currentUser').findByPk(user.id);
+      }
+    }
     // static signup method to create the user and return the created user's info
     static async signup({username, email, password}) {
       const hashedPassword = bcrypt.hashSync(password);
