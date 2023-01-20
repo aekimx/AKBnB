@@ -33,11 +33,13 @@ module.exports = (sequelize, DataTypes) => {
         len: [3, 256],
         isEmail: true
       }
-
     },
     hashedPassword: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        len: [60, 60]
+      }
     }
   }, {
     sequelize,
