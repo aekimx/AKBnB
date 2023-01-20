@@ -6,8 +6,5 @@
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend",
     "build": "npm run --prefix backend build"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3"
   }
 }
