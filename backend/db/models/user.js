@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     // create object with only User instance info that is safe to save to a JWT
     toSafeObject() {
-      const {id, username, email } = this;
-      return {id, username, email};
+      const {id, firstName, lastName, username, email } = this;
+      return {id, firstName, lastName, username, email};
     };
     // return true if match, return false if not a match
     validatePassword(password) {
@@ -77,6 +77,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [60, 60]
       }
+    },
+    firstName: {
+      type: DataTypes.STRING
+    },
+    lastName: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,
