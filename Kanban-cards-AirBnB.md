@@ -185,7 +185,7 @@ Create and return a new image for a review specified by id.
 - [ ] Image data returned includes the `id` and `url`
 - [ ] Error response with status 404 is given when a review does not exist with
   the provided `id`
-- [ ] Error response with status 400 is given when the maximum number of images
+- [ ] Error response with status 403 is given when the maximum number of images
   have been added for the review
 
 
