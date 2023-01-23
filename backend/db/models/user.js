@@ -12,14 +12,17 @@ module.exports = (sequelize, DataTypes) => {
       const {id, firstName, lastName, username, email } = this;
       return {id, firstName, lastName, username, email};
     };
+
     // return true if match, return false if not a match
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString())
     };
+
     // get current user by Id
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
     };
+
     // static login method to find the user, and if found validate password
     static async login({ credential, password }) {
       const { Op } = require('sequelize');
@@ -34,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
       if (user && user.validatePassword(password)) {
         return await User.scope('currentUser').findByPk(user.id);
       }
-    }
+    };
+
     // static signup method to create the user and return the created user's info
     static async signup({username, email, password}) {
       const hashedPassword = bcrypt.hashSync(password);
