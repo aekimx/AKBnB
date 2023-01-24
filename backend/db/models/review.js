@@ -15,10 +15,32 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Review.init({
-    spotId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
-    review: DataTypes.STRING,
-    stars: DataTypes.INTEGER
+    spotId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    review: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    stars: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 0,
+        max: 5,
+        checkInteger(value) {
+          if (value % 2 !== 0) throw new Error("Must be a valid rating!");
+        },
+        checkNumber(value) {
+          if (isNaN(value)) throw new Error("Must be a number!");
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Review',

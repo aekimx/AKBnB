@@ -1,10 +1,12 @@
 const express = require('express');
 const { Spot } = require('../../db/models');
 
+const router = express.Router();
 
-router.get('/spots', async (req, res) => {
+router.get('/', async (req, res) => {
   const spots = await Spot.findAll();
-  return res.json(spots);
+  return res.json({"Spots": spots});
 })
 
-const router = express.Router();
+
+module.exports = router;
