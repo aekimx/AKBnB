@@ -40,12 +40,14 @@ module.exports = (sequelize, DataTypes) => {
     };
 
     // static signup method to create the user and return the created user's info
-    static async signup({username, email, password}) {
+    static async signup({username, email, password, firstName, lastName}) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
         email,
-        hashedPassword
+        hashedPassword,
+        firstName,
+        lastName
       })
       return await User.scope('currentUser').findByPk(user.id);
     }
@@ -64,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'spotId'
       });
 
-      User.hasMany(models.Spot, {foreignKey: 'ownerId'});
+      User.hasMany(models.Spot, {foreignKey: 'ownerId', as: 'Owner'});
 
     }
   }
