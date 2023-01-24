@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model, Op} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     /**
@@ -30,15 +29,79 @@ module.exports = (sequelize, DataTypes) => {
   }
   Spot.init({
     ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.DECIMAL
+    address: {
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+        len: {
+          [Op.gt]: 0
+        }
+      }
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          [Op.gt]: 0
+        },
+        // need to check if no numbers? validation
+      }
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          [Op.gt]: 0
+        }
+        // need to check if no numbers? validation
+      }
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          [Op.gt]: 0
+        }
+      }
+    },
+    lat: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        checkLat(val) {
+          if (isNaN(val)) throw new Error('Must be a number!')
+        }
+      }
+    },
+    lng: {
+      type: DataTypes.DECIMAL,
+      validate: {
+        checkLng(val) {
+          if (isNaN(val)) throw new Error('Must be a number!')
+        }
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          [Op.between]: [1,50]
+        }
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: {
+        min: 1
+      }
+    }
   }, {
     sequelize,
     modelName: 'Spot',
