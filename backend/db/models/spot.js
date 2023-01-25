@@ -70,17 +70,13 @@ module.exports = (sequelize, DataTypes) => {
     lat: {
       type: DataTypes.DECIMAL,
       validate: {
-        checkLat(val) {
-          if (isNaN(val)) throw new Error('Must be a number!')
-        }
+        isDecimal: true
       }
     },
     lng: {
       type: DataTypes.DECIMAL,
       validate: {
-        checkLng(val) {
-          if (isNaN(val)) throw new Error('Must be a number!')
-        }
+        isDecimal: true
       }
     },
     name: {

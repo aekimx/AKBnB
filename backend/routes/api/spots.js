@@ -9,7 +9,7 @@ const {
 const { requireAuth, restoreUser } = require("../../utils/auth");
 
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrorsSpots } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -114,31 +114,65 @@ const validateCreateSpot = [
     .withMessage('Country is required'),
   check('lat')
     .exists({checkFalsy: true})
-    .withMessage('Latitude is not valid'),
+    .withMessage('Latitude is not valid')
+    .isDecimal()
+    .withMessage('Latitude should be a decimal'),
   check('lng')
     .exists({checkFalsy: true})
-    .withMessage('Longitude is not valid'),
+    .withMessage('Longitude is not valid')
+    .isDecimal()
+    .withMessage('Longitude should be a decimal'),
   check('name')
     .exists({checkFalsy: true})
-    .withMessage('Name must be less than 50 characters '),
+    .withMessage('Name is required')
+    .isLength({max:50})
+    .withMessage('Name should be less than 50 characters'),
   check('description')
     .exists({checkFalsy: true})
     .withMessage('Description is required'),
   check('price')
     .exists({checkFalsy: true})
     .withMessage('Price per day is required'),
-  handleValidationErrors
+  handleValidationErrorsSpots
 ];
 
 // POST /api/spots
 
-router.post("/", requireAuth, validateCreateSpot, async(req, res, next) => {
+router.post("/", requireAuth, validateCreateSpot, async(req, res) => {
   const {address, city, state, country, lat, lng, name, description, price} = req.body;
 
   const newSpot = await Spot.create({address, city, state, country, lat, lng, name, description,price});
   res.status(201);
   return res.json(newSpot);
 });
+
+
+// POST /api/spots/:spotId/images
+router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
+  let spot = await Spot.findAll({
+    where: {
+      id: req.params.spotId
+    }
+  })
+  if (!spot) {
+    let error = {
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    }
+    return res.json(error);
+  } else {
+    if (spot.ownerId === req.user.id) {
+      const {url, preview} = req.body;
+      const spotId = req.params.spotId;
+      let newSpotImage = await SpotImage.create({spotId,url,preview});
+      res.status(200);
+      return res.json(newSpotImage);
+    }
+  }
+})
+
+//PUT /api/spots/:spotId
+
 
 
 module.exports = router;
