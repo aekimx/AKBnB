@@ -4,7 +4,8 @@ const {
   Review,
   ReviewImage,
   SpotImage,
-  User
+  User,
+  sequelize
 } = require("../../db/models");
 const { requireAuth, restoreUser } = require("../../utils/auth");
 
@@ -253,8 +254,7 @@ const validateCreateReview = [
     .exists({checkFalsy: true})
     .withMessage('You must provide star rating')
     .isIn([1,2,3,4,5])
-    .withMessage("Stars must be an integer from 1 to 5")
-    ,
+    .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrorsSpots
 ];
 
@@ -266,13 +266,19 @@ router.post('/:spotId/reviews', requireAuth, validateCreateReview, async (req, r
     },
     raw: true
   });
-  console.log(spot.ownerId)
 
   if (!spot) {
     return res.json({
     "message": "Spot couldn't be found",
     "statusCode": 404
-  })} else {
+  })
+  } else if (Review.findOne({where: {userId : spot.ownerId}})) {
+    res.status(403);
+    return res.json({
+      "message": "User already has a review for this spot",
+      "statusCode": 403
+    })
+  } else {
     const {review, stars} = req.body;
     const newReview = await Review.create({
       userId: spot.ownerId,
