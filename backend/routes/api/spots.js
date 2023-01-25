@@ -205,21 +205,19 @@ router.post("/:spotId/images", restoreUser, requireAuth, async (req, res) => {
     if (spot[0].ownerId === req.user.id) {
       const { url, preview } = req.body;
       const spotId = req.params.spotId;
-      let newSpotImage = await SpotImage.create({ spotId, url, preview });
-      console.log(newSpotImage);
+      let newSpotImage = await SpotImage.scope(['defaultScope']).create({ spotId, url, preview });
       res.status(200);
-      return res.json(newSpotImage);
+      return res.json({
+        "id":newSpotImage.id,
+        "url":newSpotImage.url,
+        "preview": newSpotImage.preview}
+      );
     }
   }
 });
 
 //PUT /api/spots/:spotId
-router.put(
-  "/:spotId",
-  restoreUser,
-  requireAuth,
-  validateCreateSpot,
-  async (req, res) => {
+router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
     if (!spot) {
       let error = {
@@ -294,7 +292,8 @@ router.get("/:spotId/reviews", async (req, res) => {
           model: User,
           attributes: ["id", "firstName", "lastName"]
         },
-        { model: ReviewImage }
+        { model: ReviewImage,
+        attributes: ['id','url'] }
       ]
     });
     return res.json({ Reviews: reviews });

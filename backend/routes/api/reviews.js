@@ -51,7 +51,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
 
 // POST /api/reviews/:reviewId/images
 router.post('/:reviewId/images', async (req,res) => {
-  const review = Review.findByPk(req.params.reviewId);
+  const review = await Review.findByPk(req.params.reviewId);
   // if review doesn't exist
   if (!review) {
     res.status(404);
