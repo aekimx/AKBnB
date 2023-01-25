@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
 
 // GET /api/spots/current
 router.get("/current", restoreUser, requireAuth, async (req, res) => {
-  console.log(req.user.id);
+  // console.log(req.user.id);
   let userSpots = await Spot.findAll({
     raw: true,
     where: {
@@ -218,6 +218,73 @@ router.delete('/:spotId', async(req, res) => {
     )
   }
 })
+
+// GET /api/spots/:spotId/reviews
+router.get('/:spotId/reviews', async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    return res.json({
+    "message": "Spot couldn't be found",
+    "statusCode": 404
+  })
+  } else {
+    const reviews = await Review.findAll({
+      where: {
+        spotId: req.params.spotId
+      },
+      include: [
+        {
+        model: User,
+        attributes: ['id', 'firstName','lastName']
+      },
+      {model: ReviewImage}
+    ]
+    });
+    return res.json({"Reviews": reviews});
+  }
+})
+
+
+const validateCreateReview = [
+  check('review')
+    .exists({checkFalsy: true })
+    .withMessage('Review text is required'),
+  check('stars')
+    .exists({checkFalsy: true})
+    .withMessage('You must provide star rating')
+    .isIn([1,2,3,4,5])
+    .withMessage("Stars must be an integer from 1 to 5")
+    ,
+  handleValidationErrorsSpots
+];
+
+// POST /api/spots/:spotId/reviews
+router.post('/:spotId/reviews', requireAuth, validateCreateReview, async (req, res) => {
+  const spot = await Spot.findOne({
+    where: {
+    id: req.params.spotId
+    },
+    raw: true
+  });
+  console.log(spot.ownerId)
+
+  if (!spot) {
+    return res.json({
+    "message": "Spot couldn't be found",
+    "statusCode": 404
+  })} else {
+    const {review, stars} = req.body;
+    const newReview = await Review.create({
+      userId: spot.ownerId,
+      spotId: req.params.spotId,
+      review,
+      stars
+    })
+      res.status(201)
+      return res.json(newReview)
+  }
+})
+
 
 
 module.exports = router;

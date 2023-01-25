@@ -11,17 +11,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Review.hasMany(models.ReviewImage, {foreignKey: 'reviewId'})
+      Review.hasMany(models.ReviewImage, {foreignKey: 'reviewId'});
+
+      Review.belongsTo(models.User, {foreignKey: 'userId'});
+      Review.belongsTo(models.Spot, {foreignKey: 'spotId'});
     }
   }
   Review.init({
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE'
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE'
     },
     review: {
       type: DataTypes.STRING,
@@ -34,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
         min: 0,
         max: 5,
         checkInteger(value) {
-          if (value % 2 !== 0) throw new Error("Must be a valid rating!");
+          if (!([1,2,3,4,5].includes(value))) throw new Error("Must be a valid rating!");
         },
         checkNumber(value) {
           if (isNaN(value)) throw new Error("Must be a number!");
