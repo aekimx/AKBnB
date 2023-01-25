@@ -172,7 +172,52 @@ router.post('/:spotId/images', restoreUser, requireAuth, async (req, res) => {
 })
 
 //PUT /api/spots/:spotId
+router.put('/:spotId', restoreUser, requireAuth, validateCreateSpot, async (req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    let error = {
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    }
+    return res.json(error);
+  } else {
+    if (spot.ownerId === req.user.id) {
+      const {address, city, state, country, lat, lng, name, description, price} = req.body;
+      if (address) spot.address = address;
+      if (city) spot.city = city;
+      if (state) spot.state = state;
+      if (country) spot.country = country;
+      if (lat) spot.lat = lat;
+      if (lng) spot.lng = lng;
+      if (name) spot.name = name;
+      if (description) spot.description = description;
+      if (price) spot.price = price;
+    }
+    res.status(200);
+    let updatedSpot = await Spot.findByPk(req.params.spotId);
+    return res.json(updatedSpot);
+  }
+})
 
+
+// DELETE /api/spots/:spotId
+
+router.delete('/:spotId', async(req, res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) {
+    let error = {
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    }
+    return res.json(error);
+  } else {
+    spot.destroy();
+    return res.json({
+      "message": "Successfully deleted",
+      "statusCode": 200
+    })
+  }
+})
 
 
 module.exports = router;
