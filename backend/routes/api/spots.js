@@ -22,18 +22,16 @@ router.get("/", async (req, res) => {
   for (let spot of spots) {
     let review = await Review.findAll({
       raw: true,
-      attributes: ["stars"],
-      where: {
-        spotId: spot.id
-      }
+      attributes: [[sequelize.fn('avg', sequelize.col('stars')), 'avgStarRating']],
+      where: {spotId: spot.id}
     });
     // add avg rating - refactor later
-    let average = 0;
-    for (rating of review) {
-      average += rating.stars;
-    }
-    average = average / review.length;
-    spot.avgRating = average;
+    // let average = 0;
+    // for (rating of review) {
+    //   average += rating.stars;
+    // }
+    // average = average / review.length;
+    spot.avgRating = review;
 
     let previewImageURL = await SpotImage.findAll({
       raw: true,
@@ -61,17 +59,17 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
   for (let spot of userSpots) {
     let review = await Review.findAll({
       raw: true,
-      attributes: ["stars"],
+      attributes: [[sequelize.fn('avg', sequelize.col('stars')), 'avgStarRating']],
       where: {
         userId: req.user.id
       }
     });
-    let average = 0;
-    for (rating of review) {
-      average += rating.stars;
-    }
-    average = average / review.length;
-    spot.avgRating = average;
+    // let average = 0;
+    // for (rating of review) {
+    //   average += rating.stars;
+    // }
+    // average = average / review.length;
+    spot.avgRating = review;
 
     // add preview image
     let previewImageURL = await SpotImage.findAll({
@@ -212,10 +210,12 @@ router.delete('/:spotId', async(req, res) => {
     return res.json(error);
   } else {
     spot.destroy();
-    return res.json({
+    return res.json(
+      {
       "message": "Successfully deleted",
       "statusCode": 200
-    })
+      }
+    )
   }
 })
 
