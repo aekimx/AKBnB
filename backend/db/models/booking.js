@@ -22,8 +22,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE'
     },
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE
+    startDate: {
+     type: DataTypes.DATE,
+     allowNull: false
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        checkEndDate(value) {
+          if (this.startDate > value) throw new Error("Must give appropriate check in date");
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Booking',
