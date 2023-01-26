@@ -1,5 +1,6 @@
 const express = require("express");
 const {
+  Booking,
   Spot,
   Review,
   ReviewImage,
@@ -313,12 +314,8 @@ const validateCreateReview = [
 ];
 
 // POST /api/spots/:spotId/reviews
-router.post(
-  "/:spotId/reviews",
-  requireAuth,
-  validateCreateReview,
-  async (req, res) => {
-    const spot = await Spot.findOne({
+router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, res) => {
+  const spot = await Spot.findOne({
       where: {
         id: req.params.spotId
       },
@@ -346,8 +343,45 @@ router.post(
       });
       res.status(201);
       return res.json(newReview);
-    }
   }
-);
+});
+
+// GET /api/spots/:spotId/bookings;
+router.get('/:spotId/bookings', requireAuth, async (req,res) => {
+  let spot = await Spot.findByPk(req.params.spotId);
+  spot = spot.toJSON();
+  if (!spot) {
+    res.status(404);
+    return res.json({
+      "message": "Spot couldn't be found",
+      "statusCode": 404
+    })
+  }
+  if (spot.ownerId === req.user.id) {
+    let bookings = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId
+      },
+      include: {
+        model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      }
+    });
+    return res.json({"Bookings": bookings})
+  } else {
+    const bookingsLite = await Booking.findAll({
+      where: {
+        spotId: req.params.spotId
+      },
+      attributes: {exclude: ['userId','createdAt', 'updatedAt']}
+    })
+    return res.json({"Bookings": bookingsLite})
+  }
+})
+
+// POST /api/spots/:spotId/bookings
+router.post('/:spotId/bookings', async (req,res) => {
+
+})
 
 module.exports = router;
