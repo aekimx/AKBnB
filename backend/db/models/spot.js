@@ -50,29 +50,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: {
-          [Op.gt]: 0
-        },
-        // need to check if no numbers? validation
+        len: {[Op.gt]: 0},
+        isAlpha:true
       }
     },
     state: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: {
-          [Op.gt]: 0
-        }
-        // need to check if no numbers? validation
+        len: {[Op.gt]: 0},
+        isAlpha: true
       }
     },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: {
-          [Op.gt]: 0
-        }
+        len: {[Op.gt]: 0},
+        isAlpha: true
       }
     },
     lat: {
@@ -90,9 +85,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       validate: {
-        len: {
-          [Op.between]: [1,50]
-        }
+        len: {[Op.between]: [1,50]}
       }
     },
     description: {

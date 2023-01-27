@@ -64,7 +64,11 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
       attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
       where: {userId: req.user.id}
     });
-    spot.avgRating = review[0].avgStarRating;
+    if (review) {
+      spot.avgRating = review[0].avgStarRating;
+    } else {
+      spot.avgRating = null;
+    }
     // add preview image
     let previewImageURL = await SpotImage.findOne({
       raw: true,
@@ -74,6 +78,7 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
         preview: true
       }
     });
+
     if (previewImageURL) {
       spot.previewImage = previewImageURL.url;
     } else {
@@ -126,35 +131,19 @@ router.get("/:spotId", async (req, res) => {
 });
 
 const validateCreateSpot = [
-  check("address")
-    .exists({ checkFalsy: true })
-    .withMessage("Street address is required"),
+  check("address").exists({ checkFalsy: true }).withMessage("Street address is required"),
   check("city").exists({ checkFalsy: true }).withMessage("City is required"),
   check("state").exists({ checkFalsy: true }).withMessage("State is required"),
-  check("country")
-    .exists({ checkFalsy: true })
-    .withMessage("Country is required"),
-  check("lat")
-    .exists({ checkFalsy: true })
-    .withMessage("Latitude is not valid")
-    .isDecimal()
-    .withMessage("Latitude should be a decimal"),
-  check("lng")
-    .exists({ checkFalsy: true })
-    .withMessage("Longitude is not valid")
-    .isDecimal()
-    .withMessage("Longitude should be a decimal"),
-  check("name")
-    .exists({ checkFalsy: true })
-    .withMessage("Name is required")
-    .isLength({ max: 50 })
-    .withMessage("Name should be less than 50 characters"),
-  check("description")
-    .exists({ checkFalsy: true })
-    .withMessage("Description is required"),
-  check("price")
-    .exists({ checkFalsy: true })
-    .withMessage("Price per day is required"),
+  check("country").exists({ checkFalsy: true }).withMessage("Country is required"),
+  check("lat").exists({ checkFalsy: true }).withMessage("Latitude is not valid")
+    .isDecimal().withMessage("Latitude should be a decimal"),
+  check("lng").exists({ checkFalsy: true }).withMessage("Longitude is not valid")
+    .isDecimal().withMessage("Longitude should be a decimal"),
+  check("name").exists({ checkFalsy: true }).withMessage("Name is required")
+    .isLength({ max: 50 }).withMessage("Name should be less than 50 characters"),
+  check("description").exists({ checkFalsy: true }).withMessage("Description is required"),
+  check("price").exists({ checkFalsy: true }).withMessage("Price per day is required"),
+    // .isIn({min: 1}).withMessage("Price per day must be a positive number"),
   handleValidationErrorsSpots
 ];
 
