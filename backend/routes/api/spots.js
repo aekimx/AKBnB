@@ -178,21 +178,25 @@ router.post("/", requireAuth, validateCreateSpot, async (req, res) => {
   return res.json(newSpot);
 });
 
+const validateCreateSpotImage = [
+  check("url").exists({ checkFalsy: true }).withMessage("URL is Required"),
+  check("preview").exists({ checkFalsy: true }).withMessage("Please provide a preview selection"),
+  handleValidationErrorsSpots
+];
+
 // POST /api/spots/:spotId/images
-router.post("/:spotId/images", restoreUser, requireAuth, async (req, res) => {
-  let spot = await Spot.findAll({
+router.post("/:spotId/images", restoreUser, requireAuth, validateCreateSpotImage, async (req, res) => {
+  let spot = await Spot.findOne({
     raw: true,
     where: {id: req.params.spotId}
   });
-  console.log(spot);
+
   if (!spot) {
-    let error = {
+    return res.json({
       message: "Spot couldn't be found",
-      statusCode: 404
-    };
-    return res.json(error);
+      statusCode: 404});
   } else {
-    if (spot[0].ownerId === req.user.id) {
+    if (spot.ownerId === req.user.id) {
       const { url, preview } = req.body;
       const spotId = req.params.spotId;
       let newSpotImage = await SpotImage.scope(['defaultScope']).create({ spotId, url, preview });
@@ -202,6 +206,8 @@ router.post("/:spotId/images", restoreUser, requireAuth, async (req, res) => {
         "url":newSpotImage.url,
         "preview": newSpotImage.preview}
       );
+    } else {
+      return res.json("You are not authorized to create an image for this spo.")
     }
   }
 });
@@ -217,17 +223,7 @@ router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req,
       return res.json(error);
     } else {
       if (spot.ownerId === req.user.id) {
-        const {
-          address,
-          city,
-          state,
-          country,
-          lat,
-          lng,
-          name,
-          description,
-          price
-        } = req.body;
+        const {address, city, state, country, lat, lng, name, description,price } = req.body;
         if (address) spot.address = address;
         if (city) spot.city = city;
         if (state) spot.state = state;
@@ -237,10 +233,12 @@ router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req,
         if (name) spot.name = name;
         if (description) spot.description = description;
         if (price) spot.price = price;
+        let updatedSpot = await Spot.findByPk(req.params.spotId);
+        res.status(200);
+        return res.json(updatedSpot);
+      } else {
+        return res.json("You are not authorized to update this spot.")
       }
-      res.status(200);
-      let updatedSpot = await Spot.findByPk(req.params.spotId);
-      return res.json(updatedSpot);
     }
   }
 );

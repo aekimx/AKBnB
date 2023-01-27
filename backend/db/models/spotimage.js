@@ -25,7 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     preview: {
       type: DataTypes.BOOLEAN,
-      allowNull: true
+      allowNull: true,
+      validate: {
+        checkIfBoolean(value) {
+          if ((value !== true) && (value !== false)) throw new Error("Must be true or false!");
+        }
+      }
     }
   }, {
     sequelize,
