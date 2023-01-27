@@ -310,9 +310,7 @@ const validateCreateReview = [
 // POST /api/spots/:spotId/reviews
 router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, res) => {
   const spot = await Spot.findOne({
-      where: {
-        id: req.params.spotId
-      },
+      where: {id: req.params.spotId},
       raw: true
     });
     if (!spot) {

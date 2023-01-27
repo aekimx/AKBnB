@@ -17,9 +17,7 @@ const router = express.Router();
 // GET /reviews/current
 router.get('/current', restoreUser, requireAuth, async (req, res)=> {
   const reviews = await Review.findAll({
-    where: {
-       userId: req.user.id
-    },
+    where: {userId: req.user.id},
     include: [
       {
         model: User,
@@ -37,15 +35,19 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
       }
       },
       {
-        model: ReviewImage
+        model: ReviewImage,
+        attributes: ['id', 'url']
       }
     ]
   });
-
-  let previewImage = reviews[0].dataValues.Spot.dataValues.previewImage[0].dataValues.url
-  reviews[0].dataValues.Spot.dataValues.previewImage = previewImage;
-
-  return res.json({"Reviews": reviews});
+  if (!reviews[0]) {
+    return res.json("No reviews found!");
+  } else {
+    let previewImage = reviews[0].dataValues.Spot.dataValues.previewImage[0].dataValues.url
+    console.log(previewImage);
+    reviews[0].dataValues.Spot.dataValues.previewImage = previewImage;
+    return res.json({"Reviews": reviews});
+  }
 })
 
 
