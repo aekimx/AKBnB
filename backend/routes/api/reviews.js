@@ -50,9 +50,15 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
   }
 })
 
+const validateCreateReviewImage = [
+  check("url")
+    .exists({ checkFalsy: true })
+    .withMessage("URL is required"),
+  handleValidationErrorsSpots
+];
 
 // POST /api/reviews/:reviewId/images
-router.post('/:reviewId/images', requireAuth, async (req,res) => {
+router.post('/:reviewId/images', requireAuth, validateCreateReviewImage, async (req,res) => {
   const review = await Review.findByPk(req.params.reviewId);
   // if review doesn't exist
   if (!review) {
@@ -139,11 +145,17 @@ router.delete('/:reviewId', restoreUser, requireAuth, async (req,res) => {
       "statusCode": 404
     })
   } else {
-    deletedReview.destroy();
-    return res.json({
-      "message": "Successfully deleted",
-      "statusCode": 200
-    })
+    console.log(deletedReview);
+    if (deletedReview.dataValues.userId === req.user.id) {
+      deletedReview.destroy();
+      res.status(200)
+      return res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+      })
+    } else {
+      return res.json("You are not authorized to delete this review.")
+    }
   }
 })
 
