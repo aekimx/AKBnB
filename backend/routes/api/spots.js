@@ -215,6 +215,7 @@ router.post("/:spotId/images", restoreUser, requireAuth, validateCreateSpotImage
 //PUT /api/spots/:spotId
 router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
+    // console.log(spot);
     if (!spot) {
       let error = {
         message: "Spot couldn't be found",
@@ -224,16 +225,18 @@ router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req,
     } else {
       if (spot.ownerId === req.user.id) {
         const {address, city, state, country, lat, lng, name, description,price } = req.body;
-        if (address) spot.address = address;
-        if (city) spot.city = city;
-        if (state) spot.state = state;
-        if (country) spot.country = country;
-        if (lat) spot.lat = lat;
-        if (lng) spot.lng = lng;
-        if (name) spot.name = name;
-        if (description) spot.description = description;
-        if (price) spot.price = price;
+        await spot.update({address, city, state, country, lat, lng, name, description, price})
+        // if (address) spot.address = address;
+        // if (city) spot.city = city;
+        // if (state) spot.state = state;
+        // if (country) spot.country = country;
+        // if (lat) spot.lat = lat;
+        // if (lng) spot.lng = lng;
+        // if (name) spot.name = name;
+        // if (description) spot.description = description;
+        // if (price) spot.price = price;
         let updatedSpot = await Spot.findByPk(req.params.spotId);
+        // console.log(updatedSpot);
         res.status(200);
         return res.json(updatedSpot);
       } else {
