@@ -309,6 +309,7 @@ const validateCreateReview = [
 
 // POST /api/spots/:spotId/reviews
 router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, res) => {
+  // find the spot
   const spot = await Spot.findOne({
       where: {id: req.params.spotId},
       raw: true
@@ -318,23 +319,34 @@ router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, r
         message: "Spot couldn't be found",
         statusCode: 404
       });
-    } else if (Review.findOne({ where: { userId: spot.ownerId } })) {
-      res.status(403);
-      return res.json({
-        message: "User already has a review for this spot",
-        statusCode: 403
-      });
     } else {
-      const { review, stars } = req.body;
-      let newReview = await Review.create({
-        userId: spot.ownerId,
-        spotId: req.params.spotId,
-        review,
-        stars
-      });
-      res.status(201);
-      return res.json(newReview);
-  }
+      let review = await Review.findOne({
+        where: {
+          userId: req.user.id,
+          spotId: req.params.spotId
+       } })
+       if (review) {
+         res.status(403);
+         return res.json({
+           message: "User already has a review for this spot",
+           statusCode: 403
+         });
+       } else {
+         const { review, stars } = req.body;
+         let newReview = await Review.create({
+           userId: req.user.id,
+           spotId: req.params.spotId,
+           review,
+           stars
+         });
+         res.status(201);
+         return res.json(newReview);
+       }
+    }
+
+
+
+
 });
 
 // GET /api/spots/:spotId/bookings
