@@ -35,9 +35,28 @@ const handleValidationErrorsSpots = (req, _res, next) => {
   next();
 }
 
+const handleValidationErrorsBookings = (req, _res, next) => {
+  const validationErrors = validationResult(req);
+
+  if(!validationErrors.isEmpty()) {
+    const errors = validationErrors
+    .array()
+    .map((error) => `${error.msg}`);
+
+    const err = Error('Validation Error');
+    err.errors = errors;
+    err.statusCode = 403;
+    err.title = 'Validation Error'
+    next(err);
+  }
+  next();
+}
+
+
 
 
 module.exports = {
   handleValidationErrors,
-  handleValidationErrorsSpots
+  handleValidationErrorsSpots,
+  handleValidationErrorsBookings
 };

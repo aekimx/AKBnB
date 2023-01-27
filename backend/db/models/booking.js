@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Booking.init({
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false
+    },
     spotId: {
       type: DataTypes.INTEGER,
       onDelete: 'CADCADE'
@@ -26,17 +32,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     startDate: {
      type: DataTypes.DATE,
-     allowNull: false
+     allowNull: false,
+     validate: {
+      isDate: true
+     }
     },
     endDate: {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
+        isDate: true,
         checkEndDate(value) {
-          if (this.startDate > value) throw new Error("Must give appropriate check in date");
+          if (value < this.startDate) throw new Error("End date must be after start date!");
+        },
         }
       }
-    }
   }, {
     sequelize,
     modelName: 'Booking',
