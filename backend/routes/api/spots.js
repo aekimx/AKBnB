@@ -53,28 +53,20 @@ router.get("/", async (req, res) => {
 
 // GET /api/spots/current
 router.get("/current", restoreUser, requireAuth, async (req, res) => {
-  // console.log(req.user.id);
   let userSpots = await Spot.findAll({
     raw: true,
-    where: {
-      ownerId: req.user.id
-    }
+    where: {ownerId: req.user.id}
   });
-  // add avg rating - refactor later
   for (let spot of userSpots) {
+    // add average rating
     let review = await Review.findAll({
       raw: true,
-      attributes: [
-        [sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]
-      ],
-      where: {
-        userId: req.user.id
-      }
+      attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
+      where: {userId: req.user.id}
     });
     spot.avgRating = review[0].avgStarRating;
-
     // add preview image
-    let previewImageURL = await SpotImage.findAll({
+    let previewImageURL = await SpotImage.findOne({
       raw: true,
       attributes: ["url"],
       where: {
@@ -82,7 +74,8 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
         preview: true
       }
     });
-    spot.previewImage = previewImageURL[0].url;
+
+    spot.previewImage = previewImageURL.url;
   }
   return res.json({ Spots: userSpots });
 });
