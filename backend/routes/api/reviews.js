@@ -52,7 +52,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
 
 
 // POST /api/reviews/:reviewId/images
-router.post('/:reviewId/images', async (req,res) => {
+router.post('/:reviewId/images', requireAuth, async (req,res) => {
   const review = await Review.findByPk(req.params.reviewId);
   // if review doesn't exist
   if (!review) {
@@ -75,13 +75,19 @@ router.post('/:reviewId/images', async (req,res) => {
         "statusCode": 403
       })
     } else {
-      const { url } = req.body;
-      const newReviewImage = await ReviewImage.create({
-        reviewId: req.params.reviewId,
-        url
-      });
-      res.status(201);
-      return res.json(newReviewImage);
+      if (review.userId === req.user.id) {
+        const { url } = req.body;
+        const newReviewImage = await ReviewImage.create({
+          reviewId: req.params.reviewId,
+          url
+        });
+        res.status(201);
+        return res.json({
+          "id": newReviewImage.dataValues.id,
+        "url": newReviewImage.dataValues.url});
+      } else {
+        return res.json("You are not authorized to add an image to this review")
+      }
     }
   }
 })
