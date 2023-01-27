@@ -74,8 +74,11 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
         preview: true
       }
     });
-
-    spot.previewImage = previewImageURL.url;
+    if (previewImageURL) {
+      spot.previewImage = previewImageURL.url;
+    } else {
+      spot.previewImage = null;
+    }
   }
   return res.json({ Spots: userSpots });
 });
