@@ -352,7 +352,6 @@ router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, r
 // GET /api/spots/:spotId/bookings
 router.get('/:spotId/bookings', requireAuth, async (req,res) => {
   let spot = await Spot.findByPk(req.params.spotId);
-  spot = spot.toJSON();
   if (!spot) {
     res.status(404);
     return res.json({
@@ -362,15 +361,13 @@ router.get('/:spotId/bookings', requireAuth, async (req,res) => {
   }
   if (spot.ownerId === req.user.id) {
     let bookings = await Booking.findAll({
-      where: {
-        spotId: req.params.spotId
-      },
+      where: {spotId: req.params.spotId},
       include: {
         model: User,
         attributes: ['id', 'firstName', 'lastName']
       },
     });
-    if (!bookings) {
+    if (!bookings[0]) {
       res.status(404);
       return res.json({"Message": "No bookings found!"})
     } else {
@@ -426,14 +423,13 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
     res.status(404);
     return res.json({
       "message": "Spot couldn't be found",
-      "statusCode": 404
-    })
-  } else {
-    if (!(spot.userId === req.user.id)) {
+      "statusCode": 404})
+  }
+  if (!(spot.ownerId === req.user.id)) {
       let {startDate, endDate} = req.body;
-      startDate = new Date(startDate).getTime();
-      endDate = new Date(endDate).getTime();
-      if (endDate <= startDate) {
+      let startDateTime = new Date(startDate).getTime();
+      let endDateTime = new Date(endDate).getTime();
+      if (endDateTime <= startDateTime) {
         res.status(400);
         return res.json({
             "message": "Validation error",
@@ -444,10 +440,13 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
         let bookings = await Booking.findAll({
           raw: true,
           where: {spotId: req.params.spotId}})
+          console.log(bookings);
         for (let booking of bookings) {
-          let bookingStart = new Date(booking.startDate).getTime();
-          let bookingEnd = new Date(booking.endDate).getTime();
-          if ((bookingStart === startDate) && (bookingEnd === endDate)) {
+          let existingStart = new Date(booking.startDate).getTime();
+          let existingEnd = new Date(booking.endDate).getTime();
+          console.log(existingStart, "        ", startDateTime);
+
+          if ((existingStart === startDateTime) && (existingEnd === endDateTime)) {
               return res.json({
                 // "another": "ONE",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -455,8 +454,8 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
                 "errors": {
                   "startDate": "Start date conflicts with an existing booking",
                   "endDate": "End date conflicts with an existing booking"}})
-          } else if ((startDate >= bookingStart) && (startDate < bookingEnd) &&
-            (endDate > bookingStart) && (endDate <= bookingEnd)) {
+          } else if ((startDateTime >= bookingStart) && (startDateTime < bookingEnd) &&
+            (endDateTime > bookingStart) && (endDateTime <= bookingEnd)) {
               return res.json({
                 // "another": "TWO",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -505,7 +504,7 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
       } else {
         return res.json("You cannot book your own spot!")
       }
-  }
+
 })
 
 

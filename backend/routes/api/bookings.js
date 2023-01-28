@@ -24,10 +24,31 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
     },
     include: {
       model: Spot,
-      attributes: {exclude: ['createdAt', 'updatedAt']}
+      attributes: {exclude: ['createdAt', 'updatedAt', 'description']}
     }
   })
-  return res.json({"Bookings": bookings})
+  if (!bookings[0]) {
+    return res.json("No bookings found!")
+  } else {
+    for (let i = 0; i<bookings.length; i++ ) {
+      let booking = bookings[i];
+      let image = await SpotImage.findOne({
+        where: {
+          spotId: booking.spotId,
+          preview: true
+        },
+        attributes: ['url']
+      });
+      booking.dataValues.Spot.dataValues.previewImage = image.url
+
+      let start = booking.startDate.toISOString().slice(0,10);
+      let end = booking.endDate.toISOString().slice(0,10);
+      booking.dataValues.startDate = start;
+      booking.dataValues.endDate = end;
+  }
+  return res.json({"Bookings": bookings});
+  }
+
 })
 
 
