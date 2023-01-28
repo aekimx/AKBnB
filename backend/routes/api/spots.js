@@ -440,12 +440,17 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
         let bookings = await Booking.findAll({
           raw: true,
           where: {spotId: req.params.spotId}})
-          console.log(bookings);
-        for (let booking of bookings) {
+          // console.log(bookings);
+        for (let i =0 ; i < bookings.length; i++) {
+          let booking = bookings[i];
           let existingStart = new Date(booking.startDate).getTime();
+          console.log("booking    ", startDateTime)
+          console.log("existing   ",existingStart, "    ", i+1);
+          console.log(startDateTime < existingStart, i+1);
           let existingEnd = new Date(booking.endDate).getTime();
-          console.log(existingStart, "        ", startDateTime);
-
+          console.log("booking    ", endDateTime)
+          console.log(existingEnd, "    ", i+1);
+          // start/end date is same as existing booking
           if ((existingStart === startDateTime) && (existingEnd === endDateTime)) {
               return res.json({
                 // "another": "ONE",
@@ -454,8 +459,9 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
                 "errors": {
                   "startDate": "Start date conflicts with an existing booking",
                   "endDate": "End date conflicts with an existing booking"}})
-          } else if ((startDateTime >= bookingStart) && (startDateTime < bookingEnd) &&
-            (endDateTime > bookingStart) && (endDateTime <= bookingEnd)) {
+          // if new booking is within existing booking
+          } else if ((startDateTime >= existingStart) && (startDateTime < existingEnd) &&
+            (endDateTime > existingStart) && (endDateTime <= existingEnd)) {
               return res.json({
                 // "another": "TWO",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -463,21 +469,24 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
                 "errors": {
                    "startDate": "Start date conflicts with an existing booking",
                    "endDate": "End date conflicts with an existing booking"}})
-          } else if ((startDate >= bookingStart) && (startDate <= bookingEnd)) {
+          // if start date is within existing booking
+          } else if ((startDateTime >= existingStart) && (startDateTime <= existingEnd)) {
               return res.json({
                 // "another": "THREE",
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
                   "startDate": "Start date conflicts with an existing booking"}})
-          } else if ((endDate >= bookingStart) && (endDate <= bookingEnd)) {
+          // if end date is within existing booking
+          } else if ((endDateTime >= existingStart) && (endDateTime <= existingEnd)) {
               return res.json({
                 // "another": "FOUR",
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
                   "endDate": "End date conflicts with an existing booking"}})
-          } else if ((startDate < bookingStart) && (endDate > bookingEnd)) {
+          // if booking envelopes existing booking
+          } else if ((startDateTime < existingStart) && (endDateTime > existingEnd)) {
             return res.json({
               // "another": "FIVE",
               "message": "Sorry, this spot is already booked for the specified dates",
@@ -485,21 +494,20 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
               "errors": {
                  "startDate": "Start date conflicts with an existing booking",
                  "endDate": "End date conflicts with an existing booking"}})
-          } else {
-              let newBooking = await Booking.create({
-                spotId: req.params.spotId,
-                userId: req.user.id,
-                startDate,
-                endDate});
-                res.status(200);
-                newBooking = newBooking.toJSON();
-                let start = newBooking.startDate.toISOString().slice(0,10);
-                let end = newBooking.endDate.toISOString().slice(0,10);
-                newBooking.startDate = start;
-                newBooking.endDate = end;
-                return res.json(newBooking);
+          }
             }
-            }
+            let newBooking = await Booking.create({
+              spotId: req.params.spotId,
+              userId: req.user.id,
+              startDate,
+              endDate});
+              res.status(200);
+              newBooking = newBooking.toJSON();
+              let start = newBooking.startDate.toISOString().slice(0,10);
+              let end = newBooking.endDate.toISOString().slice(0,10);
+              newBooking.startDate = start;
+              newBooking.endDate = end;
+              return res.json(newBooking);
           }
       } else {
         return res.json("You cannot book your own spot!")
