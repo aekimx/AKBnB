@@ -103,7 +103,8 @@ router.get("/" , async (req, res) => {
         attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
         where: { spotId: spot.id }
       });
-      const avgRating = review[0].avgStarRating;
+      console.log(review[0]);
+      const avgRating = review[0].dataValues.avgStarRating;
       spot.avgRating = avgRating;
 
       // preview image
