@@ -39,7 +39,11 @@ router.get('/current', restoreUser, requireAuth, async (req, res) => {
         },
         attributes: ['url']
       });
-      booking.dataValues.Spot.dataValues.previewImage = image.url
+      if (!image) {
+        booking.dataValues.Spot.dataValues.previewImage = null;
+      } else {
+        booking.dataValues.Spot.dataValues.previewImage = image.url
+      }
 
       let start = booking.startDate.toISOString().slice(0,10);
       let end = booking.endDate.toISOString().slice(0,10);
@@ -66,33 +70,30 @@ const validateCreateBooking = [
 // PUT /api/bookings/:bookingId
 
 router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) => {
-  let today = new Date().getTime();
   let currentBooking = await Booking.findOne({
     raw: true,
     where: {id: req.params.bookingId}
   });
-  let currentEnd = new Date(currentBooking.endDate).getTime();
-  let currentStart = new Date(currentBooking.startDate).getTime();
-  // what we are trying to edit the booking dates to
-  let {startDate, endDate} = req.body;
-  newStart = new Date(startDate).getTime();
-  newEnd = new Date(endDate).getTime();
 
   if (!currentBooking) {
     res.status(404);
     return res.json({
-    "message": "Booking couldn't be found",
-    "statusCode": 404})
-  } else {
+      "message": "Booking couldn't be found",
+      "statusCode": 404})
+    } else {
+      let currentEnd = new Date(currentBooking.endDate).getTime();
+      let currentStart = new Date(currentBooking.startDate).getTime();
+      // what we are trying to edit the booking dates to
+      let {startDate, endDate} = req.body;
+      newStart = new Date(startDate).getTime();
+      newEnd = new Date(endDate).getTime();
     // Require authorization: must be user's own booking
     if (currentBooking.userId === req.user.id) {
       // find all bookings for the current spot
       let today = new Date().getTime();
       let allBookings = await Booking.findAll({
         raw: true,
-        where: {
-          spotId: currentBooking.spotId
-        }
+        where: {spotId: currentBooking.spotId}
       })
       // Trying to switch end date before start
       if (newEnd < newStart) {
