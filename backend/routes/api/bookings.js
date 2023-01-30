@@ -66,14 +66,13 @@ const validateCreateBooking = [
 // PUT /api/bookings/:bookingId
 
 router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) => {
-  // let today = new Date().getTime();
+  let today = new Date().getTime();
   let currentBooking = await Booking.findOne({
     raw: true,
-    where: {
-    id: req.params.bookingId
-    }
+    where: {id: req.params.bookingId}
   });
   let currentEnd = new Date(currentBooking.endDate).getTime();
+  let currentStart = new Date(currentBooking.startDate).getTime();
   // what we are trying to edit the booking dates to
   let {startDate, endDate} = req.body;
   newStart = new Date(startDate).getTime();
@@ -85,7 +84,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
     "message": "Booking couldn't be found",
     "statusCode": 404})
   } else {
-    // Require authorization: must be user's own spot
+    // Require authorization: must be user's own booking
     if (currentBooking.userId === req.user.id) {
       // find all bookings for the current spot
       let today = new Date().getTime();

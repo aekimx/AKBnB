@@ -16,7 +16,7 @@ const router = express.Router();
 
 // GET /reviews/current
 router.get('/current', restoreUser, requireAuth, async (req, res)=> {
-  const reviews = await Review.findAll({
+  let reviews = await Review.findAll({
     where: {userId: req.user.id},
     include: [
       {
@@ -25,14 +25,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
       },
       {
       model: Spot,
-      attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
-      include: {
-        model: SpotImage, as: 'previewImage',
-        where: {
-          preview: true
-        },
-        attributes: ['url']
-      }
+      attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
       },
       {
         model: ReviewImage,
@@ -40,12 +33,24 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
       }
     ]
   });
+
   if (!reviews[0]) {
     return res.json("No reviews found!");
   } else {
-    let previewImage = reviews[0].dataValues.Spot.dataValues.previewImage[0].dataValues.url
-    console.log(previewImage);
-    reviews[0].dataValues.Spot.dataValues.previewImage = previewImage;
+    for (let i = 0; i < reviews.length; i++) {
+      let review = reviews[i].toJSON();
+
+      let previewImage = await SpotImage.findOne({
+        raw: true,
+        where: {
+          preview: true,
+          spotId: review.spotId
+        },
+        attributes: ['url']
+      })
+      reviews[i].dataValues.Spot.dataValues.previewImage = previewImage.url;
+    }
+
     return res.json({"Reviews": reviews});
   }
 })
@@ -145,7 +150,7 @@ router.delete('/:reviewId', restoreUser, requireAuth, async (req,res) => {
       "statusCode": 404
     })
   } else {
-    console.log(deletedReview);
+    // console.log(deletedReview);
     if (deletedReview.dataValues.userId === req.user.id) {
       deletedReview.destroy();
       res.status(200)
