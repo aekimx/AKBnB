@@ -445,9 +445,6 @@ router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, r
        }
     }
 
-
-
-
 });
 
 // GET /api/spots/:spotId/bookings
@@ -545,17 +542,12 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
         for (let i =0 ; i < bookings.length; i++) {
           let booking = bookings[i];
           let existingStart = new Date(booking.startDate).getTime();
-          console.log("booking    ", startDateTime)
-          console.log("existing   ",existingStart, "    ", i+1);
-          console.log(startDateTime < existingStart, i+1);
           let existingEnd = new Date(booking.endDate).getTime();
-          console.log("booking    ", endDateTime)
-          console.log(existingEnd, "    ", i+1);
+
           // start/end date is same as existing booking
           if ((existingStart === startDateTime) && (existingEnd === endDateTime)) {
             res.status(403);
               return res.json({
-                // "another": "ONE",
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
@@ -566,7 +558,6 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
             (endDateTime > existingStart) && (endDateTime <= existingEnd)) {
               res.status(403);
               return res.json({
-                // "another": "TWO",
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
@@ -576,7 +567,6 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
           } else if ((startDateTime >= existingStart) && (startDateTime <= existingEnd)) {
               res.status(403);
               return res.json({
-                // "another": "THREE",
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
@@ -585,7 +575,6 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
           } else if ((endDateTime >= existingStart) && (endDateTime <= existingEnd)) {
               res.status(403);
               return res.json({
-                // "another": "FOUR",
                 "message": "Sorry, this spot is already booked for the specified dates",
                 "statusCode": 403,
                 "errors": {
@@ -594,7 +583,6 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
           } else if ((startDateTime < existingStart) && (endDateTime > existingEnd)) {
             res.status(403);
             return res.json({
-              // "another": "FIVE",
               "message": "Sorry, this spot is already booked for the specified dates",
               "statusCode": 403,
               "errors": {
@@ -608,11 +596,12 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
               startDate,
               endDate});
               res.status(200);
-              newBooking = newBooking.toJSON();
-              let start = newBooking.startDate.toISOString().slice(0,10);
-              let end = newBooking.endDate.toISOString().slice(0,10);
-              newBooking.startDate = start;
-              newBooking.endDate = end;
+              let newBookingJSON = newBooking.toJSON();
+              let start = newBookingJSON.startDate.toISOString().slice(0,10);
+              let end = newBookingJSON.endDate.toISOString().slice(0,10);
+              newBooking.dataValues.startDate = start;
+              newBooking.dataValues.endDate = end;
+              console.log(newBooking);
               return res.json(newBooking);
           }
       } else {
