@@ -97,6 +97,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
       })
       // Trying to switch end date before start
       if (newEnd < newStart) {
+        res.status(400);
         return res.json({
           "message": "Validation error",
           "statusCode": 400,
@@ -106,6 +107,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
         })
         // cannot check in and check out on same day
       } else if (newEnd === newStart){
+        res.status(400);
         return res.json({
           "message": "Validation error",
           "statusCode": 400,
@@ -114,6 +116,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
           }
         })
       } else if (currentEnd < today) {
+        res.status(403);
         return res.json({
           "message": "Past bookings can't be modified",
           "statusCode": 403
@@ -126,6 +129,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
           let end = new Date(booking.endDate).getTime();
           // try to switch for same date
           if ((newStart === start) && (newEnd === end)) {
+            res.status(403);
             return res.json({
               // "another": "ONE",
               "message": "Sorry, this spot is already booked for the specified dates",
@@ -136,6 +140,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
               }})
               // if new booking is within current booking
           } else if ((newStart < newEnd) && (newStart >= start) && (newEnd <= end)) {
+            res.status(403);
             return res.json({
               // "another": "TWO",
               "message": "Sorry, this spot is already booked for the specified dates",
@@ -145,6 +150,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
                  "endDate": "End date conflicts with an existing booking"}})
                  // if end is good but new start is within current booking
           } else if ((newStart >= start) && (newStart <= end)) {
+            res.status(403);
             return res.json({
               // "another": "THREE",
               "message": "Sorry, this spot is already booked for the specified dates",
@@ -153,6 +159,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
                 "startDate": "Start date conflicts with an existing booking"}})
                 // if start is good but new end is within current booking
           } else if ((newEnd >= start) && (newEnd <= end)) {
+            res.status(403);
             return res.json({
               // "another": "FOUR",
               "message": "Sorry, this spot is already booked for the specified dates",
@@ -161,6 +168,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
                 "endDate": "End date conflicts with an existing booking"}})
                 // if new start and new end envelope booking
           } else if ((newStart < start) && (newEnd > end)) {
+            res.status(403);
             return res.json({
               // "another": "FIVE",
               "message": "Sorry, this spot is already booked for the specified dates",
@@ -175,6 +183,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
             return res.json(currentBooking);
       }
     } else {
+      res.status(403);
       return res.json("You are not authorized to update this booking.")
     }
   }
@@ -187,6 +196,7 @@ router.delete('/:bookingId', requireAuth, async(req,res) => {
     where: {id: req.params.bookingId}
   });
   if (!booking) {
+    res.status(404);
     return res.json({
       "message": "Booking couldn't be found",
       "statusCode": 404
@@ -196,8 +206,9 @@ router.delete('/:bookingId', requireAuth, async(req,res) => {
     let bookingEnd = new Date(booking.endDate).getTime();
     if (booking.userId === req.user.id) {
       // Cant delete a booking thats already started
-      let today = new Date('2023-01-26').getTime();
+      let today = new Date().getTime();
       if ((bookingStart <= today) && (bookingEnd >= today)) {
+        res.status(403);
         return res.json({
           "message": "Bookings that have been started can't be deleted",
           "statusCode": 403
@@ -210,6 +221,7 @@ router.delete('/:bookingId', requireAuth, async(req,res) => {
         })
       }
     } else {
+      res.status(403);
       return res.json("You are not authorized to delete this booking")
     }
   }

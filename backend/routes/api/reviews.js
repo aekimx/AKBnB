@@ -35,6 +35,7 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
   });
 
   if (!reviews[0]) {
+    res.status(404);
     return res.json("No reviews found!");
   } else {
     for (let i = 0; i < reviews.length; i++) {
@@ -162,6 +163,7 @@ router.delete('/:reviewId', restoreUser, requireAuth, async (req,res) => {
         "statusCode": 200
       })
     } else {
+      res.status(403);
       return res.json("You are not authorized to delete this review.")
     }
   }

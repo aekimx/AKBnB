@@ -24,6 +24,7 @@ router.delete('/:imageId', requireAuth, async (req,res) => {
   })
   let imageJson = image.toJSON();
   if (!image) {
+    res.status(404);
     return res.json({
       "message": "Spot Image couldn't be found",
       "statusCode": 404
@@ -36,6 +37,7 @@ router.delete('/:imageId', requireAuth, async (req,res) => {
         "statusCode": 200
       })
     } else {
+      res.status(403);
       return res.json("You are not authorized to delete this image")
     }
   }

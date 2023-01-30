@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
     raw: true
   });
   if (!spots) {
+    res.status(404);
     return res.json({"message": "No spots found"})
   } else {
     for (let spot of spots) {
@@ -192,6 +193,7 @@ router.post("/:spotId/images", restoreUser, requireAuth, validateCreateSpotImage
   });
 
   if (!spot) {
+    res.status(404);
     return res.json({
       message: "Spot couldn't be found",
       statusCode: 404});
@@ -207,6 +209,7 @@ router.post("/:spotId/images", restoreUser, requireAuth, validateCreateSpotImage
         "preview": newSpotImage.preview}
       );
     } else {
+      res.status(403);
       return res.json("You are not authorized to create an image for this spo.")
     }
   }
@@ -221,6 +224,7 @@ router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req,
         message: "Spot couldn't be found",
         statusCode: 404
       };
+      res.status(404);
       return res.json(error);
     } else {
       if (spot.ownerId === req.user.id) {
@@ -240,6 +244,7 @@ router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req,
         res.status(200);
         return res.json(updatedSpot);
       } else {
+        res.status(403);
         return res.json("You are not authorized to update this spot.")
       }
     }
@@ -252,6 +257,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
   let spot = await Spot.findByPk(req.params.spotId);
   console.log(spot);
   if (!spot) {
+    res.status(404);
     return res.json({
       "message": "Spot couldn't be found",
       "statusCode": 404
@@ -264,6 +270,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
         statusCode: 200
       });
     } else {
+      res.status(403);
       return res.json("You are not authorized to delete this spot.")
     }
   }
@@ -273,6 +280,7 @@ router.delete("/:spotId", requireAuth, async (req, res) => {
 router.get("/:spotId/reviews", async (req, res) => {
   const spot = await Spot.findByPk(req.params.spotId);
   if (!spot) {
+    res.status(404);
     return res.json({
       message: "Spot couldn't be found",
       statusCode: 404
@@ -315,6 +323,7 @@ router.post("/:spotId/reviews", requireAuth, validateCreateReview, async (req, r
       raw: true
     });
     if (!spot) {
+      res.status(404);
       return res.json({
         message: "Spot couldn't be found",
         statusCode: 404
@@ -452,6 +461,7 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
           console.log(existingEnd, "    ", i+1);
           // start/end date is same as existing booking
           if ((existingStart === startDateTime) && (existingEnd === endDateTime)) {
+            res.status(403);
               return res.json({
                 // "another": "ONE",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -462,6 +472,7 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
           // if new booking is within existing booking
           } else if ((startDateTime >= existingStart) && (startDateTime < existingEnd) &&
             (endDateTime > existingStart) && (endDateTime <= existingEnd)) {
+              res.status(403);
               return res.json({
                 // "another": "TWO",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -471,6 +482,7 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
                    "endDate": "End date conflicts with an existing booking"}})
           // if start date is within existing booking
           } else if ((startDateTime >= existingStart) && (startDateTime <= existingEnd)) {
+              res.status(403);
               return res.json({
                 // "another": "THREE",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -479,6 +491,7 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
                   "startDate": "Start date conflicts with an existing booking"}})
           // if end date is within existing booking
           } else if ((endDateTime >= existingStart) && (endDateTime <= existingEnd)) {
+              res.status(403);
               return res.json({
                 // "another": "FOUR",
                 "message": "Sorry, this spot is already booked for the specified dates",
@@ -487,6 +500,7 @@ router.post('/:spotId/bookings', requireAuth, validateCreateBooking, async (req,
                   "endDate": "End date conflicts with an existing booking"}})
           // if booking envelopes existing booking
           } else if ((startDateTime < existingStart) && (endDateTime > existingEnd)) {
+            res.status(403);
             return res.json({
               // "another": "FIVE",
               "message": "Sorry, this spot is already booked for the specified dates",
