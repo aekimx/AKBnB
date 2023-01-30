@@ -48,9 +48,12 @@ router.get('/current', restoreUser, requireAuth, async (req, res)=> {
         },
         attributes: ['url']
       })
-      reviews[i].dataValues.Spot.dataValues.previewImage = previewImage.url;
+      if (!previewImage) {
+        reviews[i].dataValues.Spot.dataValues.previewImage = null;
+      } else {
+        reviews[i].dataValues.Spot.dataValues.previewImage = previewImage.url;
+      }
     }
-
     return res.json({"Reviews": reviews});
   }
 })
