@@ -18,11 +18,9 @@ const router = express.Router();
 
 router.delete('/:imageId', requireAuth, async (req,res) => {
   let image = await SpotImage.findOne({
-    where: {
-      id: req.params.imageId
-    }
+    where: {id: req.params.imageId},
+    include: {model: Spot, as: 'previewImage'}
   })
-  let imageJson = image.toJSON();
   if (!image) {
     res.status(404);
     return res.json({
@@ -30,7 +28,8 @@ router.delete('/:imageId', requireAuth, async (req,res) => {
       "statusCode": 404
     })
   } else {
-    if (imageJson.userId === req.user.id) {
+    let imageJson = image.toJSON();
+    if (imageJson.previewImage.ownerId === req.user.id) {
       image.destroy();
       return res.json({
         "message": "Successfully deleted",

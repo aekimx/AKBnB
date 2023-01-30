@@ -51,7 +51,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {[Op.gt]: 0},
-        isAlpha:true
       }
     },
     state: {
@@ -59,7 +58,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {[Op.gt]: 0},
-        isAlpha: true
       }
     },
     country: {
@@ -67,7 +65,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {[Op.gt]: 0},
-        isAlpha: true
       }
     },
     lat: {

@@ -124,6 +124,7 @@ router.get("/:spotId", async (req, res) => {
       ],
       where: {spotId: id}
     })
+
     spot.avgStarRating = reviews[0].avgStarRating;
     spot.numReviews= reviews[0].numReviews;
 
