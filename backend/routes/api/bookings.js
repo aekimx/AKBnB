@@ -71,7 +71,6 @@ const validateCreateBooking = [
 
 router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) => {
   let currentBooking = await Booking.findOne({
-    raw: true,
     where: {id: req.params.bookingId}
   });
 
@@ -82,13 +81,13 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
       "statusCode": 404})
     } else {
       let currentEnd = new Date(currentBooking.endDate).getTime();
-      let currentStart = new Date(currentBooking.startDate).getTime();
       // what we are trying to edit the booking dates to
       let {startDate, endDate} = req.body;
       newStart = new Date(startDate).getTime();
       newEnd = new Date(endDate).getTime();
+      let bookingJSON = currentBooking.toJSON();
     // Require authorization: must be user's own booking
-    if (currentBooking.userId === req.user.id) {
+    if (bookingJSON.userId === req.user.id) {
       // find all bookings for the current spot
       let today = new Date().getTime();
       let allBookings = await Booking.findAll({
@@ -178,8 +177,7 @@ router.put('/:bookingId', requireAuth, validateCreateBooking, async (req, res) =
                  "endDate": "End date conflicts with an existing booking"}})
           }
         } // if it checks all bookings and exits for loop, reassign the values
-            currentBooking.startDate = startDate;
-            currentBooking.endDate = endDate;
+            currentBooking.update({startDate, endDate})
             return res.json(currentBooking);
       }
     } else {

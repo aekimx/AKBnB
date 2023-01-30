@@ -15,27 +15,99 @@ const { handleValidationErrorsSpots, handleValidationErrorsBookings } = require(
 
 const router = express.Router();
 
+
+
 // GET /spots
-router.get("/", async (req, res) => {
-  const spots = await Spot.findAll({
-    raw: true
-  });
+router.get("/" , async (req, res) => {
+
+  // pagination object and validation
+  let page = req.query.page === undefined ? 1 : parseInt(req.query.page);
+  let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+
+  if (page < 1 || page > 10 || isNaN(page)) {
+    res.status(400)
+    return res.json({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {"page": "Page must be greater than or equal to 1",}})
+  }
+  if (size < 1 || size > 20 || isNaN(size)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"size": "Size must be greater than or equal to 1"}})
+  }
+
+  let pagination = {};
+  pagination.limit = size;
+  pagination.offset = (size * (page-1));
+
+  // query filter validations
+  let {minLat, maxLat, minLng, maxLng, minPrice, maxPrice} = req.query;
+  if (minLat && isNaN(minLat)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"minLat": "Minimum latitude is invalid"}})
+  }
+  if (maxLat && isNaN(maxLat)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"maxLat": "Maximum latitude is invalid"}})
+  }
+  if (minLng && isNaN(minLng)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"minLng": "Maximum longitude is invalid"}})
+  }
+  if (maxLng && isNaN(maxLng)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"maxLng": "Minimum longitude is invalid"}})
+  }
+  if (minPrice && isNaN(minPrice)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"minPrice": "Maximum price must be greater than or equal to 0"}})
+  }
+  if (maxPrice && isNaN(maxPrice)) {
+    res.status(400);
+    return res.json({
+      "message": "Validation Error",
+      "statusCode": 400,
+      "errors": {"maxPrice": "Minimum price must be greater than or equal to 0"}})
+  }
+
+  const spots = await Spot.findAll({...pagination});
+  let spotsArray = [];
+
   if (!spots) {
     res.status(404);
     return res.json({"message": "No spots found"})
   } else {
     for (let spot of spots) {
+      spot = spot.toJSON();
+
+      // average rating
       let review = await Review.findAll({
-        raw: true,
-        attributes: [
-          [sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]
-        ],
+        attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
         where: { spotId: spot.id }
       });
-      spot.avgRating = review[0].avgStarRating;
+      const avgRating = review[0].avgStarRating;
+      spot.avgRating = avgRating;
 
+      // preview image
       let previewImageURL = await SpotImage.findAll({
-        raw: true,
         attributes: ["url"],
         where: {
           spotId: spot.id,
@@ -45,10 +117,38 @@ router.get("/", async (req, res) => {
       if (previewImageURL[0]) {
         spot.previewImage = previewImageURL[0].url;
       } else {
-        spot.previewImage = null;
+        spot.previewImage = "No preview image found";
       }
+      spotsArray.push(spot);
     }
-    return res.json({ Spots: spots });
+
+    // add query filters if exists
+    // lat
+    if (minLat && maxLat) {
+      spotsArray = spotsArray.filter(spot => spot.lat >= minLat && spot.lat <= maxLat)
+    } else {
+      if (minLat) spotsArray = spotsArray.filter(spot => spot.lat >= minLat)
+      if (maxLat) spotsArray = spotsArray.filter(spot => spot.lat <= maxLat)
+    }
+    //lng
+    if (minLng && maxLng) {
+      spotsArray = spotsArray.filter(spot => spot.lng >= minLng && spot.lng <= maxLng)
+    } else {
+      if (minLng) spotsArray = spotsArray.filter(spot => spot.lng >= minLng)
+      if (maxLng) spotsArray = spotsArray.filter(spot => spot.lat <= maxLng)
+    }
+    // price
+    if (minPrice && maxPrice) {
+      spotsArray = spotsArray.filter(spot => (spot.price >= minPrice) && (spot.price <= maxPrice))
+    } else {
+      if (minPrice) spotsArray = spotsArray.filter(spot => spot.price >= minPrice)
+      if (maxPrice) spotsArray = spotsArray.filter(spot => spot.price <= maxPrice)
+    }
+
+    let result = {"Spots": spotsArray};
+    result.page = page;
+    result.size = size;
+    return res.json(result);
   }
 });
 

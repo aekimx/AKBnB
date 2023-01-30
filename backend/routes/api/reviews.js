@@ -121,12 +121,9 @@ const validateEditReview = [
 
 
 // PUT /api/reviews/:reviewId
-router.put('/:reviewId', restoreUser, requireAuth, validateEditReview, async(req,res) => {
+router.put('/:reviewId', requireAuth, validateEditReview, async(req,res) => {
    let updateReview = await Review.findOne({
-    where: {
-      id: req.params.reviewId
-    },
-    raw:true
+    where: {id: req.params.reviewId}
   });
    if (!updateReview) {
     res.status(404);
@@ -135,11 +132,13 @@ router.put('/:reviewId', restoreUser, requireAuth, validateEditReview, async(req
       "statusCode": 404
     })
    } else {
-    if (updateReview.userId === req.user.id) {
+    let reviewJSON = updateReview.toJSON();
+    if (reviewJSON.userId === req.user.id) {
       const {review, stars} = req.body;
-      updateReview.review = review;
-      updateReview.stars = stars;
+      updateReview.update({review, stars});
       return res.json(updateReview);
+    } else {
+      return res.json("You are not authorized to update this review")
     }
    }
 })
