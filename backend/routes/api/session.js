@@ -38,11 +38,9 @@ router.post("/", validateLogin, async (req, res, next) => {
   }
 
   let token = await setTokenCookie(res, user);
-  let signedInUser = await User.findOne({
-    where: { id: user.id },
-    attributes: ["id", "firstName", "lastName", "email"]
-  });
-  signedInUser.dataValues.token = token;
+  let signedInUser = await User.findByPk(user.id);
+  // signedInUser.dataValues.token = token;
+  // console.log('signedinUser', signedInUser)
   return res.json({
     user: signedInUser
   });
