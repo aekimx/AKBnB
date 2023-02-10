@@ -55,17 +55,11 @@ router.delete("/", (_req, res) => {
 });
 
 // Restore session user
-router.get("/", restoreUser, requireAuth, async (req, res) => {
+router.get("/", restoreUser, async (req, res) => {
   const { user } = req;
-  // console.log(user);
-  let userId = user.dataValues.id;
-  let currentUser = await User.findOne({
-    where: {id: userId},
-    attributes: ['id', 'firstName','lastName','email', 'username']
-  })
-  // let token = await setTokenCookie(res, user);
-  // currentUser.dataValues.token = token;
+
   if (user) {
+    let currentUser = await User.findByPk(user.id)
     return res.json({user: currentUser});
   } else return res.json({ user: null });
 });
