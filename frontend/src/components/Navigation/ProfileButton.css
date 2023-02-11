@@ -1,3 +1,28 @@
 .hidden {
   display:none
 }
+
+.profile-button {
+  width: 50px;
+  height: 25px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.fas {
+  display: flex;
+  justify-content: end;
+  align-self: center
+}
+
+.profile-dropdown {
+  list-style-type: none;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profile-button-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
