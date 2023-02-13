@@ -34,7 +34,7 @@ export default function GetSpotDetails() {
     <div>
       <div className="spot-detail-container">
         <h1>
-          {spot.address}
+          {spot.name}
         </h1>
         <h4>
           {spot.city}, {spot.state}, {spot.country}{" "}

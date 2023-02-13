@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import GetAllSpots from "./components/GetAllSpots";
 import GetSpotDetails from './components/SpotDetails';
+import CreateSpot from './components/CreateSpot';
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <GetAllSpots />
+          </Route>
+          <Route exact path="/spots/new">
+            <CreateSpot />
           </Route>
           <Route exact path="/spots/:spotId">
             <GetSpotDetails />

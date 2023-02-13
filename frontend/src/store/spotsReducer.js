@@ -1,6 +1,7 @@
 // variables
 const LOAD = 'spots/LOAD';
 const LOAD_ONE = 'spots/LOAD_ONE';
+const CREATE = 'spots/CREATE'
 
 
 // action creators
@@ -14,6 +15,11 @@ const loadOneSpot = (spot) => ({
   spot
 })
 
+const createSpot = (spotInfo)=> ({
+  type: CREATE,
+  spot: spotInfo
+})
+
 
 // selectors
 export const allSpots = (state) => Object.values(state.spots)
@@ -22,7 +28,6 @@ export const oneSpot = (id) => (state) => state.spots[id]
 
 // thunk action creator
 export const allSpotsThunk = () => async dispatch => {
-  // console.log("get all spots thunk running")
   const response = await fetch('/api/spots')
 
   if (response.ok) {
@@ -33,14 +38,32 @@ export const allSpotsThunk = () => async dispatch => {
 
 
 export const oneSpotThunk = (id) => async dispatch => {
-  // console.log("get one spot thunk running")
   const response = await fetch(`/api/spots/${id}`)
 
   if (response.ok) {
     const spot = await response.json()
-    // console.log('spot fetched from oneSpotThunk: ', spot);
     dispatch(loadOneSpot(spot))
   }
+}
+
+export const createSpotThunk = (data, spotId) => async dispatch => {
+  const response = await fetch('/api/spots', {
+    method: 'post',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  // come up with error handling!!!! VALIDATION ERRORS!!!
+  if (!response.ok) {
+    let error;
+    if (response.status === 400) {
+      error = await response.json();
+      return null // <<<< ----- FIX THIS!!!!!
+    }
+  } else {
+    const newSpot = await response.json()
+    dispatch(createSpot(newSpot))
+  }
+
 }
 
 // reducers
@@ -59,6 +82,9 @@ export default function spotsReducer(state = initialState, action) {
         newState = {...state};
         newState[action.spot.id] = action.spot
         return newState
+    case CREATE:
+      newState = {...state, [action.spot.id]: action.spot}
+      return newState;
     default:
       return state
   }
