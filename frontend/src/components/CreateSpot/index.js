@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { createSpotThunk } from "../../store/spotsReducer";
 
 import "./CreateSpot.css";
 
 export default function CreateSpot() {
-  const history = useHistory();
+
+  const [errors, setErrors] = useState({});
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -16,10 +19,17 @@ export default function CreateSpot() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  const handleSubmit = e => {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    history.push(`/`); // change to the specific spot there after
-    return null;
+
+    const newSpot = { address, city, state, country, lat, lng, name, description, price}
+    dispatch(createSpotThunk(newSpot))
+    history.push(`/spots/${newSpot.id}`); // change to the specific spot there after
+
   };
 
   // need to think about how to handle submit?
@@ -121,7 +131,7 @@ export default function CreateSpot() {
       {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
       <h3> Liven up your spot with photos </h3>
       <h4>Submit a link to at least one photo to publish your spot</h4>
-      <input
+      {/* <input
           type="url"
           // value={name}
           placeholder="Preview Image URL"
@@ -150,10 +160,10 @@ export default function CreateSpot() {
           // value={name}
           placeholder="Image URL"
           // onChange={e => setPrice(e.target.value)}
-        />
+        /> */}
 
   {/* SHOULD BE A LINE HERE separating*/}
-    <button>Create Spot</button>
+    <button type='submit'>Create Spot</button>
     </form>
   );
 }

@@ -36,7 +36,6 @@ export const allSpotsThunk = () => async dispatch => {
   }
 }
 
-
 export const oneSpotThunk = (id) => async dispatch => {
   const response = await fetch(`/api/spots/${id}`)
 
@@ -47,6 +46,7 @@ export const oneSpotThunk = (id) => async dispatch => {
 }
 
 export const createSpotThunk = (data, spotId) => async dispatch => {
+  console.log("create spot thunk running")
   const response = await fetch('/api/spots', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -54,13 +54,15 @@ export const createSpotThunk = (data, spotId) => async dispatch => {
   })
   // come up with error handling!!!! VALIDATION ERRORS!!!
   if (!response.ok) {
-    let error;
-    if (response.status === 400) {
-      error = await response.json();
-      return null // <<<< ----- FIX THIS!!!!!
-    }
+    console.log("Something went wrong. response given: ", response)
+    // let error;
+    // if (response.status === 400) {
+    //   error = await response.json();
+    //   return null // <<<< ----- FIX THIS!!!!!
+    // }
   } else {
     const newSpot = await response.json()
+    console.log("No errors, newSpot was created.", newSpot);
     dispatch(createSpot(newSpot))
   }
 
