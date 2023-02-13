@@ -4,13 +4,16 @@ import './index.css';
 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { ModalProvider, Modal } from './context/Modal';
 import App from './App';
 
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from './store/session';
+
+
+// import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const store = configureStore();
 
