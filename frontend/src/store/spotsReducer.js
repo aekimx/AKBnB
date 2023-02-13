@@ -10,15 +10,14 @@ const loadSpots = (spots) => ({
 
 
 // selectors
-export const allSpots = (state) => Object.values(state.spots.allSpots)
+export const allSpots = (state) => Object.values(state.spots)
 
 
 // thunk action creator
 
 export const allSpotsThunk = () => async dispatch => {
-  console.log("get all spots thunk running")
+  // console.log("get all spots thunk running")
   const response = await fetch('/api/spots')
-  // console.log("response from get all spots fetch: ", response )
 
   if (response.ok) {
     const spotsJSON = await response.json();
@@ -35,11 +34,9 @@ export default function spotsReducer(state = initialState, action) {
   switch(action.type) {
     case LOAD:
       newState = {...state};
-      // console.log("spotsReducer load spots", action.spots)
       action.spots.Spots.forEach(spot => {
         newState[spot.id] = spot
       })
-      console.log('newState ?? ', newState);
       return newState;
     default:
       return state
