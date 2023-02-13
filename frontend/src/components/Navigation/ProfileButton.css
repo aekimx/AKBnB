@@ -3,10 +3,12 @@
 }
 
 .profile-button {
-  width: 50px;
-  height: 25px;
+  width: 55px;
+  height: 35px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 20px;
+  padding: 8px;
+  padding-bottom: 10px;
 }
 
 .fas {
@@ -18,11 +20,26 @@
 .profile-dropdown {
   list-style-type: none;
   flex-direction: column;
-  justify-content: flex-start;
+  width: 300px;
+  padding: 10px 30px 10px 10px;
+  border: 3px solid;
 }
 
 .profile-button-images {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+}
+
+.signup-item {
+  background-color: red;
+}
+
+li {
+  width: 200px;
   justify-content: space-between;
+}
+
+.fas fa-user-circle {
+  width: 20px;
 }

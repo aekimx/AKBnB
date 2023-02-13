@@ -1,16 +1,18 @@
 ul {
   display: flex;
   justify-content: space-between;
-  border-bottom: solid lightgray;
+  /* border-bottom: solid lightgray; */
+  padding: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .home-button {
   display: flex;
-  text-decoration: none;
+  list-style-type: none;
   align-self: center;
   margin-left: 20px;
 }
-
 
 .profile-button {
   display: block;

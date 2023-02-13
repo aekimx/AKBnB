@@ -1,1 +1,69 @@
 /* DO SOME STYLING HERE!! */
+#modal-content {
+  width: 400px;
+  border-radius: 20px;
+  padding-bottom: 10px;
+}
+
+
+.signup-text {
+  text-align: center;
+  margin-bottom: -15px;
+}
+
+.signup-button {
+  background-color: rgb(243, 115, 69);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 40px;
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  box-shadow: 3px 3px black;
+  border-color: black;
+  color: white;
+}
+
+.signup-label {
+  display: block;
+  width: 400px;
+  text-align: auto;
+  margin-left: 30px;
+  padding: 5px;
+
+}
+
+.signup-input {
+  width: 300px;
+  display: block;
+  background-color: rgb(213, 234, 242);
+}
+
+.signup-errors-ul {
+  text-align: auto;
+  display: block;
+  white-space: nowrap;
+  margin-left: 10px;
+  padding-top: 20px;
+  color: red;
+  list-style-type: none;
+  width: 400px;
+  font-size: smaller;
+}
+
+.signup-errors-li {
+  padding: 4px;
+}
+
+.signup-input,
+.signup-button,
+.signup-label,
+.signup-text,
+.signup-errors-ul
+  {
+  font-family: 'Geometric Sans Serif v1', sans-serif;
+  font-weight: lighter;
+}
