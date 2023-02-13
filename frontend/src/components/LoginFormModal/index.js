@@ -52,7 +52,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <button className='login-button' type="submit" disabled={(credential <= 4 || password <= 6) }>Log In</button>
+      <button className='login-button' type="submit">Log In</button>
     </form>
   );
 }
