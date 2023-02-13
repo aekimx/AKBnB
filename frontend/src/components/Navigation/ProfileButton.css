@@ -18,12 +18,24 @@
 }
 
 .profile-dropdown {
+  /* display: block; */
+  position: absolute;
   list-style-type: none;
   flex-direction: column;
-  width: 300px;
-  padding: 10px 30px 10px 10px;
-  border: 3px solid;
+  width: 100px;
+  padding: 1px 30px 1px 10px;
+  border: 2px solid;
+  font-family: 'Geometric Sans Serif v1', sans-serif;
+  font-weight: 100;
+  right: 30px;
+  top: 61px;
 }
+
+.profileItem{
+  margin: 5px;
+  cursor: pointer;
+}
+
 
 .profile-button-images {
   display: flex;

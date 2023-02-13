@@ -40,6 +40,7 @@
   width: 300px;
   display: block;
   background-color: rgb(213, 234, 242);
+  font-weight:lighter
 }
 
 .signup-errors-ul {
@@ -62,8 +63,7 @@
 .signup-button,
 .signup-label,
 .signup-text,
-.signup-errors-ul
-  {
+.signup-errors-ul {
   font-family: 'Geometric Sans Serif v1', sans-serif;
   font-weight: lighter;
 }
