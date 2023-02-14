@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import GetAllSpots from "./components/GetAllSpots";
 import GetSpotDetails from './components/SpotDetails';
 import CreateSpot from './components/CreateSpot';
+import ManageSpots from "./components/ManageSpots";
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <GetAllSpots />
+          </Route>
+          <Route exact path="/spots/current">
+            <ManageSpots />
           </Route>
           <Route exact path="/spots/new">
             <CreateSpot />

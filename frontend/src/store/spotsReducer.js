@@ -1,7 +1,11 @@
+import { csrfFetch } from './csrf';
+
 // variables
 const LOAD = 'spots/LOAD';
 const LOAD_ONE = 'spots/LOAD_ONE';
 const CREATE = 'spots/CREATE'
+const LOAD_CURRENT = 'spots/LOAD_CURRENT'
+
 
 
 // action creators
@@ -18,6 +22,11 @@ const loadOneSpot = (spot) => ({
 const createSpot = (spotInfo)=> ({
   type: CREATE,
   spot: spotInfo
+})
+
+const currentUserSpots = (currentSpots) => ({
+  type: LOAD_CURRENT,
+  spots: currentSpots
 })
 
 
@@ -47,7 +56,7 @@ export const oneSpotThunk = (id) => async dispatch => {
 
 export const createSpotThunk = (data, spotId) => async dispatch => {
   console.log("create spot thunk running")
-  const response = await fetch('/api/spots', {
+  const response = await csrfFetch('/api/spots', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
@@ -65,7 +74,16 @@ export const createSpotThunk = (data, spotId) => async dispatch => {
     console.log("No errors, newSpot was created.", newSpot);
     dispatch(createSpot(newSpot))
   }
+}
 
+export const loadCurrentUserSpots = () => async dispatch => {
+  console.log("load current user spots thunk running")
+  const response = await fetch('/api/spots/current')
+
+  if (response.ok) {
+    const userSpots = await response.json()
+    dispatch(currentUserSpots(userSpots))
+  }
 }
 
 // reducers
@@ -86,6 +104,13 @@ export default function spotsReducer(state = initialState, action) {
         return newState
     case CREATE:
       newState = {...state, [action.spot.id]: action.spot}
+      return newState;
+    case LOAD_CURRENT:
+      newState = {...state}
+      console.log(action.spots)
+      action.spots.Spots.forEach(spot => {
+        newState[spot.id] = spot
+      })
       return newState;
     default:
       return state

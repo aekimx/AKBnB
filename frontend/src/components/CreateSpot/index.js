@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createSpotThunk } from "../../store/spotsReducer";
 
 import "./CreateSpot.css";
@@ -19,6 +19,13 @@ export default function CreateSpot() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
+  const userId = useSelector((state) => state.session.user.id)
+
+  // IMPLEMENT THIS LOGIC to redirect create spots form to LOGIN
+  // const sessionUser = useSelector(state => state.session.user);
+  // if (sessionUser) return (
+  //   <Redirect to="/" />
+  // );
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -26,15 +33,20 @@ export default function CreateSpot() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newSpot = { address, city, state, country, lat, lng, name, description, price}
+    // need to set owner Id ? current user? use session?
+    const newSpot = {ownerId: userId, address, city, state, country, lat, lng, name, description, price}
+
+    // need to fetch the new spot right?
     dispatch(createSpotThunk(newSpot))
-    history.push(`/spots/${newSpot.id}`); // change to the specific spot there after
+
+    // history.push(`/`); // change to the specific spot there after
 
   };
 
   // need to think about how to handle submit?
 
   return (
+
     <form onSubmit={handleSubmit}>
       <h1>Create a new Spot </h1>
       <h3> Where's your place located?</h3>
