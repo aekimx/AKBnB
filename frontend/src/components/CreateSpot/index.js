@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createSpotThunk } from "../../store/spotsReducer";
 
 import "./CreateSpot.css";
 
 export default function CreateSpot() {
+
+
 
   const [errors, setErrors] = useState({});
 
@@ -21,29 +23,32 @@ export default function CreateSpot() {
 
   const userId = useSelector((state) => state.session.user.id)
 
-  // IMPLEMENT THIS LOGIC to redirect create spots form to LOGIN
-  // const sessionUser = useSelector(state => state.session.user);
-  // if (sessionUser) return (
-  //   <Redirect to="/" />
-  // );
-
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // need to set owner Id ? current user? use session?
     const newSpot = {ownerId: userId, address, city, state, country, lat, lng, name, description, price}
 
     // need to fetch the new spot right?
     dispatch(createSpotThunk(newSpot))
+      .catch(( async (res) => {
+        const data = await res.json()
 
-    // history.push(`/`); // change to the specific spot there after
+        if (data.errors) {
+          let errorObj = {};
+          data.errors.forEach(error => {
+            let key = error.split(" ")[0]
+            errorObj[key] = error;
+          })
+          setErrors(errorObj)
+        }
+      }))
+    console.log('new Spot: ', newSpot)
+    // history.push(`/newSpot/${state.spots[newSpot.id]}`);
 
   };
-
-  // need to think about how to handle submit?
 
   return (
 
@@ -53,29 +58,41 @@ export default function CreateSpot() {
       <h4>
         Guests will only get your exact address once they book a reservation
       </h4>
+      <div className='create-spot-errors'>
       <label>Country</label>
+      {errors.Country !== undefined ? <h5>{errors.Country}</h5> : null}
+      </div>
       <input
         type="text"
         value={country}
         placeholder="Country"
         onChange={e => setCountry(e.target.value)}
       />
+      <div className='create-spot-errors'>
       <label>Street Address</label>
+      {errors.Address !== undefined ? <h5>{errors.Address}</h5> : null}
+      </div>
       <input
         type="text"
         value={address}
         placeholder="Address"
         onChange={e => setAddress(e.target.value)}
       />
-      <div>
+      <div className='create-spot-errors'>
+        <div>
         <label>City</label>
+        {errors.City !== undefined ? <h5>{errors.City}</h5> : null}
+        </div>
         <input
           type="text"
           value={city}
           placeholder="City"
           onChange={e => setCity(e.target.value)}
         />
+        <div className='create-spot-errors'>
         <label>State</label>
+        {errors.State !== undefined ? <h5>{errors.State}</h5> : null}
+        </div>
         <input
           type="text"
           value={state}
@@ -84,14 +101,20 @@ export default function CreateSpot() {
         />
       </div>
       <div>
+      <div className='create-spot-errors'>
         <label>Latitude</label>
+        {errors.Latitude !== undefined ? <h5>{errors.Latitude}</h5> : null}
+        </div>
         <input
           type="text"
           value={lat}
           placeholder="Latitude"
           onChange={e => setLat(e.target.value)}
         />
+        <div className='create-spot-errors'>
         <label>Longitude</label>
+        {errors.Longitude !== undefined ? <h5>{errors.Longitude}</h5> : null}
+        </div>
         <input
           type="text"
           value={lng}
@@ -110,6 +133,7 @@ export default function CreateSpot() {
         value={description}
         placeholder="Please write at least 30 characters"
         onChange={e => setDescription(e.target.value)} />
+        {errors.Description !== undefined ? <h5>{errors.Description}</h5> : null}
       </div>
       {/* SHOULD BE A LINE HERE separating*/}
       <div>
@@ -124,6 +148,7 @@ export default function CreateSpot() {
           placeholder="Name of your spot"
           onChange={e => setName(e.target.value)}
         />
+        {errors.Name !== undefined ? <text>{errors.Name}</text> : null}
       </div>
       {/* SHOULD BE A LINE HERE separating*/}
       <div>
@@ -138,6 +163,7 @@ export default function CreateSpot() {
           placeholder="Price per night (USD)"
           onChange={e => setPrice(e.target.value)}
         />
+        {errors.Price !== undefined ? <text>{errors.Price}</text> : null}
       </div>
       {/* SHOULD BE A LINE HERE separating*/}
       {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
@@ -149,6 +175,7 @@ export default function CreateSpot() {
           placeholder="Preview Image URL"
           // onChange={e => setPrice(e.target.value)}
         />
+
         <input
           type="url"
           // value={name}

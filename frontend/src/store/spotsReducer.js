@@ -62,16 +62,17 @@ export const createSpotThunk = (data, spotId) => async dispatch => {
     body: JSON.stringify(data)
   })
   // come up with error handling!!!! VALIDATION ERRORS!!!
-  if (!response.ok) {
-    console.log("Something went wrong. response given: ", response)
-    // let error;
-    // if (response.status === 400) {
-    //   error = await response.json();
-    //   return null // <<<< ----- FIX THIS!!!!!
-    // }
+  if (response.ok === false) {
+    console.log("Something went wrong. response given: ", response.json())
+
+    if (response.status === 400) {
+      let error = await response.json();
+      console.log('error from createspotthunk: ', error)
+      return error;
+    }
   } else {
     const newSpot = await response.json()
-    console.log("No errors, newSpot was created.", newSpot);
+    // console.log("No errors, newSpot was created.", newSpot);
     dispatch(createSpot(newSpot))
   }
 }

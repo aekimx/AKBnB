@@ -6,24 +6,24 @@ if (process.env.NODE_ENV === 'production') options.schema = process.env.SCHEMA;
 let spotImages = [
   {
     spotId: 1,
-    url: "spotimage-1.com",
+    url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80",
     preview: true
   },
   {
     spotId: 1,
-    url: "spotimage-1-2.com",
+    url: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8aG91c2V8ZW58MHx8MHx8&w=1000&q=80",
     preview: false
   },
   {
     spotId: 2,
-    url: "spotimage2.com",
+    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5wYUbLO04r5LHe718NGwur3J9KC-5nvb2Kg&usqp=CAU",
     preview: true,
   },
   {
     spotId:3,
-    url: "spotimage3.com",
+    url: "https://www.travelandleisure.com/thmb/IIBEmIubzmP-HBJv4l_nPUQidUE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/green-o-treehouse-montana_HERO_TREEHOUSE0822-219f8b36f0dd4421993eed3e8de274dc.jpg",
     preview: true
-  }
+  },
 ]
 
 

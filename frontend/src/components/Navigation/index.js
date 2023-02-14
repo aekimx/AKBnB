@@ -17,7 +17,7 @@ function Navigation({ isLoaded }) {
       {isLoaded &&
         <div>
           <div>
-            <Link to="/spots/new">Create a New Spot</Link>
+            {!sessionUser ? null : <Link to="/spots/new">Create a New Spot</Link>}
           </div>
           <div>
             <li className="profile-button">
