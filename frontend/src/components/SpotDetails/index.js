@@ -11,8 +11,7 @@ export default function GetSpotDetails() {
   const id = useParams();
   // console.log("id from useparams spotdetails: ", id)
 
-  useEffect(
-    () => {
+  useEffect(() => {
       // console.log("use effect get one spots thunk dispatching in spotdetails index");
       dispatch(oneSpotThunk(id.spotId));
     },
@@ -20,10 +19,7 @@ export default function GetSpotDetails() {
   );
 
   const spot = useSelector(oneSpot(id.spotId));
-  console.log(
-    "Spot from useselector allspots.id spotdetails ",
-    spot.spotImages
-  );
+  // console.log( "Spot from useselector allspots.id spotdetails ",spot.spotImages);
 
   const spotImagesArr = spot.spotImages;
   if (!spotImagesArr) return null;

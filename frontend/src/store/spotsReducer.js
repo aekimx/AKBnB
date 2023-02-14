@@ -24,15 +24,16 @@ const createSpot = (spotInfo)=> ({
   spot: spotInfo
 })
 
-const currentUserSpots = (currentSpots) => ({
+const currentUserSpots = (spots) => ({
   type: LOAD_CURRENT,
-  spots: currentSpots
+  spots
 })
 
 
 // selectors
-export const allSpots = (state) => Object.values(state.spots)
+export const allSpots = (state) => (state.spots)
 export const oneSpot = (id) => (state) => state.spots[id]
+export const currentSpots = (state) => (state.spots)
 
 
 // thunk action creator
@@ -54,32 +55,22 @@ export const oneSpotThunk = (id) => async dispatch => {
   }
 }
 
-export const createSpotThunk = (data, spotId) => async dispatch => {
+export const createSpotThunk = (data) => async dispatch => {
   console.log("create spot thunk running")
   const response = await csrfFetch('/api/spots', {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   })
-  // come up with error handling!!!! VALIDATION ERRORS!!!
-  if (response.ok === false) {
-    console.log("Something went wrong. response given: ", response.json())
-
-    if (response.status === 400) {
-      let error = await response.json();
-      console.log('error from createspotthunk: ', error)
-      return error;
-    }
-  } else {
+  if (response.ok) {
     const newSpot = await response.json()
-    // console.log("No errors, newSpot was created.", newSpot);
-    dispatch(createSpot(newSpot))
-  }
+      dispatch(createSpot(newSpot))
+    }
 }
 
 export const loadCurrentUserSpots = () => async dispatch => {
   console.log("load current user spots thunk running")
-  const response = await fetch('/api/spots/current')
+  const response = await csrfFetch('/api/spots/current');
 
   if (response.ok) {
     const userSpots = await response.json()
@@ -108,7 +99,6 @@ export default function spotsReducer(state = initialState, action) {
       return newState;
     case LOAD_CURRENT:
       newState = {...state}
-      console.log(action.spots)
       action.spots.Spots.forEach(spot => {
         newState[spot.id] = spot
       })

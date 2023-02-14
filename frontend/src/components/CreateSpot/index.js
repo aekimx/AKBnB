@@ -46,7 +46,8 @@ export default function CreateSpot() {
         }
       }))
     console.log('new Spot: ', newSpot)
-    // history.push(`/newSpot/${state.spots[newSpot.id]}`);
+
+    // history.push(`/newSpot/${state.spots[newSpot.id]}`); need to remember logic for how to get the new spot id
 
   };
 

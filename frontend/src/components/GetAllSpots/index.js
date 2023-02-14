@@ -8,22 +8,16 @@ import {useEffect} from 'react'
 import './GetAllSpots.css'
 
 export default function GetAllSpots() {
-  // console.log("get all spots is running");
 
   const dispatch = useDispatch();
-  // async function, useEffect to change state and trigger useSelector
+
   useEffect(() => {
-    // console.log("use effect get all spots thunk dispatching");
     dispatch(allSpotsThunk())
   }, [dispatch])
 
-  // after useEffect, spots
   const spots = useSelector(allSpots)
-  // console.log("useselector for state.spots ", spots)
 
-  // change spots to spotsArray for easier iteration
   const spotsArray = Object.values(spots);
-  // console.log('change from object to array again', spotsArray);
 
   return (
     <>
