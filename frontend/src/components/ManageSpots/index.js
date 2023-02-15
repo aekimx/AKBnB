@@ -8,16 +8,18 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 
 import "./ManageSpots.css";
 
-export default function ManageSpots() {
+export default function ManageSpots()  {
 
-  const userId = useSelector((state) => state.session.user.id)
+  // const userId = useSelector((state) => state.session.user.id)
 
   const dispatch = useDispatch();
 
-  useEffect(() => {dispatch(loadCurrentUserSpots());
+  useEffect(() => {
+    dispatch(loadCurrentUserSpots())
   },[dispatch]);
 
   const current = useSelector(currentSpots);
+  console.log('current from useselector in manage spots' , current);
   const currentSpotImages = Object.values(current);
 
   return (

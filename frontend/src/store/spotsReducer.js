@@ -170,10 +170,7 @@ export default function spotsReducer(state = initialState, action) {
       });
       return newState;
     case LOAD_ONE:
-      newState = {
-        ...state,
-        allSpots: { ...state.allSpots },
-        singleSpot: { ...state.singleSpot }
+      newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }
       };
       newState.singleSpot = action.spot;
       return newState;
@@ -186,14 +183,9 @@ export default function spotsReducer(state = initialState, action) {
       newState.allSpots[action.spot.id] = action.spot;
       return newState;
     case LOAD_CURRENT:
-      newState = {
-        ...state,
-        allSpots: { ...state.allSpots },
-        singleSpot: { ...state.singleSpot }
-      };
-      action.spots.Spots.forEach(spot => {
-        newState.allSpots[spot.id] = spot;
-      });
+      newState = {...state, allSpots: { },singleSpot: { ...state.singleSpot }};
+      console.log('action.spots from root reducer' , action.spots);
+      action.spots.Spots.forEach(spot => {newState.allSpots[spot.id] = spot});
       return newState;
     case UPDATE:
       newState = {
