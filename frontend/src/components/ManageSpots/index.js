@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { currentSpots, loadCurrentUserSpots } from "../../store/spotsReducer";
+import { currentSpots, loadCurrentUserSpots, deleteSpotThunk } from "../../store/spotsReducer";
 import {Link, Redirect} from 'react-router-dom';
+import DeleteConfirmModal from "../DeleteConfirmModal";
+
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 
 import "./ManageSpots.css";
 
@@ -16,12 +19,6 @@ export default function ManageSpots() {
 
   const current = useSelector(currentSpots);
   const currentSpotImages = Object.values(current);
-
-  const handleClick = (e) => {
-    // redirect to
-
-
-  }
 
   return (
     <div>
@@ -38,7 +35,9 @@ export default function ManageSpots() {
               <div>
                 <i class="fa-solid fa-star">{`${spot.avgRating}`}</i>
                 <Link to={`/spots/${spot.id}/edit`}>Update</Link>
-                <button>Delete</button>
+                <OpenModalMenuItem itemText="Delete"
+                modalComponent={<DeleteConfirmModal spotId={spot.id}/>}
+                />
               </div>
             </Link>
           </div>

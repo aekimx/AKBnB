@@ -7,16 +7,14 @@ import "./CreateSpot.css";
 
 export default function CreateSpot() {
 
-
-
   const [errors, setErrors] = useState({});
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
+  // const [lat, setLat] = useState("");
+  // const [lng, setLng] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -29,10 +27,11 @@ export default function CreateSpot() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newSpot = {ownerId: userId, address, city, state, country, lat, lng, name, description, price}
+    const newSpot = {ownerId: userId, address, city, state, country, lat: 0, lng: 0, name, description, price}
 
     // need to fetch the new spot right?
     dispatch(createSpotThunk(newSpot))
+      // .then history.push(`/newSpot/${state.spots[newSpot.id]}`); need to remember logic for how to get the new spot id
       .catch(( async (res) => {
         const data = await res.json()
 
@@ -45,9 +44,9 @@ export default function CreateSpot() {
           setErrors(errorObj)
         }
       }))
-    console.log('new Spot: ', newSpot)
+    // console.log('new Spot: ', newSpot)
 
-    // history.push(`/newSpot/${state.spots[newSpot.id]}`); need to remember logic for how to get the new spot id
+    //
 
   };
 
@@ -101,7 +100,7 @@ export default function CreateSpot() {
           onChange={e => setState(e.target.value)}
         />
       </div>
-      <div>
+      {/* <div>
       <div className='create-spot-errors'>
         <label>Latitude</label>
         {errors.Latitude !== undefined ? <h5>{errors.Latitude}</h5> : null}
@@ -122,7 +121,7 @@ export default function CreateSpot() {
           placeholder="Longitude"
           onChange={e => setLng(e.target.value)}
         />
-      </div>
+      </div> */}
       {/* SHOULD BE A LINE HERE separating*/}
       <div>
         <h3> Describe your place to guests</h3>

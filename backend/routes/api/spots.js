@@ -252,13 +252,13 @@ const validateCreateSpot = [
 
 // POST /api/spots
 // requireAuth
-router.use((req, res, next) => {
-  console.log("+++++++++++++=BEFORE CREATE SPOTS +++++++++++++=")
-  next();
-})
+// router.use((req, res, next) => {
+//   console.log("+++++++++++++=BEFORE CREATE SPOTS +++++++++++++=")
+//   next();
+// })
 
 router.post("/", requireAuth, validateCreateSpot, async (req, res) => {
-  console.log("- -------- CREATE SPOT RUNNING -----------")
+  // console.log("- -------- CREATE SPOT RUNNING -----------")
   const {
     address,
     city,
