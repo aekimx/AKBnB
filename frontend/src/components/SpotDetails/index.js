@@ -35,8 +35,8 @@ export default function GetSpotDetails() {
         </h4>
 
         <div>
-          {spotImagesArr.map(imageURL => {
-            return <img src={`${imageURL}`} alt="image" />;
+          {spotImagesArr.map(image => {
+            return <img src={`${image.url}`} alt="image" />;
           })}
         </div>
         <div>

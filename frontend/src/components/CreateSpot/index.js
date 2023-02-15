@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { createSpotThunk } from "../../store/spotsReducer";
+import { createSpotThunk, addImageThunk, oneSpotThunk } from "../../store/spotsReducer";
+
 
 import "./CreateSpot.css";
 
@@ -17,7 +18,15 @@ export default function CreateSpot() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  const userId = useSelector((state) => state.session.user.id)
+  const [previewImgURL, setPreviewImgURL] = useState("");
+
+  const [imgOneURL, setImgOneURL] = useState("");
+  const [imgTwoURL, setImgTwoURL] = useState("");
+  const [imgThreeURL, setImgThreeURL] = useState("");
+  const [imgFourURL, setImgFourURL] = useState("");
+
+
+  const user = useSelector((state) => state.session.user)
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,13 +36,36 @@ export default function CreateSpot() {
 
     const lat = 1.0;
     const lng = 1.0;
-    const newSpot = {ownerId: userId, address, city, state, country, lat, lng, name, description, price}
+    const newSpot = {ownerId: user.id, address, city, state, country, lat, lng, name, description, price}
 
-    // need to fetch the new spot right?
-    dispatch(createSpotThunk(newSpot))
-      // .then history.push(`/newSpot/${state.spots[newSpot.id]}`); need to remember logic for how to get the new spot id
+
+    const imgUrlArr = [];
+      const previewImg = { url: previewImgURL, preview: true}
+      imgUrlArr.push(previewImg);
+
+      if (imgOneURL) {
+        const imgOne = { url: imgOneURL, preview: false}
+        imgUrlArr.push(imgOne)
+      }
+
+      if (imgTwoURL) {
+        const imgTwo = { url: imgTwoURL, preview: false}
+        imgUrlArr.push(imgTwo)
+      }
+      if (imgThreeURL) {
+        const imgThree=  { url: imgThreeURL, preview: false}
+        imgUrlArr.push(imgThree);
+      }
+      if (imgFourURL) {
+        const imgFour = { url: imgFourURL, preview: false}
+        imgUrlArr.push(imgFour);
+      }
+
+      const owner = {id: user.id, firstName: user.firstName, lastName: user.lastName}
+      dispatch(createSpotThunk(newSpot, imgUrlArr, owner)) // pass in imgArr
+      .then((newSpot) => history.push(`/spots/${newSpot.id}`))
       .catch(( async (res) => {
-        const data = await res.json()
+      const data = await res.json()
 
         if (data.errors) {
           let errorObj = {};
@@ -149,37 +181,42 @@ export default function CreateSpot() {
       {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
       <h3> Liven up your spot with photos </h3>
       <h4>Submit a link to at least one photo to publish your spot</h4>
-      {/* <input
+      <input
           type="url"
-          // value={name}
+          value={previewImgURL}
           placeholder="Preview Image URL"
-          // onChange={e => setPrice(e.target.value)}
+          onChange={e => setPreviewImgURL(e.target.value)}
+        />
+        {errors.URL !== undefined ? <h5>{errors.URL}</h5> : null}
+
+        <input
+          type="url"
+          value={imgOneURL}
+          placeholder="Image URL"
+          onChange={e => setImgOneURL(e.target.value)}
         />
 
         <input
           type="url"
-          // value={name}
+          value={imgTwoURL}
           placeholder="Image URL"
-          // onChange={e => setPrice(e.target.value)}
+          onChange={e => setImgTwoURL(e.target.value)}
         />
+
         <input
           type="url"
-          // value={name}
+          value={imgThreeURL}
           placeholder="Image URL"
-          // onChange={e => setPrice(e.target.value)}
+          onChange={e => setImgThreeURL(e.target.value)}
         />
+
         <input
           type="url"
-          // value={name}
+          value={imgFourURL}
           placeholder="Image URL"
-          // onChange={e => setPrice(e.target.value)}
+          onChange={e => setImgFourURL(e.target.value)}
         />
-        <input
-          type="url"
-          // value={name}
-          placeholder="Image URL"
-          // onChange={e => setPrice(e.target.value)}
-        /> */}
+
 
   {/* SHOULD BE A LINE HERE separating*/}
     <button type='submit'>Create Spot</button>

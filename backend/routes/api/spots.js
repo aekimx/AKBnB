@@ -289,7 +289,7 @@ router.post("/", requireAuth, validateCreateSpot, async (req, res) => {
 
 const validateCreateSpotImage = [
   check("url").exists({ checkFalsy: true }).withMessage("URL is required"),
-  check("preview").exists({ checkFalsy: true }).withMessage("Please provide a preview selection"),
+  check("preview").exists({ checkFalsy: true }).withMessage("Preview selection is required"),
   handleValidationErrorsSpots
 ];
 

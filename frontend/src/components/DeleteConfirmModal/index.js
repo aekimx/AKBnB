@@ -15,10 +15,9 @@ export default function DeleteConfirmModal({spotId}) {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    // console.log("Handle delete pushed");
     dispatch(deleteSpotThunk(spotId))
+      .then(closeModal())
       .then(() => history.push('/spots/current'))
-    // console.log("Delete was successful!")
   }
 
   return (
@@ -28,6 +27,5 @@ export default function DeleteConfirmModal({spotId}) {
     <button onClick={handleDelete}>Yes(Delete Spot)</button>
     <button onClick={closeModal}>No (Keep Spot)</button>
     </div>
-
   );
 }
