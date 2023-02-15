@@ -8,17 +8,15 @@ import "./SpotDetails.css";
 
 export default function GetSpotDetails() {
   const dispatch = useDispatch();
-  const id = useParams();
+  const {spotId}= useParams();
   // console.log("id from useparams spotdetails: ", id)
 
   useEffect(() => {
       // console.log("use effect get one spots thunk dispatching in spotdetails index");
-      dispatch(oneSpotThunk(id.spotId));
-    },
-    [id]
-  );
+      dispatch(oneSpotThunk(spotId));
+    }, [spotId]);
 
-  const spot = useSelector(oneSpot(id.spotId));
+  const spot = useSelector(oneSpot);
   // console.log( "Spot from useselector allspots.id spotdetails ",spot.spotImages);
 
   const spotImagesArr = spot.spotImages;

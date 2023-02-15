@@ -13,8 +13,6 @@ export default function CreateSpot() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
-  // const [lat, setLat] = useState("");
-  // const [lng, setLng] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -27,7 +25,9 @@ export default function CreateSpot() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newSpot = {ownerId: userId, address, city, state, country, lat: 0, lng: 0, name, description, price}
+    const lat = 1.0;
+    const lng = 1.0;
+    const newSpot = {ownerId: userId, address, city, state, country, lat, lng, name, description, price}
 
     // need to fetch the new spot right?
     dispatch(createSpotThunk(newSpot))
@@ -44,10 +44,6 @@ export default function CreateSpot() {
           setErrors(errorObj)
         }
       }))
-    // console.log('new Spot: ', newSpot)
-
-    //
-
   };
 
   return (
@@ -70,7 +66,7 @@ export default function CreateSpot() {
       />
       <div className='create-spot-errors'>
       <label>Street Address</label>
-      {errors.Address !== undefined ? <h5>{errors.Address}</h5> : null}
+      {errors.Street !== undefined ? <h5>{errors.Street}</h5> : null}
       </div>
       <input
         type="text"
@@ -100,28 +96,7 @@ export default function CreateSpot() {
           onChange={e => setState(e.target.value)}
         />
       </div>
-      {/* <div>
-      <div className='create-spot-errors'>
-        <label>Latitude</label>
-        {errors.Latitude !== undefined ? <h5>{errors.Latitude}</h5> : null}
-        </div>
-        <input
-          type="text"
-          value={lat}
-          placeholder="Latitude"
-          onChange={e => setLat(e.target.value)}
-        />
-        <div className='create-spot-errors'>
-        <label>Longitude</label>
-        {errors.Longitude !== undefined ? <h5>{errors.Longitude}</h5> : null}
-        </div>
-        <input
-          type="text"
-          value={lng}
-          placeholder="Longitude"
-          onChange={e => setLng(e.target.value)}
-        />
-      </div> */}
+
       {/* SHOULD BE A LINE HERE separating*/}
       <div>
         <h3> Describe your place to guests</h3>
@@ -135,7 +110,9 @@ export default function CreateSpot() {
         onChange={e => setDescription(e.target.value)} />
         {errors.Description !== undefined ? <h5>{errors.Description}</h5> : null}
       </div>
+
       {/* SHOULD BE A LINE HERE separating*/}
+
       <div>
         <h3> Create a title for your spot </h3>
         <h4>
@@ -150,7 +127,9 @@ export default function CreateSpot() {
         />
         {errors.Name !== undefined ? <text>{errors.Name}</text> : null}
       </div>
+
       {/* SHOULD BE A LINE HERE separating*/}
+
       <div>
         <h3> Set a base price for your spot </h3>
         <h4>
@@ -165,6 +144,7 @@ export default function CreateSpot() {
         />
         {errors.Price !== undefined ? <text>{errors.Price}</text> : null}
       </div>
+
       {/* SHOULD BE A LINE HERE separating*/}
       {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
       <h3> Liven up your spot with photos </h3>

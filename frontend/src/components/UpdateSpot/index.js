@@ -6,12 +6,13 @@ import { useParams, useHistory } from "react-router-dom";
 import "./UpdateSpot.css";
 
 export default function UpdateSpot() {
-  let spotId = useParams();
-  spotId = spotId.spotId;
+  let {spotId} = useParams();
+
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const currentSpot = useSelector(oneSpot(spotId));
+  const currentSpot = useSelector(oneSpot);
+  // console.log('current spot from useslector update spot' , currentSpot)
 
   const [errors, setErrors] = useState({});
 
@@ -19,8 +20,6 @@ export default function UpdateSpot() {
   const [city, setCity] = useState(currentSpot.city);
   const [state, setState] = useState(currentSpot.state);
   const [country, setCountry] = useState(currentSpot.country);
-  // const [lat, setLat] = useState(currentSpot.lat);
-  // const [lng, setLng] = useState(currentSpot.lng);
   const [name, setName] = useState(currentSpot.name);
   const [description, setDescription] = useState(currentSpot.description);
   const [price, setPrice] = useState(currentSpot.price);
@@ -29,8 +28,9 @@ export default function UpdateSpot() {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const updatedSpot = {spotId, ownerId: userId, address, city, state, country,lat: 0,lng: 0, name, description,price};
+    const lat = 1;
+    const lng = 1;
+    const updatedSpot = {spotId, ownerId: userId, address, city, state, country, lat, lng, name, description,price};
 
     dispatch(updateSpotThunk(updatedSpot))
       .then(() => history.push(`/spots/${spotId}`))

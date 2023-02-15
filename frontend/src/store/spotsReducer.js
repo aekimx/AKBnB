@@ -13,7 +13,7 @@ const DELETE = 'spots/DELETE';
 // action creators
 const loadSpots = (spots) => ({
   type: LOAD,
-  spots
+  spots // payload
 })
 
 const loadOneSpot = (spot) => ({
@@ -38,12 +38,13 @@ const updateSpot = (updatedSpot) => ({
 
 const deleteSpot = (spotId) => ({
   type: DELETE,
+  spotId
 })
 
 // selectors
-export const allSpots = (state) => (state.spots)
-export const oneSpot = (id) => (state) => state.spots[id]
-export const currentSpots = (state) => (state.spots)
+export const allSpots = (state) => (state.spots.allSpots)
+export const oneSpot = (state) => (state.spots.singleSpot)
+export const currentSpots = (state) => (state.spots.allSpots)
 
 
 // thunk action creator
@@ -116,37 +117,41 @@ export const deleteSpotThunk = (spotId) => async dispatch => {
 
 
 // reducers
-let initialState = {}
+let initialState = {
+  allSpots: {},
+  singleSpot: {}
+}
 
 export default function spotsReducer(state = initialState, action) {
-  let newState = {}
+  let newState={}
   switch(action.type) {
     case LOAD:
-      newState = {...state};
+      newState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
       action.spots.Spots.forEach(spot => {
-        newState[spot.id] = spot
-      })
+        newState.allSpots[spot.id] = spot
+      });
       return newState;
     case LOAD_ONE:
-        newState = {...state};
-        newState[action.spot.id] = action.spot
-        return newState
+      newState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+      newState.singleSpot = action.spot;
+      return newState;
     case CREATE:
-      newState = {...state, [action.spot.id]: action.spot}
+      newState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+      newState.allSpots[action.spot.id] = action.spot;
       return newState;
     case LOAD_CURRENT:
-      newState = {...state}
+      newState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
       action.spots.Spots.forEach(spot => {
-        newState[spot.id] = spot
+        newState.allSpots[spot.id] = spot
       })
       return newState;
     case UPDATE:
-        newState = {...state}
-        newState[action.updatedSpot.id] = action.updatedSpot
+      newState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+        newState.singleSpot = action.updatedSpot
         return newState;
     case DELETE:
-        newState = {...state}
-        delete newState[action.spotId]
+      newState = {...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+        delete newState.allSpots[action.spotId];
         return newState;
     default:
       return state
