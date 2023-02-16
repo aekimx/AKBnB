@@ -22,7 +22,11 @@ export default function GetAllSpots() {
     if (spot.avgRating === null) {
       spot.avgRating = "New"
     }
+    // else {
+    //   spot.avgRating = +(spot.avgRating).toFixed(1); // why is this not working?
+    // }
   })
+
 
   return (
     <>

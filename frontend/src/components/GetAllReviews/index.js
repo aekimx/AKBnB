@@ -10,14 +10,18 @@ export default function GetAllReviews() {
 
   useEffect(() => {
     dispatch(loadReviewsThunk(spotId))
+    .then(async (res) => {
+      const data = await res.json();
+      console.log(data);
+    })
   }, [dispatch, spotId])
 
   const reviews = useSelector(allReviews);
-  const reviewsArr = Object.values(reviews);
 
-  // console.log('reviews array from useselector in useeffect', reviewsArr);
-  // if (!reviewsArr) return null;
-  reviewsArr.map(review => review.createdAt = review.createdAt.slice(0,10));
+  const reviewsArr = Object.values(reviews);
+  console.log('reviewsArr ', reviewsArr)
+
+  if (!reviewsArr[0]) return null;
 
   return (
     <div>

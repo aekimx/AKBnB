@@ -14,8 +14,8 @@ export default function GetSpotDetails() {
   const dispatch = useDispatch();
   const {spotId}= useParams();
 
-  const userId = useSelector(state => state.session.user.id)
-
+  const userId = useSelector(state => state.session.user?.id)
+  const spot = useSelector(oneSpot);
 
   useEffect(() => {
       dispatch(oneSpotThunk(spotId));
@@ -25,9 +25,8 @@ export default function GetSpotDetails() {
 
     }, [spotId]);
 
-  const spot = useSelector(oneSpot);
-  // const reviews = useSelector(allReviews)
-  // console.log('reviews from useslector in spotdetails ', reviews);
+
+  // if (!userId) return null;
 
   // is this going to be a problem? Check!!! Hits this every time - how to fix?
   if (!spot.name) {
@@ -37,9 +36,8 @@ export default function GetSpotDetails() {
   }
 
   if (spot.avgStarRating === null) spot.avgStarRating = "New";
-  console.log(spot.numReviews === 1 ? 'review' : 'reviews');
+  // console.log(spot.numReviews === 1 ? 'review' : 'reviews');
 
-  // UPDATE SPOT RATING DECIMAL POINTS
 
   const spotImagesArr = spot.spotImages;
   if (!spotImagesArr) return null;

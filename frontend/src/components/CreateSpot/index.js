@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { createSpotThunk, addImageThunk, oneSpotThunk } from "../../store/spotsReducer";
+import { createSpotThunk } from "../../store/spotsReducer";
 
 
 import "./CreateSpot.css";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useModal } from '../../context/Modal';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { createReviewThunk } from '../../store/reviewsReducer';
 import {useHistory} from 'react-router-dom'
 
@@ -14,15 +14,18 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-    const {closeModal} = useModal()
+  const {closeModal} = useModal()
+
+  const {firstName, lastName} = useSelector(state=> state.session.user)
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const createdReview = {spotId, userId, review, stars};
-    console.log('created review' , createdReview);
+    const reviewData = {spotId, userId, review, stars};
+    // console.log('created review' , createdReview);
+    const User = { id: userId, firstName, lastName}
 
-    dispatch(createReviewThunk(createdReview))
+    dispatch(createReviewThunk(reviewData, User))
       .then(closeModal())
       // dont think we need this?
       // .catch(( async (res) => {
