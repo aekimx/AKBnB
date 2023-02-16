@@ -32,18 +32,23 @@ export const allReviews = state => state.reviews.spot
 
 //thunk action creator
 export const createReviewThunk = (reviewData) => async dispatch => {
-  const response = await csrfFetch('/api/reviews', {
+  console.log("Create review thunk running");
+  const response = await csrfFetch(`/api/spots/${reviewData.spotId}/reviews`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(reviewData)
   })
+  console.log('response from csrf fetch in create review thunk' , response)
   if (response.ok) {
-    const newReview = response.json();
+    const newReview = await response.json();
+    console.log("new review created if response.ok" , newReview);
     dispatch(createReview(newReview))
+    return newReview;
   }
 }
 
 export const loadReviewsThunk = (spotId) => async dispatch => {
+  console.log('load review thunk running');
   const response = await fetch(`/api/spots/${spotId}/reviews`);
 
   if (response.ok) {
@@ -67,10 +72,9 @@ export default function reviewsReducer ( state = initialState, action) {
       return newState;
     case LOAD_REVIEWS:
       newState = {...state, spot: {...state.spot}, user: {...state.user}}
-      action.reviews.forEach(review => {
-        newState.spot[review.Id] = review
+      action.reviews.Reviews.forEach(review => {
+        newState.spot[review.id] = review
       })
-      console.log('newstate from reviews reducer' ,newState)
       return newState
     default:
       return state

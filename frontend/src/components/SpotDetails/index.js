@@ -2,12 +2,13 @@ import React from "react";
 import { NavLink, Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { oneSpotThunk, oneSpot } from "../../store/spotsReducer";
+import { oneSpotThunk, oneSpot, clearSpot } from "../../store/spotsReducer";
 import CreateReview from "../CreateReview";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { loadReviewsThunk, allReviews } from "../../store/reviewsReducer";
 
 import "./SpotDetails.css";
+import GetAllReviews from "../GetAllReviews";
 
 export default function GetSpotDetails() {
   const dispatch = useDispatch();
@@ -17,25 +18,28 @@ export default function GetSpotDetails() {
 
 
   useEffect(() => {
-      // console.log("use effect get one spots thunk dispatching in spotdetails index");
       dispatch(oneSpotThunk(spotId));
       dispatch(loadReviewsThunk(spotId));
+
+      return () => dispatch(clearSpot());
+
     }, [spotId]);
 
   const spot = useSelector(oneSpot);
-  const reviews = useSelector(allReviews)
-  console.log('reviews from useslector in spotdetails ', reviews);
+  // const reviews = useSelector(allReviews)
+  // console.log('reviews from useslector in spotdetails ', reviews);
 
+  // is this going to be a problem? Check!!! Hits this every time - how to fix?
   if (!spot.name) {
     return (
       <h1>Unable to retrieve details. Please try again shortly.</h1>
     )
   }
 
-  // NEED TO WORK
-  // console.log('spot.avg star rating in spot details', spot.avgStarRating)
   if (spot.avgStarRating === null) spot.avgStarRating = "New";
+  console.log(spot.numReviews === 1 ? 'review' : 'reviews');
 
+  // UPDATE SPOT RATING DECIMAL POINTS
 
   const spotImagesArr = spot.spotImages;
   if (!spotImagesArr) return null;
@@ -72,8 +76,7 @@ export default function GetSpotDetails() {
           <button>Reserve</button>
         </div>
       </div>
-      <div className='!!!!!INCLUDE REVIEWS HERE!!!!!!!'>
-        {/* <Reviews /> */}
+      <div>
         <div>
           <i class="fa-solid fa-star">{`${spot.avgStarRating}`}</i>
           <div> {spot.numReviews} {spot.numReview === 1 ? 'review' : 'reviews'}</div>
@@ -83,6 +86,9 @@ export default function GetSpotDetails() {
           itemText="Post Your Review"
           modalComponent={<CreateReview reviewInfo={reviewInfo}/>}
           />}
+        </div>
+        <div>
+          <GetAllReviews />
         </div>
           {/* {reviews.forEach(review => {
             <div>

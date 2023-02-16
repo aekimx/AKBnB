@@ -19,12 +19,12 @@ export default function ManageSpots()  {
   },[dispatch]);
 
   const current = useSelector(currentSpots);
-  console.log('current from useselector in manage spots' , current);
+  // console.log('current from useselector in manage spots' , current);
   const currentSpotImages = Object.values(current);
 
   const currentSpotsArr = Object.values(current);
 
-  console.log('currentSpotsArr for avgStarrating fix', currentSpotsArr)
+  // console.log('currentSpotsArr for avgStarrating fix', currentSpotsArr)
 
   currentSpotsArr.forEach(spot => {
     if (spot.avgRating === null) {

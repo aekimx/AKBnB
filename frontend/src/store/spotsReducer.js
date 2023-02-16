@@ -7,6 +7,7 @@ const CREATE = "spots/CREATE";
 const LOAD_CURRENT = "spots/LOAD_CURRENT";
 const UPDATE = "spots/UPDATE";
 const DELETE = "spots/DELETE";
+const CLEAR = 'spots/CLEAR';
 
 const ADD_IMAGE = "spots/ADD_IMAGE";
 
@@ -40,6 +41,10 @@ const deleteSpot = spotId => ({
   type: DELETE,
   spotId
 });
+
+export const clearSpot = () => ({
+  type: CLEAR,
+})
 
 const addImage = imgArr => ({
   type: ADD_IMAGE,
@@ -195,6 +200,10 @@ export default function spotsReducer(state = initialState, action) {
         singleSpot: { ...state.singleSpot }
       };
       delete newState.allSpots[action.spotId];
+      return newState;
+    case CLEAR:
+      newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
+      newState.singleSpot = {};
       return newState;
     case ADD_IMAGE:
       newState = {...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};

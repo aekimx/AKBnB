@@ -26,7 +26,7 @@ export default function UpdateSpot({spot}) {
     e.preventDefault();
     const lat = 1;
     const lng = 1;
-    const updatedSpot = {spotId: spot.spotId, spot: userId, address, city, state, country, lat, lng, name, description,price};
+    const updatedSpot = {spotId: +spot.spotId, spot: userId, address, city, state, country, lat, lng, name, description,price};
 
     dispatch(updateSpotThunk(updatedSpot))
       .then(() => history.push(`/spots/${spot.spotId}`))
