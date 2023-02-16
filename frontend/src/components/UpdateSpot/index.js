@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateSpotThunk, oneSpot } from "../../store/spotsReducer";
-import { useParams, useHistory } from "react-router-dom";
+import { updateSpotThunk} from "../../store/spotsReducer";
+import { useHistory } from "react-router-dom";
 
 import "./UpdateSpot.css";
 
-export default function UpdateSpot() {
-  let {spotId} = useParams();
+export default function UpdateSpot({spot}) {
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const currentSpot = useSelector(oneSpot);
-  // console.log('current spot from useslector update spot' , currentSpot)
-
   const [errors, setErrors] = useState({});
 
-  const [address, setAddress] = useState(currentSpot.address);
-  const [city, setCity] = useState(currentSpot.city);
-  const [state, setState] = useState(currentSpot.state);
-  const [country, setCountry] = useState(currentSpot.country);
-  const [name, setName] = useState(currentSpot.name);
-  const [description, setDescription] = useState(currentSpot.description);
-  const [price, setPrice] = useState(currentSpot.price);
+  const [address, setAddress] = useState(spot.address);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [name, setName] = useState(spot.name);
+  const [description, setDescription] = useState(spot.description);
+  const [price, setPrice] = useState(spot.price);
 
   const userId = useSelector(state => state.session.user.id);
 
@@ -30,33 +26,29 @@ export default function UpdateSpot() {
     e.preventDefault();
     const lat = 1;
     const lng = 1;
-    const updatedSpot = {spotId, ownerId: userId, address, city, state, country, lat, lng, name, description,price};
+    const updatedSpot = {spotId: spot.spotId, spot: userId, address, city, state, country, lat, lng, name, description,price};
 
     dispatch(updateSpotThunk(updatedSpot))
-      .then(() => history.push(`/spots/${spotId}`))
+      .then(() => history.push(`/spots/${spot.spotId}`))
       .catch(async res => {
         const data = await res.json();
 
-      if (data.errors) {
-        let errorObj = {};
-        data.errors.forEach(error => {
-          let key = error.split(" ")[0];
-          errorObj[key] = error;
-        });
-        setErrors(errorObj);
-      }
+        if (data.errors) {
+          let errorObj = {};
+          data.errors.forEach(error => {
+            let key = error.split(" ")[0];
+            errorObj[key] = error;
+          });
+          setErrors(errorObj);
+        }
     })
-
-
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>Update your spot </h1>
       <h3> Where's your place located?</h3>
-      <h4>
-        Guests will only get your exact address once they book a reservation
-      </h4>
+      <h4>Guests will only get your exact address once they book a reservation</h4>
       <div className='create-spot-errors'>
       <label>Country</label>
       {errors.Country !== undefined ? <h5>{errors.Country}</h5> : null}
@@ -99,28 +91,6 @@ export default function UpdateSpot() {
           onChange={e => setState(e.target.value)}
         />
       </div>
-      {/* <div> */}
-      {/* <div className='create-spot-errors'>
-        <label>Latitude</label>
-        {errors.Latitude !== undefined ? <h5>{errors.Latitude}</h5> : null}
-        </div>
-        <input
-          type="text"
-          value={lat}
-          placeholder="Latitude"
-          onChange={e => setLat(e.target.value)}
-        /> */}
-        {/* <div className='create-spot-errors'>
-        <label>Longitude</label>
-        {errors.Longitude !== undefined ? <h5>{errors.Longitude}</h5> : null}
-        </div>
-        <input
-          type="text"
-          value={lng}
-          placeholder="Longitude"
-          onChange={e => setLng(e.target.value)}
-        />
-      </div> */}
       {/* SHOULD BE A LINE HERE separating*/}
       <div>
         <h3> Describe your place to guests</h3>
@@ -152,10 +122,7 @@ export default function UpdateSpot() {
       {/* SHOULD BE A LINE HERE separating*/}
       <div>
         <h3> Set a base price for your spot </h3>
-        <h4>
-          {" "}Competitive pricing can help your listing stand out and rank
-          higher in search results
-        </h4>
+        <h4>Competitive pricing can help your listing stand out and rank higher in search results</h4>
         <input
           type="text"
           value={price}
@@ -166,8 +133,8 @@ export default function UpdateSpot() {
       </div>
       {/* SHOULD BE A LINE HERE separating*/}
       {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
-      <h3> Liven up your spot with photos </h3>
-      <h4>Submit a link to at least one photo to publish your spot</h4>
+      {/* <h3> Liven up your spot with photos </h3>
+      <h4>Submit a link to at least one photo to publish your spot</h4> */}
       {/* <input
           type="url"
           // value={name}

@@ -22,6 +22,17 @@ export default function ManageSpots()  {
   console.log('current from useselector in manage spots' , current);
   const currentSpotImages = Object.values(current);
 
+  const currentSpotsArr = Object.values(current);
+
+  console.log('currentSpotsArr for avgStarrating fix', currentSpotsArr)
+
+  currentSpotsArr.forEach(spot => {
+    if (spot.avgRating === null) {
+      spot.avgRating = "New"
+    }
+  })
+
+
   return (
     <div>
       <h1>Manage Your Spots</h1>

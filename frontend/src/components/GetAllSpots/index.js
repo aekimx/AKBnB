@@ -18,6 +18,11 @@ export default function GetAllSpots() {
   const spots = useSelector(allSpots)
 
   const spotsArray = Object.values(spots);
+  spotsArray.forEach(spot=> {
+    if (spot.avgRating === null) {
+      spot.avgRating = "New"
+    }
+  })
 
   return (
     <>

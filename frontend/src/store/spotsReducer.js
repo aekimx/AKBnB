@@ -62,10 +62,13 @@ export const allSpotsThunk = () => async dispatch => {
 };
 
 export const oneSpotThunk = id => async dispatch => {
+  // console.log("One spot thunk running")
   const response = await fetch(`/api/spots/${id}`);
 
   if (response.ok) {
+    // console.log('response ', response);
     const spot = await response.json();
+    // console.log('spot ', spot);
     dispatch(loadOneSpot(spot));
   }
 };
@@ -160,14 +163,8 @@ export default function spotsReducer(state = initialState, action) {
   let newState = {};
   switch (action.type) {
     case LOAD:
-      newState = {
-        ...state,
-        allSpots: { ...state.allSpots },
-        singleSpot: { ...state.singleSpot }
-      };
-      action.spots.Spots.forEach(spot => {
-        newState.allSpots[spot.id] = spot;
-      });
+      newState = {...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};
+      action.spots.Spots.forEach(spot => { newState.allSpots[spot.id] = spot;});
       return newState;
     case LOAD_ONE:
       newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }
@@ -184,15 +181,11 @@ export default function spotsReducer(state = initialState, action) {
       return newState;
     case LOAD_CURRENT:
       newState = {...state, allSpots: { },singleSpot: { ...state.singleSpot }};
-      console.log('action.spots from root reducer' , action.spots);
+      // console.log('action.spots from root reducer' , action.spots);
       action.spots.Spots.forEach(spot => {newState.allSpots[spot.id] = spot});
       return newState;
     case UPDATE:
-      newState = {
-        ...state,
-        allSpots: { ...state.allSpots },
-        singleSpot: { ...state.singleSpot }
-      };
+      newState = {...state, allSpots: { ...state.allSpots }, singleSpot: { }};
       newState.singleSpot = action.updatedSpot;
       return newState;
     case DELETE:
@@ -204,11 +197,7 @@ export default function spotsReducer(state = initialState, action) {
       delete newState.allSpots[action.spotId];
       return newState;
     case ADD_IMAGE:
-      newState = {
-        ...state,
-        allSpots: { ...state.allSpots },
-        singleSpot: { ...state.singleSpot }
-      };
+      newState = {...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};
       newState.allSpots[action.image.id].previewImage = action.imgArr[0].url;
       newState.singleSpot.SpotImages = [...action.imgArr]; // do we need to hit both single spot + all spot
       // need to add to single spot as well? since we are going to single spot page

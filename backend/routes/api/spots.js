@@ -408,7 +408,7 @@ const validateCreateReview = [
     .withMessage("Review text is required"),
   check("stars")
     .exists({ checkFalsy: true })
-    .withMessage("You must provide star rating")
+    .withMessage("Star Rating is required")
     .isIn([1, 2, 3, 4, 5])
     .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrorsSpots

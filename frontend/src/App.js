@@ -7,7 +7,8 @@ import GetAllSpots from "./components/GetAllSpots";
 import GetSpotDetails from './components/SpotDetails';
 import CreateSpot from './components/CreateSpot';
 import ManageSpots from "./components/ManageSpots";
-import UpdateSpot from "./components/UpdateSpot";
+
+import UpdateSpotInfo from "./components/UpdateSpot/updateSpotInfo";
 
 
 function App() {
@@ -32,11 +33,15 @@ function App() {
             <CreateSpot />
           </Route>
           <Route exact path="/spots/:spotId/edit">
-            <UpdateSpot />
+            <UpdateSpotInfo />
           </Route>
           <Route exact path="/spots/:spotId">
             <GetSpotDetails />
           </Route>
+          <Route>
+            <h1>Unable to retrieve details. Please try again shortly.</h1>
+          </Route>
+
         </Switch>
       )}
     </>
