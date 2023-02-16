@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { currentSpots, loadCurrentUserSpots, deleteSpotThunk } from "../../store/spotsReducer";
 import {Link, Redirect} from 'react-router-dom';
-import DeleteConfirmModal from "../DeleteConfirmModal";
+import DeleteConfirmModal from "../DeleteSpot";
 
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 

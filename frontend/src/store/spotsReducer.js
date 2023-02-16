@@ -143,20 +143,6 @@ export const deleteSpotThunk = spotId => async dispatch => {
   }
 };
 
-// export const addImageThunk = imgArr => async dispatch => {
-//   imgArr.forEach(async image => {
-//     const response = await csrfFetch(`/api/spots/${image.id}/images`, {
-//       method: "post",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(image)
-//     });
-
-//     if (response.ok) {
-//       const newImage = response.json();
-//       dispatch(addImage(newImage));
-//     }
-//   });
-// };
 
 // reducers
 let initialState = {

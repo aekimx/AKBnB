@@ -1,8 +1,9 @@
 import { csrfFetch } from "./csrf";
 
 //variables
-const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
-const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS'
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW';
+const LOAD_REVIEWS = 'reviews/LOAD_REVIEWS';
+const DELETE_REVIEW = 'reviews/DELETE_REVIEW';
 
 //action creators
 const createReview = (review) => ({
@@ -13,6 +14,11 @@ const createReview = (review) => ({
 const loadReviews = (reviews) => ({
   type: LOAD_REVIEWS,
   reviews
+})
+
+const deleteReview = (reviewId) => ({
+  type: DELETE_REVIEW,
+  reviewId
 })
 
 // selector
@@ -89,6 +95,18 @@ export const loadReviewsThunk = (spotId) => async dispatch => {
   }
 }
 
+export const deleteReviewThunk = (reviewId) => async dispatch => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: 'DELETE'
+  });
+
+  if (response.ok) {
+    const successfulDelete = await response.json();
+    dispatch(deleteReview(reviewId))
+  }
+}
+
+
 //reducer
 let initialState = {
   spot: {},
@@ -98,16 +116,19 @@ let initialState = {
 export default function reviewsReducer ( state = initialState, action) {
   let newState = {};
   switch(action.type) {
+    case LOAD_REVIEWS:
+      newState = {...state, spot: {}, user: {...state.user}}
+      action.reviews.Reviews.forEach(review => {
+        newState.spot[review.id] = review
+      })
+      return newState
     case CREATE_REVIEW:
       newState = {...state, spot: {...state.spot}, user: {...state.user}}
       newState.spot[action.review.id] = action.review;
       return newState;
-    case LOAD_REVIEWS:
-      newState = {...state, spot: {}, user: {...state.user}}
-      // console.log('action.reviews ', action.reviews)
-      action.reviews.Reviews.forEach(review => {
-        newState.spot[review.id] = review
-      })
+    case DELETE_REVIEW:
+      newState = {...state, spot: {...state.spot}, user: {...state.user}}
+      delete newState.spot[action.reviewId]
       return newState
     default:
       return state
