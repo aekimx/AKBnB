@@ -103,7 +103,7 @@ router.get("/" , async (req, res) => {
         attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
         where: { spotId: spot.id }
       });
-      console.log(review[0]);
+      // console.log(review[0]);
       const avgRating = review[0].dataValues.avgStarRating;
       spot.avgRating = avgRating;
 
@@ -164,8 +164,9 @@ router.get("/current", restoreUser, requireAuth, async (req, res) => {
     let review = await Review.findAll({
       raw: true,
       attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
-      where: {userId: req.user.id}
+      where: {spotId: spot.id}
     });
+
     if (review) {
       spot.avgRating = review[0].avgStarRating;
     } else {
@@ -226,7 +227,8 @@ router.get("/:spotId", async (req, res) => {
       where: {spotId: id}
     })
 
-    spot.avgStarRating = reviews[0].avgStarRating;
+    console.log('--------------- reviews from backend', reviews)
+    spot.avgStarRating = reviews[0].avgStarRating
     spot.numReviews= reviews[0].numReviews;
 
     return res.json(spot);
@@ -245,7 +247,8 @@ const validateCreateSpot = [
   check("name").exists({ checkFalsy: true }).withMessage("Name is required")
     .isLength({ max: 50 }).withMessage("Name should be less than 50 characters"),
   check("description").exists({ checkFalsy: true }).withMessage("Description is required"),
-  check("price").exists({ checkFalsy: true }).withMessage("Price per day is required"),
+  check("price").exists({ checkFalsy: true }).withMessage("Price per day is required")
+    .isDecimal().withMessage("Price should be a number"),
     // .isIn({min: 1}).withMessage("Price per day must be a positive number"),
   handleValidationErrorsSpots
 ];

@@ -1,11 +1,11 @@
 import { useModal } from '../../context/Modal';
 import {useDispatch} from 'react-redux';
-import { deleteReviewThunk } from '../../store/reviewsReducer';
+import { deleteReviewThunk, loadReviewsThunk } from '../../store/reviewsReducer';
 import {useHistory} from 'react-router-dom'
 import { oneSpotThunk } from '../../store/spotsReducer';
 
 
-export default function DeleteReview({reviewId}, spotId) {
+export default function DeleteReview({reviewId, spotId}) {
 
   // console.log('spotId from prop in delete confirm modal', spotId);
   const {closeModal} = useModal()
@@ -13,12 +13,15 @@ export default function DeleteReview({reviewId}, spotId) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleDelete = (e) => {
+  const handleDelete = async(e) => {
     e.preventDefault();
-    dispatch(deleteReviewThunk(reviewId))
-      .then(dispatch(oneSpotThunk(spotId)))
-      .then(closeModal())
-      // .then(() => history.push('/spots/current'))
+
+    const successfulDelete = await dispatch(deleteReviewThunk(reviewId))
+    if (successfulDelete.message === "Successfully deleted") {
+      const onespot = await dispatch(oneSpotThunk(spotId))
+    }
+    await closeModal();
+
   }
 
   return (

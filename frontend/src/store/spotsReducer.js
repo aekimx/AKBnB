@@ -63,7 +63,7 @@ export const allSpotsThunk = () => async dispatch => {
       if (!spot.avgRating) {
         // console.log(spot.avgRating)
         spot.avgRating = "New"
-        console.log('did the reassignment work ', spot.avgRating)
+        // console.log('did the reassignment work ', spot.avgRating)
       }
     })
     console.log(spotsJSON);
@@ -77,6 +77,7 @@ export const oneSpotThunk = id => async dispatch => {
   if (response.ok) {
     const spot = await response.json();
     dispatch(loadOneSpot(spot));
+    return spot;
   }
 };
 
@@ -88,6 +89,7 @@ export const createSpotThunk = (data, imgUrlArr, owner) => async dispatch => {
   });
   if (response.ok) {
     const newSpot = await response.json();
+    console.log('newSpot ',newSpot)
     newSpot.avgRating = 0;
     newSpot.spotImages = [];
     newSpot.Owner = owner;
@@ -109,17 +111,18 @@ export const createSpotThunk = (data, imgUrlArr, owner) => async dispatch => {
 };
 
 export const loadCurrentUserSpots = () => async dispatch => {
-  // console.log("load current user spots thunk running")
+  console.log("load current user spots thunk running")
   const response = await csrfFetch("/api/spots/current");
 
   if (response.ok) {
     const userSpots = await response.json();
+    console.log('userSpots from loadcurrent user spots thunk ', userSpots);
     dispatch(currentUserSpots(userSpots));
   }
 };
 
 export const updateSpotThunk = data => async dispatch => {
-  console.log('data in update spot thunk ', data.spotId);
+  // console.log('data in update spot thunk ', data.spotId);
   const response = await csrfFetch(`/api/spots/${+data.spotId}`, {
     method: "put",
     headers: { "Content-Type": "application/json" },
@@ -160,7 +163,7 @@ export default function spotsReducer(state = initialState, action) {
       action.spots.Spots.forEach(spot => { newState.allSpots[spot.id] = spot;});
       return newState;
     case LOAD_ONE:
-      newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }
+      newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: {  }
       };
       newState.singleSpot = action.spot;
       return newState;

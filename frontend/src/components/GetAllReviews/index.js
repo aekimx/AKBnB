@@ -14,7 +14,7 @@ export default function GetAllReviews() {
 
   useEffect(() => {
     dispatch(loadReviewsThunk(spotId))
-    .then(oneSpotThunk(spotId))
+    .then(dispatch(oneSpotThunk(spotId)))
   }, [dispatch, spotId])
 
   const reviews = useSelector(allReviews);
@@ -34,7 +34,7 @@ export default function GetAllReviews() {
         return (
         <div>
           {userId === review.userId ?
-          <OpenModalMenuItem itemText="Delete" modalComponent={<DeleteReview reviewId={review.id} spotId/>} />
+          <OpenModalMenuItem itemText="Delete" modalComponent={<DeleteReview reviewId={review.id} spotId={spotId}/>} />
           : null}
 
           <h3>{review.User.firstName}</h3>

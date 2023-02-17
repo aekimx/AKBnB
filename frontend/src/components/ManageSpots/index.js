@@ -17,17 +17,16 @@ export default function ManageSpots()  {
   },[dispatch]);
 
   const current = useSelector(currentSpots);
-  console.log('current spots , ', current);
+  // console.log('current spots , ', current);
   const currentSpotImages = Object.values(current);
-
 
   const currentSpotsArr = Object.values(current);
 
   currentSpotsArr.forEach(spot => {
-    // console.log('spot avg rating in manage spots ' , spot.avgRating)
-    if (spot.avgRating === null) {
+    console.log('spot avg rating in manage spots ' , spot.avgRating)
+    if (spot.avgRating === null || spot.avgRating === NaN) {
       spot.avgRating = "New"
-    } else {
+    } else if (spot.avgRating !== "New") {
       spot.avgRating = Number(spot.avgRating).toFixed(1);
     }
   })

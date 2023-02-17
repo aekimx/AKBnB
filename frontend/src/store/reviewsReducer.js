@@ -103,6 +103,7 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
   if (response.ok) {
     const successfulDelete = await response.json();
     dispatch(deleteReview(reviewId))
+    return successfulDelete;
   }
 }
 

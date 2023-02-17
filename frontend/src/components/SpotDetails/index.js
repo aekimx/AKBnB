@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { oneSpotThunk, oneSpot, clearSpot } from "../../store/spotsReducer";
@@ -16,7 +16,9 @@ export default function GetSpotDetails() {
 
   const userId = useSelector(state => state.session.user?.id)
 
-  const spot = useSelector(oneSpot);
+  const spot = useSelector(state => {
+    console.log('single spot state useslector', state.spots.singleSpot)
+    return state.spots.singleSpot});
 
   const review = useSelector(state => state.reviews.spot);
 
@@ -28,7 +30,9 @@ export default function GetSpotDetails() {
 
 
   useEffect(() => {
+
       dispatch(oneSpotThunk(spotId));
+
       dispatch(loadReviewsThunk(spotId));
 
       return () => dispatch(clearSpot());
@@ -43,16 +47,15 @@ export default function GetSpotDetails() {
     )
   }
 
-  if (spot.avgStarRating === null) {
+  if (!spot.avgStarRating) {
     spot.avgStarRating = "New";
-  } else {
-    console.log(typeof +spot.avgStarRating)
+  } else if (spot.avgStarRating !== "New") {
     spot.avgStarRating = Number(spot.avgStarRating).toFixed(1);
   }
 
 
   const spotImagesArr = spot.spotImages;
-  console.log('spotimagesarr ', spotImagesArr)
+  // console.log('spotimagesarr ', spotImagesArr)
   if (!spotImagesArr) return null;
 
   const reviewInfo = {spotId: spot.id, userId}
@@ -91,7 +94,7 @@ export default function GetSpotDetails() {
 
         <div className='dot-reviews'>
           <div className='star-reviews'>
-            <i class="fa-solid fa-star" /><p>{`${spot.avgStarRating}`}</p>
+            <i class="fa-solid fa-star" /><p>{spot.avgStarRating}</p>
           </div>
         {spot.numReviews === 0 ? null : <p>•</p> }
         <div className='num-reviews'>{spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
@@ -105,7 +108,7 @@ export default function GetSpotDetails() {
 
       <div>
         <div>
-          <i class="fa-solid fa-star">{`${spot.avgStarRating}`}</i>
+          <i class="fa-solid fa-star">{spot.avgStarRating}</i>
           <div> {spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
         </div>
         <div>

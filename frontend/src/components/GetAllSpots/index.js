@@ -27,7 +27,6 @@ export default function GetAllSpots() {
     else {
       spot.avgRating = Number(spot.avgRating).toFixed(1); // why is this not working?
     }
-    spot.avgRating = Number(spot.avgRating).toFixed(1);
   })
 
 

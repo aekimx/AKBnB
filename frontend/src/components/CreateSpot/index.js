@@ -44,20 +44,20 @@ export default function CreateSpot() {
       imgUrlArr.push(previewImg);
 
       if (imgOneURL) {
-        const imgOne = { url: imgOneURL, preview: false}
+        const imgOne = { url: imgOneURL, preview: 'false'}
         imgUrlArr.push(imgOne)
       }
 
       if (imgTwoURL) {
-        const imgTwo = { url: imgTwoURL, preview: false}
+        const imgTwo = { url: imgTwoURL, preview: 'false'}
         imgUrlArr.push(imgTwo)
       }
       if (imgThreeURL) {
-        const imgThree=  { url: imgThreeURL, preview: false}
+        const imgThree=  { url: imgThreeURL, preview: 'false'}
         imgUrlArr.push(imgThree);
       }
       if (imgFourURL) {
-        const imgFour = { url: imgFourURL, preview: false}
+        const imgFour = { url: imgFourURL, preview: 'false'}
         imgUrlArr.push(imgFour);
       }
 
