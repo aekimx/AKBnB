@@ -46,7 +46,7 @@ export default function GetAllSpots() {
             </div>
           </div>
           <div className='spot-price-night'>
-              <h4 className='spot-price'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
+              <text className='all-spot-price'>{`$${spot.price}`}</text> <text className='night'> night</text>
           </div>
           </Link>
         </div>

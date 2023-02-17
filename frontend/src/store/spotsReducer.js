@@ -80,7 +80,7 @@ export const oneSpotThunk = id => async dispatch => {
   }
 };
 
-export const createSpotThunk = (data, imgArr, owner) => async dispatch => {
+export const createSpotThunk = (data, imgUrlArr, owner) => async dispatch => {
   const response = await csrfFetch("/api/spots", {
     method: "post",
     headers: { "Content-Type": "application/json" },
@@ -88,11 +88,11 @@ export const createSpotThunk = (data, imgArr, owner) => async dispatch => {
   });
   if (response.ok) {
     const newSpot = await response.json();
-    newSpot.avgStarRating = 0;
+    newSpot.avgRating = 0;
     newSpot.spotImages = [];
     newSpot.Owner = owner;
-    for (let i = 0; i < imgArr.length; i++) {
-      let image = imgArr[i];
+    for (let i = 0; i < imgUrlArr.length; i++) {
+      let image = imgUrlArr[i];
       const response = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -165,11 +165,7 @@ export default function spotsReducer(state = initialState, action) {
       newState.singleSpot = action.spot;
       return newState;
     case CREATE:
-      newState = {
-        ...state,
-        allSpots: { ...state.allSpots },
-        singleSpot: { ...state.singleSpot }
-      };
+      newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};
       newState.allSpots[action.spot.id] = action.spot;
       return newState;
     case LOAD_CURRENT:

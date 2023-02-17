@@ -74,7 +74,7 @@ export default function GetSpotDetails() {
         </div>
 
         <div className='hosted-reserve'>
-        <div>
+        <div className='hosted-reserve-desc'>
           <p className='hosted-owner'>Hosted by {`${spot.Owner.firstName} ${spot.Owner.lastName}`}</p>
           <p className='spot-description'>{`${spot.description}`}</p>
         </div>

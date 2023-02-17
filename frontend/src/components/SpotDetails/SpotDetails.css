@@ -44,6 +44,12 @@
 
 .spot-description {
   font-size: 16px;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.hosted-reserve-desc {
+  width: 700px;
 }
 
 .res-price-rating-div {
@@ -57,13 +63,14 @@
 }
 
 .spot-price {
-  font-size: 25px;
+  font-size: 20px;
   margin-left: 20px;
+  font-weight:bold
 }
 
 .night {
   font-size: 15px;
-  margin-top: auto;
+  margin-top: 5px;
   margin-bottom: 3px;
   padding-left: 2px;
 }
@@ -116,5 +123,7 @@
   margin-top:10px;
   margin-bottom: 5px;
   background-color: red;
-  color:white
+  color:white;
+  border-radius: 8px;
+  cursor: pointer;
 }
