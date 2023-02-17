@@ -12,7 +12,6 @@ import configureStore from './store';
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from './store/session';
 
-
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const store = configureStore();

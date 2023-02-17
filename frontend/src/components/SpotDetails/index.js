@@ -17,7 +17,7 @@ export default function GetSpotDetails() {
   const userId = useSelector(state => state.session.user?.id)
 
   const spot = useSelector(state => {
-    console.log('single spot state useslector', state.spots.singleSpot)
+    // console.log('single spot state useslector', state.spots.singleSpot)
     return state.spots.singleSpot});
 
   const review = useSelector(state => state.reviews.spot);
@@ -55,10 +55,16 @@ export default function GetSpotDetails() {
 
 
   const spotImagesArr = spot.spotImages;
-  // console.log('spotimagesarr ', spotImagesArr)
+
   if (!spotImagesArr) return null;
 
   const reviewInfo = {spotId: spot.id, userId}
+
+  let reviews = 'reviews';
+  (spot.numReviews === 1 ? reviews = 'review' : reviews = 'reviews')
+
+  let letter;
+  (spot.numReviews === 0 ? letter = null : letter = '•')
 
   return (
     <div>
@@ -96,8 +102,8 @@ export default function GetSpotDetails() {
           <div className='star-reviews'>
             <i class="fa-solid fa-star" /><p>{spot.avgStarRating}</p>
           </div>
-        {spot.numReviews === 0 ? null : <p>•</p> }
-        <div className='num-reviews'>{spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
+          <p>{letter}</p>
+        {spot.numReviews === 0 ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
         </div>
           </div>
           </div>
@@ -109,7 +115,7 @@ export default function GetSpotDetails() {
       <div>
         <div>
           <i class="fa-solid fa-star">{spot.avgStarRating}</i>
-          <div> {spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
+          {spot.numReviews === 0 ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
         </div>
         <div>
         {+spot.ownerId === +userId || !userId || disableReview ? null : <OpenModalMenuItem

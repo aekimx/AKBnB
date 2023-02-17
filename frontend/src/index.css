@@ -3,3 +3,11 @@ a:active {
   text-decoration: none;
   color:none
 }
+
+a {
+  color: black
+}
+
+html {
+  font-family: 'Noto Sans Osage', sans-serif;
+}
