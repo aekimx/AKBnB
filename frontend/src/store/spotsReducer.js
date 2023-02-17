@@ -46,11 +46,6 @@ export const clearSpot = () => ({
   type: CLEAR,
 })
 
-const addImage = imgArr => ({
-  type: ADD_IMAGE,
-  imgArr // array of images with {id, url, preview}
-});
-
 // selectors
 export const allSpots = state => state.spots.allSpots;
 export const oneSpot = state => state.spots.singleSpot;
@@ -67,19 +62,15 @@ export const allSpotsThunk = () => async dispatch => {
 };
 
 export const oneSpotThunk = id => async dispatch => {
-  // console.log("One spot thunk running")
   const response = await fetch(`/api/spots/${id}`);
 
   if (response.ok) {
-    // console.log('response ', response);
     const spot = await response.json();
-    // console.log('spot ', spot);
     dispatch(loadOneSpot(spot));
   }
 };
 
 export const createSpotThunk = (data, imgArr, owner) => async dispatch => {
-  // console.log("create spot thunk running")
   const response = await csrfFetch("/api/spots", {
     method: "post",
     headers: { "Content-Type": "application/json" },

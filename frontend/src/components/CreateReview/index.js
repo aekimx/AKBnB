@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useModal } from '../../context/Modal';
 import {useDispatch, useSelector} from 'react-redux';
-import { createReviewThunk } from '../../store/reviewsReducer';
+import { createReviewThunk, loadReviewsThunk,  } from '../../store/reviewsReducer';
+import { oneSpotThunk } from "../../store/spotsReducer";
 import {useHistory} from 'react-router-dom'
 
 import './CreateReview.css'
 
 export default function CreateReview({reviewInfo: {spotId, userId}}) {
-  // console.log('review info prop', reviewInfo);
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0);
 
@@ -22,24 +22,14 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
     e.preventDefault();
 
     const reviewData = {spotId, userId, review, stars};
-    // console.log('created review' , createdReview);
+
     const User = { id: userId, firstName, lastName}
 
     dispatch(createReviewThunk(reviewData, User))
-      .then(closeModal())
-      // dont think we need this?
-      // .catch(( async (res) => {
-      //   const data = await res.json()
+    // change the state in spot details to rerender
+    .then(dispatch(oneSpotThunk(spotId)))
+    .then(closeModal())
 
-      //     if (data.errors) {
-      //       let errorObj = {};
-      //       data.errors.forEach(error => {
-      //         let key = error.split(" ")[0]
-      //         errorObj[key] = error;
-      //       })
-      //       setErrors(errorObj)
-      //     }
-      //   }))
   }
 
   return (

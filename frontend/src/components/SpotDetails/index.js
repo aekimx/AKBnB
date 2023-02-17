@@ -15,7 +15,17 @@ export default function GetSpotDetails() {
   const {spotId}= useParams();
 
   const userId = useSelector(state => state.session.user?.id)
+
   const spot = useSelector(oneSpot);
+
+  const review = useSelector(state => state.reviews.spot);
+
+  const reviewArr = Object.values(review);
+  let  disableReview = false ;
+  reviewArr.forEach(review => {
+    if (review.userId === userId) disableReview = true;
+  })
+
 
   useEffect(() => {
       dispatch(oneSpotThunk(spotId));
@@ -35,8 +45,12 @@ export default function GetSpotDetails() {
     )
   }
 
-  if (spot.avgStarRating === null) spot.avgStarRating = "New";
-  // console.log(spot.numReviews === 1 ? 'review' : 'reviews');
+  if (spot.avgStarRating === null) {
+    spot.avgStarRating = "New";
+  } else {
+    console.log(typeof +spot.avgStarRating)
+    spot.avgStarRating = Number(spot.avgStarRating).toFixed(1);
+  }
 
 
   const spotImagesArr = spot.spotImages;
@@ -70,17 +84,17 @@ export default function GetSpotDetails() {
           <div>
             <i class="fa-solid fa-star">{`${spot.avgStarRating}`}</i>
           </div>
-          <div> {spot.numReviews} {spot.numReview === 1 ? 'review' : 'reviews'}</div>
+          <div> {spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
           <button>Reserve</button>
         </div>
       </div>
       <div>
         <div>
           <i class="fa-solid fa-star">{`${spot.avgStarRating}`}</i>
-          <div> {spot.numReviews} {spot.numReview === 1 ? 'review' : 'reviews'}</div>
+          <div> {spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
         </div>
         <div>
-        {+spotId === userId ? null : <OpenModalMenuItem
+        {+spot.ownerId === +userId || !userId || disableReview ? null : <OpenModalMenuItem
           itemText="Post Your Review"
           modalComponent={<CreateReview reviewInfo={reviewInfo}/>}
           />}
