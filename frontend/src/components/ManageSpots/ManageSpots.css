@@ -54,6 +54,7 @@
   height: 30px;
   width: 55px;
   padding: 1px;
+  background-color: darkgray;
 }
 
 .night-update-delete {
@@ -65,6 +66,7 @@
 .updatelinktext {
   margin-top:5.5px;
   margin-left: 4px;
+  color: white;
 }
 
 .create-spot-link {

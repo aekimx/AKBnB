@@ -1,0 +1,122 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  margin-left: auto;
+  margin-right:auto;
+}
+
+
+.form-header {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.place-located {
+  font-size: 20px;
+}
+
+.create-spot-errors {
+  color: red;
+  list-style-type: none;
+}
+
+.guests-location {
+  font-size: 15px;
+  width: 367px;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.country-street-input input {
+  width: 367px;
+}
+
+
+.city-state {
+  width: 380px;
+  display:flex;
+  flex-direction: row;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px;
+}
+
+.comma {
+  display: flex;
+  flex-direction: row;
+}
+
+.state {
+  margin-left: 10px;
+}
+
+.city input {
+  width: 175px;
+}
+.state input {
+  width: 175px;
+  margin-bottom: 15px;
+}
+
+
+.submit-button {
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right:auto;
+  background-color: red;
+  color: white;
+  border: 2px solid black;
+}
+
+.error-formatting {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.error-text {
+  margin-left: 5px;
+  margin-top: 1px;
+  font-size: 13px;
+  color: red;
+}
+
+.guest-stay {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.guest-stay-desc {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.guest-stay-box {
+  width: 367px;
+  border-bottom: 2px solid black;
+  width: 380px;
+  margin-bottom: 10px;
+}
+
+.guest-stay-box .error-text {
+  margin-bottom: 10px;
+}
+
+.guest-stay-box textarea {
+  width: 367px;
+  height: 100px;
+  margin-bottom: 5px;
+}
+
+.guest-stay-box input {
+  width: 367px;
+  margin-bottom: 5px;
+}

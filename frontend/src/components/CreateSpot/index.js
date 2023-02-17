@@ -81,106 +81,139 @@ export default function CreateSpot() {
   return (
 
     <form onSubmit={handleSubmit}>
-      <h1>Create a new Spot </h1>
-      <h3> Where's your place located?</h3>
-      <h4>
+      <div className='form-container'>
+      <p className='form-header'>Create a new Spot </p>
+      <p className='place-located'> Where's your place located?</p>
+      <p className='guests-location'>
         Guests will only get your exact address once they book a reservation
-      </h4>
-      <div className='create-spot-errors'>
+      </p>
+      <div className='form-inputs'>
+
+
+        <div className='country-street-input'>
+<div className='error-formatting'>
       <label>Country</label>
-      {errors.Country !== undefined ? <h5>{errors.Country}</h5> : null}
+      <div className='create-spot-errors'>
+      {errors.Country !== undefined ? <p className='error-text'>{errors.Country}</p> : null}
       </div>
+
+      </div>
+
       <input
         type="text"
         value={country}
         placeholder="Country"
         onChange={e => setCountry(e.target.value)}
       />
-      <div className='create-spot-errors'>
-      <label>Street Address</label>
-      {errors.Street !== undefined ? <h5>{errors.Street}</h5> : null}
       </div>
+
+    <div className='country-street-input'>
+
+ <div className='error-formatting'>
+
+      <label>Street Address</label>
+      <div className='create-spot-errors'>
+      {errors.Street !== undefined ? <p className='error-text'>{errors.Street}</p> : null}
+      </div>
+
+      </div>
+
+
       <input
         type="text"
         value={address}
         placeholder="Address"
         onChange={e => setAddress(e.target.value)}
       />
-      <div className='create-spot-errors'>
-        <div>
+      </div>
+
+      <div className='city-state'>
+        <div className="city">
+
+        <div className='error-formatting'>
+
         <label>City</label>
-        {errors.City !== undefined ? <h5>{errors.City}</h5> : null}
-        </div>
-        <input
-          type="text"
-          value={city}
-          placeholder="City"
-          onChange={e => setCity(e.target.value)}
-        />
         <div className='create-spot-errors'>
-        <label>State</label>
-        {errors.State !== undefined ? <h5>{errors.State}</h5> : null}
+          {errors.City !== undefined ? <p className='error-text'>{errors.City}</p> : null}
         </div>
-        <input
-          type="text"
-          value={state}
-          placeholder="State"
-          onChange={e => setState(e.target.value)}
-        />
+
+    </div>
+
+        <div className='comma'>
+        <input type="text" value={city} placeholder="City" onChange={e => setCity(e.target.value)} />
+        <p>, </p>
+        </div>
+        </div>
+
+      <div className="state">
+
+      <div className='error-formatting'>
+
+        <label>State</label>
+        <div className='create-spot-errors'>
+          {errors.State !== undefined ? <p className='error-text'>{errors.State}</p> : null}
+        </div>
+
+    </div>
+
+        <input type="text" value={state} placeholder="State" onChange={e => setState(e.target.value)}/>
+        </div>
       </div>
 
       {/* SHOULD BE A LINE HERE separating*/}
-      <div>
-        <h3> Describe your place to guests</h3>
-        <h4>
+      <div className='guest-stay-box'>
+        <p className='guest-stay'> Describe your place to guests</p>
+        <p className='guest-stay-desc'>
           Mention the best features of your space, any special amenities like
           fast wifi or parking, and what you love about the neighborhood
-        </h4>
+        </p>
         <textarea
         value={description}
         placeholder="Please write at least 30 characters"
         onChange={e => setDescription(e.target.value)} />
-        {errors.Description !== undefined ? <h5>{errors.Description}</h5> : null}
+        {errors.Description !== undefined ? <p className='error-text'>{errors.Description}</p> : null}
       </div>
 
       {/* SHOULD BE A LINE HERE separating*/}
 
-      <div>
-        <h3> Create a title for your spot </h3>
-        <h4>
+      <div className='guest-stay-box'>
+        <p className='guest-stay'> Create a title for your spot </p>
+        <p className='guest-stay-desc'>
           {" "}Catch guest's attention with a spot title that highlights what
           makes your place special
-        </h4>
+        </p>
         <input
           type="text"
           value={name}
           placeholder="Name of your spot"
           onChange={e => setName(e.target.value)}
         />
-        {errors.Name !== undefined ? <text>{errors.Name}</text> : null}
+        {errors.Name !== undefined ? <p className='error-text'>{errors.Name}</p> : null}
       </div>
 
       {/* SHOULD BE A LINE HERE separating*/}
 
-      <div>
-        <h3> Set a base price for your spot </h3>
-        <h4>
+      <div className='guest-stay-box'>
+        <p className='guest-stay'> Set a base price for your spot </p>
+        <p className='guest-stay-desc'>
           {" "}Competitive pricing can help your listing stand out and rank
           higher in search results
-        </h4>
+        </p>
+        <text>$</text>
         <input
           type="text"
           value={price}
           placeholder="Price per night (USD)"
           onChange={e => setPrice(e.target.value)}
         />
-        {errors.Price !== undefined ? <text>{errors.Price}</text> : null}
+        {errors.Price !== undefined ? <p className='error-text'>{errors.Price}</p> : null}
       </div>
 
       {/* SHOULD BE A LINE HERE separating*/}
       {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
-      <h3> Liven up your spot with photos </h3>
-      <h4>Submit a link to at least one photo to publish your spot</h4>
+      <div className='guest-stay-box'>
+      <p className='guest-stay'> Liven up your spot with photos </p>
+      <p className='guest-stay-desc'>Submit a link to at least one photo to publish your spot</p>
       <input
           type="url"
           value={previewImgURL}
@@ -216,10 +249,13 @@ export default function CreateSpot() {
           placeholder="Image URL"
           onChange={e => setImgFourURL(e.target.value)}
         />
+      </div>
 
 
   {/* SHOULD BE A LINE HERE separating*/}
-    <button type='submit'>Create Spot</button>
-    </form>
+    <button className='submit-button'type='submit'>Create Spot</button>
+    </div>
+  </div>
+</form>
   );
 }
