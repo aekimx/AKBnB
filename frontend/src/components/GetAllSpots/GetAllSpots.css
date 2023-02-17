@@ -5,7 +5,7 @@
 
 .spots {
   display: flex;
-  width: 1040px;
+  width: 1024px;
   flex-wrap: wrap;
 }
 
@@ -14,7 +14,6 @@
   width: 280px;
   padding: 10px;
   flex-wrap: wrap;
-
 }
 
 .rating-city {
@@ -35,4 +34,13 @@
 
 .city-state {
   font-size: 15px;
+}
+
+.spot-price-night {
+  display:flex;
+  flex-direction:row;
+}
+.night {
+  margin-left: 3px;
+  font-weight: 100;
 }

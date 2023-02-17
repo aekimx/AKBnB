@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
           <div>
             {!sessionUser ? null :
             <div className='create-spot-link-container'>
-              <Link to="/spots/new" className='create-spot-link'>Create a New Spot</Link>
+              <Link to="/spots/new" className='create-spot'> <p className='navbar-create-spot'>Create a New Spot</p></Link>
             </div>}
           </div>
           <div>

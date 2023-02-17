@@ -58,7 +58,11 @@ ul {
   margin-top: 17px;
 }
 
-.create-spot-link {
+.navbar-create-spot {
   text-decoration: none;
-  color: red
+  color: red;
+}
+
+.create-spot {
+  text-decoration: none;
 }

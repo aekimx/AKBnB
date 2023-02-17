@@ -10,8 +10,6 @@ import "./ManageSpots.css";
 
 export default function ManageSpots()  {
 
-  // const userId = useSelector((state) => state.session.user.id)
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,16 +17,16 @@ export default function ManageSpots()  {
   },[dispatch]);
 
   const current = useSelector(currentSpots);
-  // console.log('current from useselector in manage spots' , current);
   const currentSpotImages = Object.values(current);
 
-  const currentSpotsArr = Object.values(current);
 
-  // console.log('currentSpotsArr for avgStarrating fix', currentSpotsArr)
+  const currentSpotsArr = Object.values(current);
 
   currentSpotsArr.forEach(spot => {
     if (spot.avgRating === null) {
       spot.avgRating = "New"
+    } else {
+      spot.avgRating = Number(spot.avgRating).toFixed(1);
     }
   })
 
@@ -36,24 +34,40 @@ export default function ManageSpots()  {
   return (
     <div>
       <h1>Manage Your Spots</h1>
-      <Link to='/spots/new'>Create New Spot</Link>
-    <div className="manage-spots">
+      <div className='create-spot-button'>
+      <Link to='/spots/new' className='create-spot-link'>Create New Spot</Link>
+      </div>
+    <div className="spots">
       {currentSpotImages.map(spot => {
         return (
-          <div>
-            <Link to={`/spots/${spot.id}`}>
-              <img src={spot.previewImage} alt={`preview`} />
-              <h3>{`${spot.city}, ${spot.state}`}</h3>
-              <h4>{`$${spot.price} night`}</h4>
-              <div>
-                <i class="fa-solid fa-star">{`${spot.avgRating}`}</i>
-                <Link to={`/spots/${spot.id}/edit`}>Update</Link>
-                <OpenModalMenuItem itemText="Delete"
-                modalComponent={<DeleteConfirmModal spotId={spot.id}/>}
-                />
+          <div className='spot-tile'>
+            <Link to={`/spots/${spot.id}`} className='link-spot-tile'>
+              <img src={spot.previewImage} alt={`preview`} className='img-tile'/>
+              <div className='rating-city'>
+                <h3 className='city-state'>{`${spot.city}, ${spot.state}`}</h3>
+                <div className='star-rating'>
+                  <i class="fa-solid fa-star"/><p className='rating-text'>{`${spot.avgRating}`}</p>
+                </div>
               </div>
+              <div className='night-update-delete'>
+                <div className='spot-price-night'>
+                <h4 className='spot-price'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
+                </div>
+                <div className='update-delete-links'>
+                  <div className='button'>
+                  <Link to={`/spots/${spot.id}/edit`} className='update-link'><p className='updatelinktext'>Update</p></Link>
+                  </div>
+                  <div className='button'>
+                  <OpenModalMenuItem className='delete-modal' itemText="Delete"
+                  modalComponent={<DeleteConfirmModal spotId={spot.id}/>}
+                  />
+                  </div>
+                </div>
+              </div>
+
             </Link>
           </div>
+
         );
       })}
     </div>

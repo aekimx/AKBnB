@@ -119,6 +119,7 @@ export const loadCurrentUserSpots = () => async dispatch => {
 };
 
 export const updateSpotThunk = data => async dispatch => {
+  console.log('data in update spot thunk ', data.spotId);
   const response = await csrfFetch(`/api/spots/${+data.spotId}`, {
     method: "put",
     headers: { "Content-Type": "application/json" },

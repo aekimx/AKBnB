@@ -45,9 +45,9 @@ export default function GetAllSpots() {
               <i class="fa-solid fa-star" /><p className='rating-text'>{`${spot.avgRating}`}</p>
             </div>
           </div>
-          <h4>{`$${spot.price} night`}</h4>
-
-
+          <div className='spot-price-night'>
+              <h4 className='spot-price'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
+          </div>
           </Link>
         </div>
         )

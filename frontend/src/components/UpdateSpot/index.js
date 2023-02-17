@@ -22,14 +22,16 @@ export default function UpdateSpot({spot}) {
 
   const userId = useSelector(state => state.session.user.id);
 
+  // console.log('spot inputted into spotId ', spot.id)
+
   const handleSubmit = e => {
     e.preventDefault();
     const lat = 1;
     const lng = 1;
-    const updatedSpot = {spotId: +spot.spotId, spot: userId, address, city, state, country, lat, lng, name, description,price};
+    const updatedSpot = {spotId: spot.id, spot: userId, address, city, state, country, lat, lng, name, description,price};
 
     dispatch(updateSpotThunk(updatedSpot))
-      .then(() => history.push(`/spots/${spot.spotId}`))
+      .then(() => history.push(`/spots/${spot.id}`))
       .catch(async res => {
         const data = await res.json();
 

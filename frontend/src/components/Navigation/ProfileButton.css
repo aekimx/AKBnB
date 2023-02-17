@@ -23,19 +23,23 @@
   list-style-type: none;
   flex-direction: column;
   width: auto;
-  padding: 1px 30px 1px 10px;
+  padding: 5px 40px 1px 20px;
   border: 2px solid;
   border-radius: 5px;
   font-family: 'Geometric Sans Serif v1', sans-serif;
   font-weight: 100;
   right: 35px;
   top: 61px;
-  align-items: center;
-  cursor: auto
+  align-self: center;
+  cursor: auto;
+
 }
 
 .profile-dropdown>li {
   margin-left: 20px;
+  justify-content: center;
+  padding-top: 5px;
+
 }
 
 .profileItem{
@@ -54,9 +58,10 @@
   background-color: red;
 }
 
-li {
-  width: 200px;
-  justify-content: space-between;
+.modal li {
+  width: 70px;
+  padding-right: 10px;
+  /* padding-top: 6px; */
 }
 
 .fas fa-user-circle {
@@ -66,4 +71,36 @@ li {
 .signUpText,
 .logInText {
   width: 100px;
+  height: 40px;
+}
+
+.logout-button {
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  background-color: gray;
+  color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.logged-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding-top: 5px;
+}
+
+.logged-in p {
+  padding-top: 2px;
+  margin-left: 5px;
+}
+
+.modal {
+  padding: 0;
+}
+
+.manage-spots {
+  text-decoration: none;
 }

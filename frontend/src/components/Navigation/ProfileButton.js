@@ -56,21 +56,21 @@ function ProfileButton({ user }) {
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <li>Hello, {user.firstName}</li>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
+          <div className='logged-in'>
+            <p className='user-info'>Hello, {user.firstName}</p>
+            <p className='user-info'>{user.username}</p>
+            <p className='user-info'>{user.firstName} {user.lastName}</p>
+            <p className='user-info'>{user.email}</p>
             {/* NEEDS TO BE A LINE HERE TO SEPARATE */}
-            <Link to={`/spots/current`}>Manage Spots</Link>
+            <Link to={`/spots/current`} className='manage-spots'>Manage Spots</Link>
             {/* NEEDS TO BE A LINE HERE TO SEPARATE */}
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
+            <p>
+              <button className='logout-button' onClick={logout}>Log Out</button>
+            </p>
 
-          </>
+          </div>
         ) : (
-          <>
+          <div className='modal'>
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
@@ -85,7 +85,7 @@ function ProfileButton({ user }) {
             />
 
 
-          </>
+          </div>
         )}
       </ul>
     </>
