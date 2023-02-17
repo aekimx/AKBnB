@@ -1,14 +1,14 @@
 ul {
   display: flex;
   justify-content: space-between;
-  /* border-bottom: solid lightgray; */
+  border-bottom: solid rgb(175, 174, 174);
   padding: 0px;
   margin-left: 0px;
   margin-right: 0px;
 }
 
 .home-button {
-  display: flex;
+  display: inline-block;
   list-style-type: none;
   align-self: center;
   margin-left: 20px;
@@ -17,4 +17,48 @@ ul {
 .profile-button {
   display: block;
   margin-right: 10px;
+}
+
+.navlink-home {
+  display:flex;
+  flex-direction: row;
+}
+
+/* .navlink-home:active {
+  text-decoration: none;
+}
+.navlink-home:visited {
+  text-decoration: none;
+}
+.navlink-home:hover {
+  text-decoration:none;
+} */
+
+.fa-sun {
+  font-size: 30px;
+}
+
+.navlink-home {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 20px;
+  width:100px;
+  margin-top: 5px;
+  color: rgb(59, 125, 225)
+}
+
+.loggedin-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.create-spot-link-container {
+  margin-top: 17px;
+}
+
+.create-spot-link {
+  text-decoration: none;
+  color: rgb(59, 125, 225)
 }

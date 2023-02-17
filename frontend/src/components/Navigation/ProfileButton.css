@@ -22,12 +22,13 @@
   position: absolute;
   list-style-type: none;
   flex-direction: column;
-  width: 100px;
+  width: 150px;
   padding: 1px 30px 1px 10px;
   border: 2px solid;
+  border-radius: 5px;
   font-family: 'Geometric Sans Serif v1', sans-serif;
   font-weight: 100;
-  right: 30px;
+  right: 50px;
   top: 61px;
 }
 

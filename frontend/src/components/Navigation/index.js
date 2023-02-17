@@ -1,8 +1,10 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+// import logo from '../../assets/logo'
+
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -10,14 +12,18 @@ function Navigation({ isLoaded }) {
   return (
     <ul className="navigation-bar">
       <li className="home-button">
-        <NavLink exact to="/">
-          Home
-        </NavLink>
+        <div className='logo-container'>
+          <NavLink exact to="/" className='navlink-home'><i class="fa-regular fa-sun" /><p className='logo-text' >AKBnB</p></NavLink>
+
+          </div>
       </li>
       {isLoaded &&
-        <div>
+        <div className='loggedin-container'>
           <div>
-            {!sessionUser ? null : <Link to="/spots/new">Create a New Spot</Link>}
+            {!sessionUser ? null :
+            <div className='create-spot-link-container'>
+              <Link to="/spots/new" className='create-spot-link'>Create a New Spot</Link>
+            </div>}
           </div>
           <div>
             <li className="profile-button">
