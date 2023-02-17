@@ -1,0 +1,38 @@
+.img-tile {
+  width: 270px;
+  height: 250px;
+}
+
+.spots {
+  display: flex;
+  width: 1040px;
+  flex-wrap: wrap;
+}
+
+.spot-tile {
+  flex-direction: row;
+  width: 280px;
+  padding: 10px;
+  flex-wrap: wrap;
+
+}
+
+.rating-city {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.link-spot-tile {
+  text-decoration: none;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+}
+
+.city-state {
+  font-size: 15px;
+}

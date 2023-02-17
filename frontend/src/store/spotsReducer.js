@@ -57,6 +57,16 @@ export const allSpotsThunk = () => async dispatch => {
 
   if (response.ok) {
     const spotsJSON = await response.json();
+    // console.log('spotsJSON from allspots thunk ', spotsJSON)
+    spotsJSON.Spots.forEach(spot => {
+      // console.log (typeof spot.avgRating)
+      if (!spot.avgRating) {
+        // console.log(spot.avgRating)
+        spot.avgRating = "New"
+        console.log('did the reassignment work ', spot.avgRating)
+      }
+    })
+    console.log(spotsJSON);
     dispatch(loadSpots(spotsJSON));
   }
 };

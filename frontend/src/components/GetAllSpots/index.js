@@ -19,12 +19,15 @@ export default function GetAllSpots() {
 
   const spotsArray = Object.values(spots);
   spotsArray.forEach(spot=> {
-    if (spot.avgRating === null) {
+    // console.log('spot info for rating', spot, '       ', spot.avgRating)
+    // console.log('spot.avgRating ',spot.avgRating)
+    if (spot.avgRating === null || spot.avgRating === "NaN") {
       spot.avgRating = "New"
     }
-    // else {
-    //   spot.avgRating = +(spot.avgRating).toFixed(1); // why is this not working?
-    // }
+    else {
+      spot.avgRating = Number(spot.avgRating).toFixed(1); // why is this not working?
+    }
+    spot.avgRating = Number(spot.avgRating).toFixed(1);
   })
 
 
@@ -33,14 +36,18 @@ export default function GetAllSpots() {
       <div className='spots'>
       {spotsArray.map(spot =>  {
         return (
-        <div>
-          <Link to={`/spots/${spot.id}`}>
-          <img src={spot.previewImage} alt={`preview`}/>
-          <h3>{`${spot.city}, ${spot.state}`}</h3>
-          <h4>{`$${spot.price} night`}</h4>
-          <div>
-          <i class="fa-solid fa-star">{`${spot.avgRating}`}</i>
+        <div className='spot-tile'>
+          <Link to={`/spots/${spot.id}`} className='link-spot-tile'>
+          <img src={spot.previewImage} alt={`preview`} className='img-tile'/>
+          <div className='rating-city'>
+            <h3 className='city-state'>{`${spot.city}, ${spot.state}`}</h3>
+            <div className='star-rating'>
+              <i class="fa-solid fa-star" /><p className='rating-text'>{`${spot.avgRating}`}</p>
+            </div>
           </div>
+          <h4>{`$${spot.price} night`}</h4>
+
+
           </Link>
         </div>
         )

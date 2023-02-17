@@ -46,7 +46,7 @@ ul {
   font-size: 20px;
   width:100px;
   margin-top: 5px;
-  color: rgb(59, 125, 225)
+  color: red
 }
 
 .loggedin-container {
@@ -60,5 +60,5 @@ ul {
 
 .create-spot-link {
   text-decoration: none;
-  color: rgb(59, 125, 225)
+  color: red
 }

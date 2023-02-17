@@ -9,6 +9,7 @@
   border-radius: 20px;
   padding: 8px;
   padding-bottom: 10px;
+  cursor: pointer
 }
 
 .fas {
@@ -18,18 +19,23 @@
 }
 
 .profile-dropdown {
-  /* display: block; */
   position: absolute;
   list-style-type: none;
   flex-direction: column;
-  width: 150px;
+  width: auto;
   padding: 1px 30px 1px 10px;
   border: 2px solid;
   border-radius: 5px;
   font-family: 'Geometric Sans Serif v1', sans-serif;
   font-weight: 100;
-  right: 50px;
+  right: 35px;
   top: 61px;
+  align-items: center;
+  cursor: auto
+}
+
+.profile-dropdown>li {
+  margin-left: 20px;
 }
 
 .profileItem{
@@ -55,4 +61,9 @@ li {
 
 .fas fa-user-circle {
   width: 20px;
+}
+
+.signUpText,
+.logInText {
+  width: 100px;
 }
