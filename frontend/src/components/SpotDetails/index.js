@@ -6,9 +6,9 @@ import { oneSpotThunk, oneSpot, clearSpot } from "../../store/spotsReducer";
 import CreateReview from "../CreateReview";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import { loadReviewsThunk, allReviews } from "../../store/reviewsReducer";
+import GetAllReviews from "../GetAllReviews";
 
 import "./SpotDetails.css";
-import GetAllReviews from "../GetAllReviews";
 
 export default function GetSpotDetails() {
   const dispatch = useDispatch();
@@ -36,8 +36,6 @@ export default function GetSpotDetails() {
     }, [spotId]);
 
 
-  // if (!userId) return null;
-
   // is this going to be a problem? Check!!! Hits this every time - how to fix?
   if (!spot.name) {
     return (
@@ -54,6 +52,7 @@ export default function GetSpotDetails() {
 
 
   const spotImagesArr = spot.spotImages;
+  console.log('spotimagesarr ', spotImagesArr)
   if (!spotImagesArr) return null;
 
   const reviewInfo = {spotId: spot.id, userId}
@@ -61,33 +60,49 @@ export default function GetSpotDetails() {
   return (
     <div>
       <div className="spot-detail-container">
-        <h1>
-          {spot.name}
-        </h1>
-        <h4>
-          {spot.city}, {spot.state}, {spot.country}{" "}
-        </h4>
+        <p className='spot-name'> {spot.name} </p>
+        <div className='city-state-country'>
+        <p>{spot.city},</p>
+        <p>{spot.state},</p>
+        <p>{spot.country}</p>
+        </div>
 
-        <div>
+        <div className='image-div'>
           {spotImagesArr.map(image => {
-            return <img src={`${image.url}`} alt="image" />;
+            return <img src={`${image.url}`} alt="image" className={image.preview === true ? 'previewImage' : 'regImage'} />;
           })}
         </div>
+
+        <div className='hosted-reserve'>
         <div>
-          <h3>
-            Hosted by {`${spot.Owner.firstName} ${spot.Owner.lastName}`}
-          </h3>
-          <h4>{`${spot.description}`}</h4>
+          <p className='hosted-owner'>Hosted by {`${spot.Owner.firstName} ${spot.Owner.lastName}`}</p>
+          <p className='spot-description'>{`${spot.description}`}</p>
         </div>
-        <div className="reservation-price-rating-div">
-          <div>{`${spot.price} night`}</div>
-          <div>
-            <i class="fa-solid fa-star">{`${spot.avgStarRating}`}</i>
+
+    <div className="res-price-rating-div">
+
+    <div className='night-review'>
+
+        <div className='spot-price-night'>
+              <p className='spot-price'>{`$${spot.price}`}</p> <p className='night'> night</p>
+        </div>
+
+    <div className = 'reviews-container'>
+
+        <div className='dot-reviews'>
+          <div className='star-reviews'>
+            <i class="fa-solid fa-star" /><p>{`${spot.avgStarRating}`}</p>
           </div>
-          <div> {spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
-          <button>Reserve</button>
+        {spot.numReviews === 0 ? null : <p>•</p> }
+        <div className='num-reviews'>{spot.numReviews === 1 ? `${spot.numReviews} review` : `${spot.numReviews} reviews`}</div>
         </div>
-      </div>
+          </div>
+          </div>
+            <button className='reserve-button'>Reserve</button>
+                  </div>
+                       </div>
+                       </div>
+
       <div>
         <div>
           <i class="fa-solid fa-star">{`${spot.avgStarRating}`}</i>

@@ -20,6 +20,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* border-bottom: 0px; */
+}
+
+.rating-city h3 {
+  margin-top: 5px;
+  border-bottom: none;
 }
 
 .star-rating {

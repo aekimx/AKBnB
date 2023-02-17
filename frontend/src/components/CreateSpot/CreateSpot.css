@@ -120,3 +120,9 @@
   width: 367px;
   margin-bottom: 5px;
 }
+
+.button-box {
+  width: 380px;
+  display:flex;
+  justify-content: center;
+}

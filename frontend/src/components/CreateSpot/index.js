@@ -253,7 +253,9 @@ export default function CreateSpot() {
 
 
   {/* SHOULD BE A LINE HERE separating*/}
+  <div className='button-box'>
     <button className='submit-button'type='submit'>Create Spot</button>
+  </div>
     </div>
   </div>
 </form>
