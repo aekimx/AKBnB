@@ -52,7 +52,7 @@ export default function ManageSpots()  {
               </div>
               <div className='night-update-delete'>
                 <div className='spot-price-night'>
-                <h4 className='spot-price'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
+                <h4 className='spot-price-manage'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
                 </div>
                 <div className='update-delete-links'>
                   <div className='button'>

@@ -39,6 +39,11 @@
   flex-direction:row;
   margin-top: 8px;
 }
+
+.spot-price-night>.night {
+  margin-top: 3px;
+}
+
 .night {
   margin-left: 3px;
   font-weight: 100;
@@ -93,4 +98,10 @@ h1 {
   border: 2px solid black;
   padding: 1px;
   background-color: darkgray;
+}
+
+.spot-price-manage {
+  margin-left: 2px;
+  font-size: 18px;
+  font-weight:bold;
 }
