@@ -67,7 +67,7 @@ export default function GetSpotDetails() {
   (spot.numReviews === 0 ? letter = null : letter = '•')
 
   return (
-    <div>
+    <div >
       <div className="spot-detail-container">
         <p className='spot-name'> {spot.name} </p>
         <div className='city-state-country'>

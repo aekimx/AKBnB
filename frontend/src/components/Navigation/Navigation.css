@@ -24,16 +24,6 @@ ul {
   flex-direction: row;
 }
 
-/* .navlink-home:active {
-  text-decoration: none;
-}
-.navlink-home:visited {
-  text-decoration: none;
-}
-.navlink-home:hover {
-  text-decoration:none;
-} */
-
 .fa-sun {
   font-size: 30px;
 }
@@ -65,4 +55,8 @@ ul {
 
 .create-spot {
   text-decoration: none;
+}
+
+.navigation-bar {
+  font-family: 'Noto Sans Osage', sans-serif;
 }

@@ -6,6 +6,8 @@ import { oneSpotThunk } from "../../store/spotsReducer";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import DeleteReview from "../DeleteReview";
 
+import "./GetAllReviews.css"
+
 export default function GetAllReviews() {
 
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ export default function GetAllReviews() {
   if (!reviewsArr[0]) return null;
 
   return (
-    <div>
+    <div className='reviews-div'>
       {reviewsArrNew.map(review => {
         return (
         <div>

@@ -33,7 +33,7 @@ export default function ManageSpots()  {
 
 
   return (
-    <div>
+    <div className='manage-spots-div'>
       <h1>Manage Your Spots</h1>
       <div className='create-spot-button'>
       <Link to='/spots/new' className='create-spot-link'>Create New Spot</Link>

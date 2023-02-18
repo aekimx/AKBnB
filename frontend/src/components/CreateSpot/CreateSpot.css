@@ -1,3 +1,7 @@
+form, ::placeholder {
+  font-family: 'Noto Sans Osage', sans-serif;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -52,6 +56,10 @@
   flex-direction: row;
 }
 
+.comma-comma {
+  margin-left: 2px;
+}
+
 .state {
   margin-left: 10px;
 }
@@ -83,8 +91,8 @@
 
 
 .error-text {
-  margin-left: 5px;
-  margin-top: 1px;
+  margin-left: 4px;
+  margin-top: 3px;
   font-size: 13px;
   color: red;
 }

@@ -141,7 +141,7 @@ export default function CreateSpot() {
 
         <div className='comma'>
         <input type="text" value={city} placeholder="City" onChange={e => setCity(e.target.value)} />
-        <p>, </p>
+        <p className='comma-comma'>, </p>
         </div>
         </div>
 
