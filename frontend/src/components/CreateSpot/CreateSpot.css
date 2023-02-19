@@ -42,7 +42,6 @@ form, ::placeholder {
   width: 367px;
 }
 
-
 .city-state {
   width: 380px;
   display:flex;
@@ -133,4 +132,16 @@ form, ::placeholder {
   width: 380px;
   display:flex;
   justify-content: center;
+}
+
+.dollarsign-input {
+  display: flex;
+}
+
+.dollarsign {
+  margin-right: 3px;
+}
+
+.dollarsign-input input {
+  width: 357px;
 }

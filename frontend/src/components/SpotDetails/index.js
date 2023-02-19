@@ -131,6 +131,10 @@ export default function GetSpotDetails() {
           modalComponent={<CreateReview reviewInfo={reviewInfo}/>}
           /> </div>}
 
+          <div>
+            {spot.avgStarRating !== "New" || !userId || +spot.ownerId === +userId ? null : <p className='first-post-review'>Be the first to post a review!</p>}
+          </div>
+
         <div>
           <GetAllReviews />
         </div>

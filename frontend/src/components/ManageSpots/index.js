@@ -55,10 +55,10 @@ export default function ManageSpots()  {
                 <h4 className='spot-price-manage'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
                 </div>
                 <div className='update-delete-links'>
-                  <div className='button'>
+                  <div className='delete-button'>
                   <Link to={`/spots/${spot.id}/edit`} className='update-link'><p className='updatelinktext'>Update</p></Link>
                   </div>
-                  <div className='button'>
+                  <div className='delete-button'>
                   <OpenModalMenuItem className='delete-modal' itemText="Delete"
                   modalComponent={<DeleteConfirmModal spotId={spot.id}/>}
                   />

@@ -199,13 +199,15 @@ export default function CreateSpot() {
           {" "}Competitive pricing can help your listing stand out and rank
           higher in search results
         </p>
-        <text>$</text>
+        <div className='dollarsign-input'>
+        <p className="dollarsign">$</p>
         <input
           type="text"
           value={price}
           placeholder="Price per night (USD)"
           onChange={e => setPrice(e.target.value)}
         />
+        </div>
         {errors.Price !== undefined ? <p className='error-text'>{errors.Price}</p> : null}
       </div>
 

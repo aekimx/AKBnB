@@ -206,3 +206,10 @@
 .star-reviews-bigger > i.fa-solid.fa-star::before {
   font-size: 25px;
 }
+
+.first-post-review {
+  font-family: 'Noto Sans Osage', sans-serif;
+  margin-left: 20px;
+  font-size: 15px;
+  margin-bottom: 50px;
+}
