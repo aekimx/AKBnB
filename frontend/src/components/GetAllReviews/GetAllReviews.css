@@ -1,3 +1,17 @@
 .reviews-div {
   font-family: 'Noto Sans Osage', sans-serif;
 }
+
+.get-all-review-tile {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+}
+
+
+
+.review-review {
+  width: 950px;
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useModal } from '../../context/Modal';
 import {useDispatch, useSelector} from 'react-redux';
-import { createReviewThunk, loadReviewsThunk,  } from '../../store/reviewsReducer';
+import { createReviewThunk } from '../../store/reviewsReducer';
 import { oneSpotThunk } from "../../store/spotsReducer";
-import {useHistory} from 'react-router-dom'
 
 import './CreateReview.css'
 
@@ -11,7 +10,7 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0);
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const {closeModal} = useModal()
@@ -35,8 +34,8 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
   return (
     <div>
     <h2>How was your stay?</h2>
-    {errors.Review !== undefined ? <h5>{errors.Review}</h5> : null }
-    {errors.Star !== undefined ? <h5>{errors.Star}</h5> : null }
+    {/* {errors.Review !== undefined ? <h5>{errors.Review}</h5> : null }
+    {errors.Star !== undefined ? <h5>{errors.Star}</h5> : null } */}
 
       <textarea
       placeholder='Leave your review here.'

@@ -5,7 +5,7 @@
 
 .spot-name {
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 30px;
 }
 
@@ -47,6 +47,7 @@
   font-size: 16px;
   margin-top: 5px;
   flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .hosted-reserve-desc {
@@ -56,11 +57,13 @@
 .res-price-rating-div {
   border: 2px solid black;
   width: 300px;
-  justify-content: left;
-  margin-left: auto;
-  margin-right: 50px;
+  margin-right: 10px;
+  margin-top: 15px;
   border-radius: 10px;
-  padding: 7px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  height: 80px;
+  padding-right: 10px;
 }
 
 .spot-price {
@@ -94,6 +97,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-top: 0px;
+  padding-right: 5px;
 }
 
 .hosted-reserve {
@@ -101,6 +105,9 @@
   flex-direction: row;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-bottom: 2px solid black;
+  width: 950px;
+
 }
 
 .fa-circle fa-solid {
@@ -115,6 +122,7 @@
 
 .num-reviews {
   margin-left: 10px;
+
 }
 
 .reserve-button {
@@ -127,4 +135,64 @@
   color:white;
   border-radius: 8px;
   cursor: pointer;
+}
+
+
+.spot-detail-stars-review {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.fa-star {
+  margin-top: 2px;
+  margin-right: 3px;
+}
+
+.create-review-modal-spotdetails {
+  list-style: none;
+  margin-left: 20px;
+  margin-top: 20px;
+  font-family: 'Noto Sans Osage', sans-serif;
+
+}
+
+
+.reviews-container-bigger {
+  /* border: 2px solid red; */
+  margin-left: 20px;
+  font-family: 'Noto Sans Osage', sans-serif;
+}
+
+.dot-reviews-bigger {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.star-reviews-bigger {
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+}
+
+.avg-star-rating-bigger {
+  font-size: 25px;
+  margin-bottom:2px;
+  margin-top:-2px;
+}
+
+.num-reviews-bigger {
+  margin-left: 10px;
+  font-size: 25px;
+  margin-top: -2px;
+}
+
+.dot-bigger {
+  font-size: 25px;
+  /* margin-top:-2px; */
+}
+
+.star-reviews-bigger > i.fa-solid.fa-star::before {
+  font-size: 25px;
 }

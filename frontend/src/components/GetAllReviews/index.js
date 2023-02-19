@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { loadReviewsThunk, allReviews } from "../../store/reviewsReducer";
 import { oneSpotThunk } from "../../store/spotsReducer";
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
@@ -34,14 +34,14 @@ export default function GetAllReviews() {
     <div className='reviews-div'>
       {reviewsArrNew.map(review => {
         return (
-        <div>
+        <div className='get-all-review-tile'>
           {userId === review.userId ?
           <OpenModalMenuItem itemText="Delete" modalComponent={<DeleteReview reviewId={review.id} spotId={spotId}/>} />
           : null}
 
-          <h3>{review.User.firstName}</h3>
-          <h3>{review.createdAt}</h3>
-          <p>{review.review}</p>
+          <p className='firstname-review'>{review.User.firstName}</p>
+          <p className='date-review'>{review.createdAt}</p>
+          <p className='review-review'>{review.review}</p>
         </div>)
       })}
     </div>

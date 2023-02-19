@@ -7,6 +7,7 @@
   display: flex;
   width: 1024px;
   flex-wrap: wrap;
+  margin-left: 5px;
 }
 
 .spot-tile {
@@ -82,7 +83,7 @@
 
 .create-spot-link {
   text-decoration: none;
-  margin-left: 20px;
+  margin-left: 12px;
   color: white
 }
 
@@ -98,6 +99,7 @@ h1 {
   border: 2px solid black;
   padding: 1px;
   background-color: darkgray;
+  border-radius: 10px;
 }
 
 .spot-price-manage {
