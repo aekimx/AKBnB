@@ -8,10 +8,30 @@
   padding-top: 5px;
 }
 
-
-
 .review-review {
   width: 950px;
   display: flex;
   flex-wrap: wrap;
+  font-size: 15px;
+}
+
+.firstname-review {
+  margin-bottom: 2px;
+  font-size: 20px;
+}
+
+.date-review {
+  margin-bottom: 2px;
+  font-size: 20px;
+}
+
+.delete-review-modal {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 48px;
+  list-style-type: none;
+  color: white;
+  background-color: gray;
+  margin-top: 10px;
+  font-size: 12px;
 }

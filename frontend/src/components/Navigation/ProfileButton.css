@@ -23,16 +23,14 @@
   list-style-type: none;
   flex-direction: column;
   width: auto;
-  padding: 5px 40px 1px 20px;
+  padding: 5px 20px 1px 10px;
   border: 2px solid;
   border-radius: 5px;
-  font-family: 'Geometric Sans Serif v1', sans-serif;
+  font-family: 'Noto Sans Osage', sans-serif;
   font-weight: 100;
   right: 35px;
   top: 61px;
-  align-self: center;
   cursor: auto;
-
 }
 
 .profile-dropdown>li {
@@ -76,13 +74,17 @@
 
 .logout-button {
   cursor: pointer;
-  margin-bottom: 10px;
-  margin-left: 15px;
   background-color: gray;
   color: white;
   width: 80px;
   height: 30px;
   border-radius: 10px;
+}
+
+.logout-button-div {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 .logged-in {
@@ -103,4 +105,18 @@
 
 .manage-spots {
   text-decoration: none;
+  margin-left: 4px;
+}
+
+.logged-in-user-info {
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+}
+
+.manage-spots-div {
+  width: 175px;
+  margin-top: 5px;
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 }

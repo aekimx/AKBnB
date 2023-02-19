@@ -35,13 +35,12 @@ export default function GetAllReviews() {
       {reviewsArrNew.map(review => {
         return (
         <div className='get-all-review-tile'>
-          {userId === review.userId ?
-          <OpenModalMenuItem itemText="Delete" modalComponent={<DeleteReview reviewId={review.id} spotId={spotId}/>} />
-          : null}
-
           <p className='firstname-review'>{review.User.firstName}</p>
           <p className='date-review'>{review.createdAt}</p>
           <p className='review-review'>{review.review}</p>
+          {userId === review.userId ?
+          <div className='delete-review-modal'><OpenModalMenuItem itemText="Delete"  modalComponent={<DeleteReview reviewId={review.id} spotId={spotId}/>} /></div>
+          : null}
         </div>)
       })}
     </div>

@@ -63,7 +63,8 @@
   margin-left: 10px;
   margin-bottom: 15px;
   height: 80px;
-  padding-right: 10px;
+  padding-right: 25px;
+  padding-bottom: 10px;
 }
 
 .spot-price {
@@ -152,9 +153,16 @@
 .create-review-modal-spotdetails {
   list-style: none;
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   font-family: 'Noto Sans Osage', sans-serif;
-
+  border: 2px solid black;
+  padding-left:2px;
+  border-radius: 5px;
+  width: 110px;
+  color: white;
+  background-color: gray;
+  margin-bottom: 10px;
+  font-size: 12px;
 }
 
 
@@ -162,6 +170,7 @@
   /* border: 2px solid red; */
   margin-left: 20px;
   font-family: 'Noto Sans Osage', sans-serif;
+  margin-bottom: 15px;
 }
 
 .dot-reviews-bigger {

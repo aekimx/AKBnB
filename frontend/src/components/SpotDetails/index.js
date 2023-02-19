@@ -125,12 +125,12 @@ export default function GetSpotDetails() {
           </div>
             </div>
 
-        <div className="create-review-modal-spotdetails">
-        {+spot.ownerId === +userId || !userId || disableReview ? null : <OpenModalMenuItem
+
+        {+spot.ownerId === +userId || !userId || disableReview ? null : <div className="create-review-modal-spotdetails"> <OpenModalMenuItem
           itemText="Post Your Review"
           modalComponent={<CreateReview reviewInfo={reviewInfo}/>}
-          />}
-        </div>
+          /> </div>}
+
         <div>
           <GetAllReviews />
         </div>
