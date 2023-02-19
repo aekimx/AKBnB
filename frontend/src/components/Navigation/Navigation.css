@@ -36,7 +36,7 @@ ul {
   font-size: 20px;
   width:100px;
   margin-top: 5px;
-  color: red
+  color: rgb(228, 60, 60);
 }
 
 .loggedin-container {
@@ -50,7 +50,7 @@ ul {
 
 .navbar-create-spot {
   text-decoration: none;
-  color: red;
+  color:  rgb(228, 60, 60);
 }
 
 .create-spot {

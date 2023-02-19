@@ -132,10 +132,11 @@
   margin-left:25px;
   margin-top:10px;
   margin-bottom: 5px;
-  background-color: red;
+  background-color: rgb(228, 60, 60);
   color:white;
   border-radius: 8px;
   cursor: pointer;
+  border: 2px solid black;
 }
 
 
