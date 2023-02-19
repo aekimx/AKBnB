@@ -20,21 +20,30 @@
 }
 
 .image-div {
-  width: 1000px;
+  width: 1150px;
   display:flex;
-  flex-wrap: wrap;
+  height: 350px;
 
 }
 
 .previewImage {
   width: 50%;
-  height: 400px;
+  height: 410px;
   margin-right: 3px;
+  height: 100%;
+}
+
+.regular-images-div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
 }
 
 .regImage {
-  width: 25%;
-  height: 195px;
+  width: 220px;
+  height: 175px;
+  margin-left: 2px;
+  margin-bottom: 2px;
 }
 
 

@@ -66,6 +66,11 @@ export default function GetSpotDetails() {
   let letter;
   (spot.numReviews === 0 ? letter = null : letter = '•')
 
+  const previewImg = spotImagesArr[0];
+
+  const imagesArr = spotImagesArr.slice(1);
+
+
   return (
     <div className='spot'>
       <div className="spot-detail-container">
@@ -77,9 +82,11 @@ export default function GetSpotDetails() {
         </div>
 
         <div className='image-div'>
-          {spotImagesArr.map(image => {
-            return <img src={`${image.url}`} alt="image" className={image.preview === true ? 'previewImage' : 'regImage'} />;
-          })}
+          <img src={previewImg.url} alt='preview' className='previewImage' />
+          <div className='regular-images-div'>
+          {imagesArr.map(image => {
+            return <img src={image.url} alt="image" className='regImage' /> })}
+          </div>
         </div>
 
         <div className='hosted-reserve'>
