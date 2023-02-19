@@ -1,0 +1,11 @@
+input, textarea{
+  font-family: 'Noto Sans Osage', sans-serif;
+}
+
+.comma-update-spot {
+  display: flex;
+}
+
+.comma-update-spot p {
+  margin-left: 2px;
+}

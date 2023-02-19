@@ -32,27 +32,39 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
   }
 
   return (
-    <div>
-    <h2>How was your stay?</h2>
-    {/* {errors.Review !== undefined ? <h5>{errors.Review}</h5> : null }
-    {errors.Star !== undefined ? <h5>{errors.Star}</h5> : null } */}
+    <div className='create-review-div'>
+      <p className='create-review-text'>How was your stay?</p>
+
+      <div className='star-hover-text-review'>
+
 
       <textarea
-      placeholder='Leave your review here.'
-      onChange={(e) => setReview(e.target.value)} />
-      <div class="rate">
-        <input type="radio" id="star5" name="rate" onChange={(e) => setStars(5)}/>
-        <label for="star5" title="text">5 stars</label>
-        <input type="radio" id="star4" name="rate" onChange={(e) => setStars(4)} />
-        <label for="star4" title="text">4 stars</label>
-        <input type="radio" id="star3" name="rate" onChange={(e) => setStars(3)} />
-        <label for="star3" title="text">3 stars</label>
-        <input type="radio" id="star2" name="rate" onChange={(e) => setStars(2)} />
-        <label for="star2" title="text">2 stars</label>
-        <input type="radio" id="star1" name="rate" onChange={(e) => setStars(1)} />
-        <label for="star1" title="text">1 star</label>
+        className='leave-review-here-textarea'
+        placeholder='Leave your review here.'
+        onChange={(e) => setReview(e.target.value)} />
+
+    <div className='stars-text-icons'>
+        <div class="rate">
+          <input type="radio" id="star5" name="rate" onChange={(e) => setStars(5)}/>
+          <label for="star5" title="text">5 stars</label>
+          <input type="radio" id="star4" name="rate" onChange={(e) => setStars(4)} />
+          <label for="star4" title="text">4 stars</label>
+          <input type="radio" id="star3" name="rate" onChange={(e) => setStars(3)} />
+          <label for="star3" title="text">3 stars</label>
+          <input type="radio" id="star2" name="rate" onChange={(e) => setStars(2)} />
+          <label for="star2" title="text">2 stars</label>
+          <input type="radio" id="star1" name="rate" onChange={(e) => setStars(1)} />
+          <label for="star1" title="text">1 star</label>
+        </div>
+        <span className='stars-text-create-review'>Stars</span>
+        </div>
+
+
       </div>
-      <button disabled={review.length < 10 || stars < 1} onClick={handleSubmit}>Submit Your Review</button>
+
+        <div className='create-review-button-div'>
+          <button disabled={review.length < 10 || stars < 1} onClick={handleSubmit}>Submit Your Review</button>
+        </div>
     </div>
   )
 }

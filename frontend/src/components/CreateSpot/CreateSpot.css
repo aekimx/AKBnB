@@ -73,14 +73,17 @@ form, ::placeholder {
 
 
 .submit-button {
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 40px;
   margin-top: 10px;
   margin-left: auto;
   margin-right:auto;
-  background-color: red;
+  background-color: rgb(228, 60, 60);
   color: white;
   border: 2px solid black;
+  border-radius: 5px;
+  font-size: 15px;
+
 }
 
 .error-formatting {
@@ -120,18 +123,19 @@ form, ::placeholder {
 .guest-stay-box textarea {
   width: 367px;
   height: 100px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .guest-stay-box input {
   width: 367px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .button-box {
   width: 380px;
   display:flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .dollarsign-input {

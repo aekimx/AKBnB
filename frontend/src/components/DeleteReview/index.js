@@ -4,6 +4,7 @@ import { deleteReviewThunk, loadReviewsThunk } from '../../store/reviewsReducer'
 import {useHistory} from 'react-router-dom'
 import { oneSpotThunk } from '../../store/spotsReducer';
 
+import './DeleteReview.css'
 
 export default function DeleteReview({reviewId, spotId}) {
 
@@ -25,11 +26,13 @@ export default function DeleteReview({reviewId, spotId}) {
   }
 
   return (
-    <div>
-    <h2> Confirm Delete</h2>
-    <h3> Are you sure you want to delete this review?</h3>
-    <button onClick={handleDelete}>Yes(Delete Review)</button>
-    <button onClick={closeModal}>No (Keep Review)</button>
+    <div className='delete-spot-modal-div'>
+    <p className='confirm-delete-text'> Confirm Delete</p>
+    <p className='confirm-delete-text-smaller'> Are you sure you want to delete this review?</p>
+      <div className='delete-confirm-modal-buttons'>
+        <button onClick={handleDelete} className='delete-spot-button-confirm'>Yes (Delete Review)</button>
+        <button onClick={closeModal} className='delete-spot-button-confirm-no'>No (Keep Review)</button>
+      </div>
     </div>
   );
 }
