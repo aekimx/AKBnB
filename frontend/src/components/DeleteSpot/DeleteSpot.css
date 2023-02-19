@@ -1,0 +1,43 @@
+.delete-spot-modal-div {
+  font-family: 'Noto Sans Osage', sans-serif;
+}
+
+.confirm-delete-text {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.confirm-delete-text-smaller {
+  font-size: 15px;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.delete-spot-button-confirm, .delete-spot-button-confirm-no {
+  width: 250px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.delete-spot-button-confirm {
+  margin-bottom: 10px;
+  background-color: rgb(243, 115, 69);
+  color: white;
+
+}
+
+.delete-spot-button-confirm-no {
+  margin-bottom: 15px;
+  background-color: gray;
+  color: white;
+
+}
+
+.delete-confirm-modal-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 70px;
+}

@@ -1,8 +1,8 @@
-/* DO SOME STYLING HERE!! */
 #modal-content {
   width: 400px;
   border-radius: 20px;
   padding-bottom: 10px;
+  border: 2px solid black;
 }
 
 
@@ -16,14 +16,14 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-left: 40px;
+  margin-left: 38px;
   width: 300px;
   height: 40px;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
-  box-shadow: 3px 3px black;
-  border-color: black;
+  border-color: 2px solid black;
+  border-radius: 5px;
   color: white;
 }
 
@@ -39,15 +39,15 @@
 .signup-input {
   width: 300px;
   display: block;
-  background-color: rgb(213, 234, 242);
-  font-weight:lighter
+  font-weight:lighter;
+  border: 1px solid black;
 }
 
 .signup-errors-ul {
   text-align: auto;
   display: block;
   white-space: nowrap;
-  margin-left: 10px;
+  margin-left: 25px;
   padding-top: 20px;
   color: red;
   list-style-type: none;

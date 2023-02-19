@@ -1,4 +1,4 @@
-import './DeleteConfirmModal.css'
+import './DeleteSpot.css'
 
 import { useModal } from '../../context/Modal';
 import {useDispatch} from 'react-redux';
@@ -21,11 +21,13 @@ export default function DeleteConfirmModal({spotId}) {
   }
 
   return (
-    <div>
-    <h2> Confirm Delete</h2>
-    <h3> Are you sure you want to remove this spot from the listing?</h3>
-    <button onClick={handleDelete}>Yes(Delete Spot)</button>
-    <button onClick={closeModal}>No (Keep Spot)</button>
+    <div className='delete-spot-modal-div'>
+      <p className='confirm-delete-text'> Confirm Delete</p>
+      <p className='confirm-delete-text-smaller'> Are you sure you want to remove this spot from the listing?</p>
+      <div className='delete-confirm-modal-buttons'>
+        <button onClick={handleDelete} className='delete-spot-button-confirm'>Yes (Delete Spot)</button>
+        <button onClick={closeModal} className='delete-spot-button-confirm-no'>No (Keep Spot)</button>
+      </div>
     </div>
   );
 }

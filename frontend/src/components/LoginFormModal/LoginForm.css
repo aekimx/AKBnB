@@ -20,12 +20,11 @@
 .login-inputs {
   width: 300px;
   display: block;
-  background-color: rgb(213, 234, 242);
   font-weight:lighter
 }
 
 .login-button {
-  background-color: rgb(243, 115, 69);
+  background-color:rgb(243, 115, 69);
   display: flex;
   justify-content: center;
   text-align: center;
@@ -35,7 +34,6 @@
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
-  box-shadow: 3px 3px black;
   border-color: black;
   color: white;
 }
@@ -54,10 +52,11 @@
   white-space: nowrap;
   margin-left: 10px;
   padding-top: 20px;
-  color: red;
+  color:rgb(243, 115, 69);
   list-style-type: none;
   width: 400px;
   font-size: smaller;
+  border-bottom: none;
 }
 
 .login-button,
@@ -67,4 +66,8 @@
 .login-text {
   font-family: 'Noto Sans Osage', sans-serif;
   font-weight: lighter;
+}
+
+.signup-errors-ul {
+  border-bottom: none;
 }
