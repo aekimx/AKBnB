@@ -18,8 +18,7 @@ function LoginFormPage() {
 
   if (sessionUser) return (
     <Redirect to="/" />
-  );
-
+  )
 
   const handleSubmit = (e) => {
     e.preventDefault();

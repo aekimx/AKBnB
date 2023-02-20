@@ -32,6 +32,7 @@ export default function GetSpotDetails() {
   useEffect(() => {
     dispatch(oneSpotThunk(spotId));
     dispatch(loadReviewsThunk(spotId));
+    return (() => dispatch(clearSpot()))
     }, [spotId]);
 
 
@@ -67,6 +68,7 @@ export default function GetSpotDetails() {
   (spot.numReviews === 0 ? letter = null : letter = '•')
 
   const previewImg = spotImagesArr[0];
+  if (!previewImg.url) previewImg.url = "";
 
   const imagesArr = spotImagesArr.slice(1);
 

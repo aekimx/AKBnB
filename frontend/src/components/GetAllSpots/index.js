@@ -13,7 +13,7 @@ export default function GetAllSpots() {
 
   useEffect(() => {
     dispatch(allSpotsThunk())
-    // return dispatch(clearSpot())
+    return (() => dispatch(clearSpot()))
   }, [dispatch])
 
   const spots = useSelector(allSpots)

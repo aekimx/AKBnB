@@ -15,6 +15,7 @@ export default function ManageSpots()  {
   useEffect(() => {
     dispatch(clearSpot());
     dispatch(loadCurrentUserSpots())
+    return (() => dispatch(clearSpot()))
   },[dispatch]);
 
   // useEffect(() => {
