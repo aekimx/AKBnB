@@ -42,7 +42,12 @@ let spotImages = [
   {
     spotId:5,
     url: "https://hgtvhome.sndimg.com/content/dam/images/hgrm/fullset/2011/7/26/0/DP_Thomas-Oppelt-italian-style-kitchen_s4x3.jpg.rend.hgtvcom.1280.960.suffix/1405454818754.jpeg",
-    preview: false
+    preview: true
+  },
+  {
+    spotId:6,
+    url: "https://photos.zillowstatic.com/fp/ff4a7f9527ff9ddb1162b837c415ecd7-p_e.jpg",
+    preview: true
   },
 ]
 

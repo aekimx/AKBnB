@@ -16,7 +16,7 @@ export default function GetSpotDetails() {
 
   const userId = useSelector(state => state.session.user?.id)
 
-  const spot = useSelector(state => {state.spots.singleSpot});
+  const spot = useSelector(state => state.spots.singleSpot);
 
   const review = useSelector(state => state.reviews.spot);
 
@@ -66,8 +66,8 @@ export default function GetSpotDetails() {
   (spot.numReviews === 0 ? letter = null : letter = '•')
 
   const previewImg = spotImagesArr[0];
-  if (!previewImg.url) {
-    // console.log('preview image from spot details ', previewImg)
+  if (previewImg.url === undefined) {
+    console.log('preview image from spot details ', previewImg)
     previewImg.url = "https://photos.zillowstatic.com/fp/ff4a7f9527ff9ddb1162b837c415ecd7-p_e.jpg";
   }
 
@@ -114,7 +114,7 @@ export default function GetSpotDetails() {
             <i class="fa-solid fa-star" /><p>{spot.avgStarRating}</p>
           </div>
           <p>{letter}</p>
-        {spot.numReviews === 0 ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
+        {spot.numReviews === 0 || spot.numReviews === "New" ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
         </div>
           </div>
           </div>
@@ -132,7 +132,7 @@ export default function GetSpotDetails() {
               <i class="fa-solid fa-star" /><p className='avg-star-rating-bigger'>{spot.avgStarRating}</p>
             </div>
             <p className='dot-bigger'>{letter}</p>
-          {spot.numReviews === 0 ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
+          {spot.numReviews === 0 || spot.numReviews === "New" ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
           </div>
             </div>
 

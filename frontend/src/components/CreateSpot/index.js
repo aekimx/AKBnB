@@ -11,6 +11,7 @@ import "./CreateSpot.css";
 export default function CreateSpot() {
 
   const [errors, setErrors] = useState({});
+  const [previewImgError, setPreviewImgError] = useState({});
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -36,7 +37,6 @@ export default function CreateSpot() {
   // useEffect(() => {
   //   return dispatch(clearSpot());
   // }, [dispatch])
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,21 +68,26 @@ export default function CreateSpot() {
         imgUrlArr.push(imgFour);
       }
 
-      const owner = {id: user.id, firstName: user.firstName, lastName: user.lastName}
-      dispatch(createSpotThunk(newSpot, imgUrlArr, owner)) // pass in imgArr
-      .then((newSpot) => history.push(`/spots/${newSpot.id}`))
-      .catch(( async (res) => {
-      const data = await res.json()
 
-        if (data.errors) {
-          let errorObj = {};
-          data.errors.forEach(error => {
-            let key = error.split(" ")[0]
-            errorObj[key] = error;
-          })
-          setErrors(errorObj)
-        }
-      }))
+      const owner = {id: user.id, firstName: user.firstName, lastName: user.lastName}
+      if (!previewImgURL ) {
+        setPreviewImgError({url: "Please include a preview image"})
+      } else {
+        dispatch(createSpotThunk(newSpot, imgUrlArr, owner)) // pass in imgArr
+        .then((newSpot) => history.push(`/spots/${newSpot.id}`))
+        .catch(( async (res) => {
+        const data = await res.json()
+
+          if (data.errors) {
+            let errorObj = {};
+            data.errors.forEach(error => {
+              let key = error.split(" ")[0]
+              errorObj[key] = error;
+            })
+            setErrors(errorObj)
+          }
+        }))
+      }
   };
 
   return (
@@ -229,7 +234,7 @@ export default function CreateSpot() {
           placeholder="Preview Image URL"
           onChange={e => setPreviewImgURL(e.target.value)}
         />
-        {errors.URL !== undefined ? <p className='create-url-error'>{errors.URL}</p> : null}
+        {previewImgError !== false ? <p className='create-url-error'>{previewImgError.url}</p> : null}
 
         <input
           type="url"
