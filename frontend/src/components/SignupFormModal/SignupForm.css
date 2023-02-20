@@ -25,6 +25,12 @@
   border-color: 2px solid black;
   border-radius: 5px;
   color: white;
+  font-size: 15px;
+}
+
+.signup-button:disabled {
+  background-color: gray;
+  border: 2px solid black;
 }
 
 .signup-label {
