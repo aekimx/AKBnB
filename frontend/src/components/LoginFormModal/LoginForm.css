@@ -71,3 +71,9 @@
 .signup-errors-ul {
   border-bottom: none;
 }
+
+
+.login-error-text {
+  color: red;
+  margin-left: 25px;
+}

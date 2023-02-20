@@ -24,9 +24,14 @@ function LoginFormPage() {
     e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal())
+      .then(() => {
+        if (sessionUser) {
+          closeModal()
+        }
+      })
       .catch(async (res) => {
         const data = await res.json();
+        console.log('data from loginform modal ', data);
         if (data && data.errors) setErrors(data.errors);
       });
   }
@@ -48,7 +53,7 @@ function LoginFormPage() {
     <form onSubmit={handleSubmit}>
     <h1 className='login-text'>Login</h1>
       <ul className='login-errors-ul'>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => <li className='login-error-text' key={idx}>{error}</li>)}
       </ul>
       <label className='login-label'>
         Username or Email

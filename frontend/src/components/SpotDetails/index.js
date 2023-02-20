@@ -60,7 +60,7 @@ export default function GetSpotDetails() {
   const reviewInfo = {spotId: spot.id, userId}
 
   let reviews = 'reviews';
-  (spot.numReviews === "1" ? reviews = 'review' : reviews = 'reviews')
+  (spot.numReviews === "1" || spot.numReviews === 1 ? reviews = 'review' : reviews = 'reviews')
 
   let letter;
   (spot.avgStarRating === "New" ? letter = null : letter = '•')
