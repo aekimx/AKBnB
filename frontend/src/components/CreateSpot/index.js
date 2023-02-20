@@ -71,20 +71,24 @@ export default function CreateSpot() {
 
       const owner = {id: user.id, firstName: user.firstName, lastName: user.lastName}
 
-      dispatch(createSpotThunk(newSpot, imgUrlArr, owner)) // pass in imgArr
-        .then((newSpot) => history.push(`/spots/${newSpot.id}`))
-        .catch(( async (res) => {
-          if (!previewImgURL) setPreviewImgError({url: "Please include a preview image"})
-          const data = await res.json()
-          if (data.errors) {
-            let errorObj = {};
-            data.errors.forEach(error => {
-              let key = error.split(" ")[0]
-              errorObj[key] = error;
-            })
-            setErrors(errorObj)
-          }
-        }))
+      if (!previewImgURL) {
+        setPreviewImgError({url: "Please include a preview image"})
+      } else {
+        dispatch(createSpotThunk(newSpot, imgUrlArr, owner)) // pass in imgArr
+          .then((newSpot) => history.push(`/spots/${newSpot.id}`))
+          .catch(( async (res) => {
+
+            const data = await res.json()
+            if (data.errors) {
+              let errorObj = {};
+              data.errors.forEach(error => {
+                let key = error.split(" ")[0]
+                errorObj[key] = error;
+              })
+              setErrors(errorObj)
+            }
+          }))
+      }
   };
 
   return (
