@@ -16,9 +16,7 @@ export default function GetSpotDetails() {
 
   const userId = useSelector(state => state.session.user?.id)
 
-  const spot = useSelector(state => {
-    // console.log('single spot state useslector', state.spots.singleSpot)
-    return state.spots.singleSpot});
+  const spot = useSelector(state => {state.spots.singleSpot});
 
   const review = useSelector(state => state.reviews.spot);
 
@@ -68,7 +66,11 @@ export default function GetSpotDetails() {
   (spot.numReviews === 0 ? letter = null : letter = '•')
 
   const previewImg = spotImagesArr[0];
-  if (!previewImg.url) previewImg.url = "";
+  if (!previewImg.url) {
+    // console.log('preview image from spot details ', previewImg)
+    previewImg.url = "https://photos.zillowstatic.com/fp/ff4a7f9527ff9ddb1162b837c415ecd7-p_e.jpg";
+  }
+
 
   const imagesArr = spotImagesArr.slice(1);
 
