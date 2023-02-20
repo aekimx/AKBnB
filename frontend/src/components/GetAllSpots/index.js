@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { allSpots, allSpotsThunk } from '../../store/spotsReducer';
+import { allSpots, allSpotsThunk, clearSpot } from '../../store/spotsReducer';
 import {useEffect} from 'react'
 
 
@@ -13,26 +13,25 @@ export default function GetAllSpots() {
 
   useEffect(() => {
     dispatch(allSpotsThunk())
+    // return dispatch(clearSpot())
   }, [dispatch])
 
   const spots = useSelector(allSpots)
 
   const spotsArray = Object.values(spots);
   spotsArray.forEach(spot=> {
-    // console.log('spot info for rating', spot, '       ', spot.avgRating)
-    // console.log('spot.avgRating ',spot.avgRating)
     if (spot.avgRating === null || spot.avgRating === "NaN") {
       spot.avgRating = "New"
     }
-    else {
-      spot.avgRating = Number(spot.avgRating).toFixed(1); // why is this not working?
+    else if (spot.avgRating !== "New") {
+      spot.avgRating = Number(spot.avgRating).toFixed(1);
     }
   })
 
 
   return (
     <>
-      <div className='spots'>
+      <div className='get-all-spots'>
       {spotsArray.map(spot =>  {
         return (
         <div className='spot-tile'>

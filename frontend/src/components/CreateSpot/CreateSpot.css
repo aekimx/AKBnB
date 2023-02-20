@@ -124,6 +124,7 @@ form, ::placeholder {
   width: 367px;
   height: 100px;
   margin-bottom: 15px;
+  overflow-wrap: wrap;
 }
 
 .guest-stay-box input {
@@ -148,4 +149,12 @@ form, ::placeholder {
 
 .dollarsign-input input {
   width: 357px;
+}
+
+.create-url-error {
+  color: red;
+  font-size: 13px;
+  margin-top:-10px;
+  margin-bottom: 5px;
+  margin-left: 2px;
 }

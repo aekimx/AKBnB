@@ -25,6 +25,7 @@ function LoginFormPage() {
     e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
+      .then(closeModal())
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -35,7 +36,7 @@ function LoginFormPage() {
   const demoUser = (e) => {
     e.preventDefault();
     return dispatch(sessionActions.login({'credential': 'Demo-lition', 'password': 'password'}))
-      .then(closeModal)
+      .then(closeModal())
       .catch(
         async (res) => {
           const data = await res.json();

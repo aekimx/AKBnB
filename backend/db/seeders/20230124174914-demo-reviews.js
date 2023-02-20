@@ -27,7 +27,20 @@ const reviews = [
     userId: 3,
     review: "Place was wonderful!!!",
     stars: 5
+  },
+  {
+    spotId: 4,
+    userId: 1,
+    review: "I would come here again for a wonderful relaxing time",
+    stars: 4
+  },
+  {
+    spotId: 5,
+    userId: 2,
+    review: "Very unclean. Would not come here again!",
+    stars: 2
   }
+
 ]
 
 

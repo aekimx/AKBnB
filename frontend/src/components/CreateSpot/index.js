@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createSpotThunk } from "../../store/spotsReducer";
+import { clearSpot } from "../../store/spotsReducer";
+
 
 
 import "./CreateSpot.css";
@@ -30,6 +32,11 @@ export default function CreateSpot() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // useEffect(() => {
+  //   return dispatch(clearSpot());
+  // }, [dispatch])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -222,7 +229,7 @@ export default function CreateSpot() {
           placeholder="Preview Image URL"
           onChange={e => setPreviewImgURL(e.target.value)}
         />
-        {errors.URL !== undefined ? <h5>{errors.URL}</h5> : null}
+        {errors.URL !== undefined ? <p className='create-url-error'>{errors.URL}</p> : null}
 
         <input
           type="url"

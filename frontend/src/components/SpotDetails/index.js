@@ -30,22 +30,22 @@ export default function GetSpotDetails() {
 
 
   useEffect(() => {
-
-      dispatch(oneSpotThunk(spotId));
-
-      dispatch(loadReviewsThunk(spotId));
-
-      return () => dispatch(clearSpot());
-
+    dispatch(oneSpotThunk(spotId));
+    dispatch(loadReviewsThunk(spotId));
     }, [spotId]);
 
 
+  // useEffect(() => {
+  //   return () => dispatch(clearSpot());
+  // }, [dispatch])
+
+
   // is this going to be a problem? Check!!! Hits this every time - how to fix?
-  if (!spot.name) {
-    return (
-      <h1>Unable to retrieve details. Please try again shortly.</h1>
-    )
-  }
+  // if (!spot.name) {
+  //   return (
+  //     <h1>Unable to retrieve details. Please try again shortly.</h1>
+  //   )
+  // }
 
   if (!spot.avgStarRating) {
     spot.avgStarRating = "New";
@@ -72,7 +72,7 @@ export default function GetSpotDetails() {
 
 
   return (
-    <div className='spot'>
+    <div className='spot-details-div'>
       <div className="spot-detail-container">
         <p className='spot-name'> {spot.name} </p>
         <div className='city-state-country'>

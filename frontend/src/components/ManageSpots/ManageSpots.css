@@ -3,11 +3,12 @@
   height: 250px;
 }
 
-.spots {
+.manage-spots {
   display: flex;
-  width: 1024px;
+  width: auto;
   flex-wrap: wrap;
   margin-left: 5px;
+  justify-content: center;
 }
 
 .spot-tile {

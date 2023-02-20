@@ -8,10 +8,12 @@
   border-radius: 10px;
 }
 
-.spots {
+.get-all-spots {
+  font-family: 'Noto Sans Osage', sans-serif;
   display: flex;
-  width: 1024px;
+  width: auto;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .spot-tile {
@@ -19,6 +21,7 @@
   width: 280px;
   padding: 10px;
   flex-wrap: wrap;
+  /* justify-content: center; */
 }
 
 .rating-city {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { currentSpots, loadCurrentUserSpots, deleteSpotThunk } from "../../store/spotsReducer";
+import { currentSpots, loadCurrentUserSpots, deleteSpotThunk, clearSpot } from "../../store/spotsReducer";
 import {Link, Redirect} from 'react-router-dom';
 import DeleteConfirmModal from "../DeleteSpot/index";
 
@@ -13,17 +13,23 @@ export default function ManageSpots()  {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearSpot());
     dispatch(loadCurrentUserSpots())
   },[dispatch]);
 
+  // useEffect(() => {
+  //   return dispatch(clearSpot());
+  // }, [])
+
+
   const current = useSelector(currentSpots);
-  // console.log('current spots , ', current);
+
   const currentSpotImages = Object.values(current);
 
   const currentSpotsArr = Object.values(current);
 
   currentSpotsArr.forEach(spot => {
-    console.log('spot avg rating in manage spots ' , spot.avgRating)
+    // console.log('spot avg rating in manage spots ' , spot.avgRating)
     if (spot.avgRating === null || spot.avgRating === NaN) {
       spot.avgRating = "New"
     } else if (spot.avgRating !== "New") {
@@ -38,7 +44,7 @@ export default function ManageSpots()  {
       <div className='create-spot-button'>
       <Link to='/spots/new' className='create-spot-link'>Create New Spot</Link>
       </div>
-    <div className="spots">
+    <div className="manage-spots">
       {currentSpotImages.map(spot => {
         return (
           <div className='spot-tile'>
@@ -54,6 +60,7 @@ export default function ManageSpots()  {
                 <div className='spot-price-night'>
                 <h4 className='spot-price-manage'>{`$${spot.price}`}</h4> <h4 className='night'> night</h4>
                 </div>
+
                 <div className='update-delete-links'>
                   <div className='delete-button'>
                   <Link to={`/spots/${spot.id}/edit`} className='update-link'><p className='updatelinktext'>Update</p></Link>

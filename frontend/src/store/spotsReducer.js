@@ -189,9 +189,7 @@ export default function spotsReducer(state = initialState, action) {
       delete newState.allSpots[action.spotId];
       return newState;
     case CLEAR:
-      newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot } };
-      newState.singleSpot = {};
-      return newState;
+      return {allSpots: {}, singleSpot: {}};
     case ADD_IMAGE:
       newState = {...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot }};
       newState.allSpots[action.image.id].previewImage = action.imgArr[0].url;
