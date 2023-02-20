@@ -132,7 +132,7 @@ export default function GetSpotDetails() {
               <i class="fa-solid fa-star" /><p className='avg-star-rating-bigger'>{spot.avgStarRating}</p>
             </div>
             <p className='dot-bigger'>{letter}</p>
-          {spot.numReviews === 0 || spot.numReviews === "New" ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
+          {spot.avgStarRating === "New" ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
           </div>
             </div>
 
