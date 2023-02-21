@@ -31,7 +31,7 @@ function LoginFormPage() {
       })
       .catch(async (res) => {
         const data = await res.json();
-        console.log('data from loginform modal ', data);
+        // console.log('data from loginform modal ', data);
         if (data && data.errors) setErrors(data.errors);
       });
   }
