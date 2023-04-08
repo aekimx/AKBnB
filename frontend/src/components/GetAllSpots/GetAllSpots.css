@@ -8,38 +8,39 @@
   border-radius: 10px;
 }
 
-.spots {
+.get-all-spots-container {
   display: flex;
   width: 1024px;
   flex-wrap: wrap;
+  font-family: 'Noto Sans Osage', sans-serif;
 }
 
-.spot-tile {
+.get-all-spots-tile {
   flex-direction: row;
   width: 280px;
   padding: 10px;
   flex-wrap: wrap;
 }
 
-.rating-city {
+.get-all-spots-rating-city {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: -12px;
 }
 
-.link-spot-tile {
+.get-all-spots-link {
   text-decoration: none;
 }
 
-.star-rating {
+.get-all-spots-star-rating {
   display: flex;
   flex-direction: row;
   margin-right: 10px;
   margin-top: 5px;
 }
 
-.city-state {
+.get-all-spots-city-state {
   font-size: 15px;
 }
 
@@ -56,13 +57,9 @@
 
 .all-spot-price {
   font-size: 18px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 a:active {
   text-decoration: none;
-}
-
-.spots {
-  font-family: 'Noto Sans Osage', sans-serif;
 }
