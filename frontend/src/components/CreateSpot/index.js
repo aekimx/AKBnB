@@ -115,6 +115,7 @@ export default function CreateSpot() {
       <input
         type="text"
         value={country}
+        maxLength='30'
         placeholder="Country"
         onChange={e => setCountry(e.target.value)}
       />
@@ -136,24 +137,26 @@ export default function CreateSpot() {
         type="text"
         value={address}
         placeholder="Address"
+        maxLength='50'
         onChange={e => setAddress(e.target.value)}
       />
       </div>
 
       <div className='city-state'>
         <div className="city">
-
         <div className='error-formatting'>
-
         <label>City</label>
         <div className='create-spot-errors'>
           {errors.City !== undefined ? <p className='error-text'>{errors.City}</p> : null}
         </div>
-
     </div>
 
         <div className='comma'>
-        <input type="text" value={city} placeholder="City" onChange={e => setCity(e.target.value)} />
+        <input type="text"
+          maxLength='30'
+          value={city}
+          placeholder="City"
+          onChange={e => setCity(e.target.value)} />
         <p className='comma-comma'>, </p>
         </div>
         </div>
@@ -183,6 +186,7 @@ export default function CreateSpot() {
         <textarea
         value={description}
         placeholder="Please write at least 30 characters"
+        minLength='30'
         onChange={e => setDescription(e.target.value)} />
         {errors.Description !== undefined ? <p className='error-text'>{errors.Description}</p> : null}
       </div>
@@ -225,7 +229,6 @@ export default function CreateSpot() {
       </div>
 
       {/* SHOULD BE A LINE HERE separating*/}
-      {/* THINK ABOUT HOW TO LINK SPOT IMAGES TO THIS */}
       <div className='guest-stay-box'>
       <p className='guest-stay'> Liven up your spot with photos </p>
       <p className='guest-stay-desc'>Submit a link to at least one photo to publish your spot</p>
@@ -269,7 +272,7 @@ export default function CreateSpot() {
 
   {/* SHOULD BE A LINE HERE separating*/}
   <div className='button-box'>
-    <button className='submit-button'type='submit'>Create Spot</button>
+    <button className='submit-button'type='submit' disabled={previewImgURL.length === 0}>Create Spot</button>
   </div>
     </div>
   </div>

@@ -15,7 +15,9 @@ PostgreSQL\
 Sequelize\
 Express\
 React\
-Redux
+Redux\
+HTML\
+CSS
 
 
 # Features Directions: #
