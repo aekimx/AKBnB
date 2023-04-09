@@ -1,25 +1,10 @@
 
-<<<<<<< HEAD
-.spot-details-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 1024px;
-}
-
-.spot-detail-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 20px;
-=======
 
 .spot-detail-overall-container {
   width: 1024px;
   display: flex;
   flex-direction: column;
   justify-content: center;
->>>>>>> dev
   font-family: 'Noto Sans Osage', sans-serif;
 }
 
