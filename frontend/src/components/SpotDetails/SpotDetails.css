@@ -1,9 +1,9 @@
 .spot-detail-overall-container {
   border: 2px solid green;
-  /* width: 1024px; */
+  width: 1024px;
   display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
+  flex-direction: column;
+  justify-content: center;
   font-family: 'Noto Sans Osage', sans-serif;
 }
 
@@ -108,13 +108,6 @@
 }
 
 
-.reviews-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-
-
 .spot-detail-reserve-button {
   width: 250px;
   height: 25px;
@@ -126,12 +119,6 @@
   border-radius: 8px;
   cursor: pointer;
   border: 2px solid black;
-}
-
-.spot-detail-stars-review {
-  margin-left: 20px;
-  display: flex;
-  flex-direction: row;
 }
 
 
@@ -150,18 +137,12 @@
   font-size: 12px;
 }
 
-
-.spot-detail-reviews-container {
-  margin-left: 20px;
-  margin-bottom: 15px;
-}
-
 .spot-detail-dot-reviews-bigger {
   display: flex;
   flex-direction: row;
   margin-left: 20px;
   margin-bottom: 15px;
-  border: 2px solid green;
+  /* border: 2px solid green; */
 
 }
 
@@ -193,7 +174,6 @@
 }
 
 .first-post-review {
-  font-family: 'Noto Sans Osage', sans-serif;
   margin-left: 20px;
   font-size: 15px;
   margin-bottom: 50px;

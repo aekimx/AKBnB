@@ -66,7 +66,6 @@ export default function GetSpotDetails() {
 
   return (
     <div className='spot-detail-overall-container'>
-      <div>
       <div className="spot-detail-container">
         <p className='spot-detail-name'> {spot.name} </p>
         <div className='spot-detail-city-state-country'>
@@ -100,21 +99,19 @@ export default function GetSpotDetails() {
       </div>
 
     </div>
-
       <>
-
-      {/* <div className='spot-detail-reviews-container'> */}
         <div className='spot-detail-dot-reviews-bigger'>
           <div className='star-reviews-bigger'>
             <i class="fa-solid fa-star" /><p className='avg-star-rating-bigger'>{spot.avgStarRating}</p>
           </div>
           <p className='dot-bigger'>{letter}</p>
-        {spot.numReviews === 0 ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
+          {spot.numReviews === 0 ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
         </div>
-      {/* </div> */}
 
-
-        {+spot.ownerId === +userId || !userId || disableReview ? null : <div className="create-review-modal-spotdetails"> <OpenModalMenuItem
+          {+spot.ownerId === +userId || !userId || disableReview ?
+          null
+          :
+          <div className="create-review-modal-spotdetails"> <OpenModalMenuItem
           itemText="Post Your Review"
           modalComponent={<CreateReview reviewInfo={reviewInfo}/>}
           /> </div>}
@@ -126,11 +123,7 @@ export default function GetSpotDetails() {
           <GetAllReviews />
 
       </>
-    </div>
 
-    <div>
-      MAP???
-    </div>
 
     </div>
 
