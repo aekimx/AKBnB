@@ -24,19 +24,11 @@ export default function ManageSpots()  {
 
 
   const current = useSelector(currentSpots);
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
   const currentSpotImages = Object.values(current);
 
   const currentSpotsArr = Object.values(current);
 
   currentSpotsArr.forEach(spot => {
-<<<<<<< HEAD
-    // console.log('spot avg rating in manage spots ' , spot.avgRating)
-=======
->>>>>>> dev
     if (spot.avgRating === null || spot.avgRating === NaN) {
       spot.avgRating = "New"
     } else if (spot.avgRating !== "New") {
@@ -51,11 +43,7 @@ export default function ManageSpots()  {
       <div className='manage-spots-create-spot-button'>
       <Link to='/spots/new' className='manage-spots-create-spot-link'>Create New Spot</Link>
       </div>
-<<<<<<< HEAD
-    <div className="manage-spots">
-=======
     <div className="manage-spots-container">
->>>>>>> dev
       {currentSpotImages.map(spot => {
         return (
           <div className='manage-spots-tile'>
@@ -73,16 +61,10 @@ export default function ManageSpots()  {
                   <div className='spot-price-manage'>{`$${spot.price}`}</div> <div className='manage-spots-night'> night</div>
                 </div>
 
-<<<<<<< HEAD
-                <div className='update-delete-links'>
-                  <div className='delete-button'>
-                  <Link to={`/spots/${spot.id}/edit`} className='update-link'><p className='updatelinktext'>Update</p></Link>
-=======
                 <div className='manage-spots-update-delete-links'>
 
                   <div className='manage-spots-delete-button'>
                     <Link to={`/spots/${spot.id}/edit`} className='manage-spots-update-link'><p className='manage-spots-updatelinktext'>Update</p></Link>
->>>>>>> dev
                   </div>
 
                   <div className='manage-spots-delete-button'>

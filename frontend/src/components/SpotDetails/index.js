@@ -15,13 +15,7 @@ export default function GetSpotDetails() {
   const {spotId}= useParams();
 
   const userId = useSelector(state => state.session.user?.id)
-<<<<<<< HEAD
-
   const spot = useSelector(state => state.spots.singleSpot);
-
-=======
-  const spot = useSelector(state => state.spots.singleSpot);
->>>>>>> dev
   const review = useSelector(state => state.reviews.spot);
 
   const reviewArr = Object.values(review);
@@ -32,16 +26,10 @@ export default function GetSpotDetails() {
 
 
   useEffect(() => {
-<<<<<<< HEAD
-    dispatch(oneSpotThunk(spotId));
-    dispatch(loadReviewsThunk(spotId));
-    return (() => dispatch(clearSpot()))
-=======
       dispatch(oneSpotThunk(spotId));
       dispatch(loadReviewsThunk(spotId));
       return () => dispatch(clearSpot());
 
->>>>>>> dev
     }, [spotId]);
 
 
@@ -87,11 +75,7 @@ export default function GetSpotDetails() {
 
 
   return (
-<<<<<<< HEAD
-    <div className='spot-details-div'>
-=======
     <div className='spot-detail-overall-container'>
->>>>>>> dev
       <div className="spot-detail-container">
         <p className='spot-detail-name'> {spot.name} </p>
         <div className='spot-detail-city-state-country'>
@@ -130,34 +114,9 @@ export default function GetSpotDetails() {
           <div className='star-reviews-bigger'>
             <i class="fa-solid fa-star" /><p className='avg-star-rating-bigger'>{spot.avgStarRating}</p>
           </div>
-<<<<<<< HEAD
-          {spot.avgStarRating === "New" ? null : <p>{letter}</p>}
-        {spot.avgStarRating === "New" ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
-        </div>
-          </div>
-          </div>
-            <button className='reserve-button'>Reserve</button>
-                  </div>
-                       </div>
-                       </div>
-
-      <div>
-
-      <div className='reviews-container-bigger'>
-
-          <div className='dot-reviews-bigger'>
-            <div className='star-reviews-bigger'>
-              <i class="fa-solid fa-star" /><p className='avg-star-rating-bigger'>{spot.avgStarRating}</p>
-            </div>
-            {spot.avgStarRating === "New" ? null : <p className='dot-bigger'>{letter}</p>}
-          {spot.avgStarRating === "New" ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
-          </div>
-            </div>
-=======
           <p className='dot-bigger'>{letter}</p>
           {spot.numReviews === 0 ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
         </div>
->>>>>>> dev
 
           {+spot.ownerId === +userId || !userId || disableReview ?
           null

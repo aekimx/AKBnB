@@ -31,12 +31,8 @@ export default function GetAllSpots() {
 
   return (
     <>
-<<<<<<< HEAD
-      <div className='get-all-spots'>
-=======
     <div className='get-all-spots-overall-container'>
       <div className='get-all-spots-container'>
->>>>>>> dev
       {spotsArray.map(spot =>  {
         return (
         <div className='get-all-spots-tile'>
