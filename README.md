@@ -1,5 +1,5 @@
 # AKBnB:
-AirVnb is a full stack Airbnb Clone utilizing an Express Sequelize backend and a React/Redux frontend.
+AKBnB is a full stack Airbnb Clone utilizing an Express Sequelize backend and a React/Redux frontend.
 Create listings, write reviews, and browse spots around the world for amazing places to stay for your next vacation. \
 
 [Click here to view AKBnB Live Site](http://akbnb-onrender.com)
