@@ -54,6 +54,10 @@ ul {
   color:  rgb(228, 60, 60);
 }
 
+.navbar-create-spot:hover {
+  text-decoration: underline;
+}
+
 .create-spot {
   text-decoration: none;
 }

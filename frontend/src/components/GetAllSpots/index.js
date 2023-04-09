@@ -32,12 +32,13 @@ export default function GetAllSpots() {
 
   return (
     <>
+    <div className='get-all-spots-overall-container'>
       <div className='get-all-spots-container'>
       {spotsArray.map(spot =>  {
         return (
         <div className='get-all-spots-tile'>
           <Link to={`/spots/${spot.id}`} className='get-all-spots-link'>
-          <img src={spot.previewImage} alt={`preview`} className='img-tile'/>
+          <img src={spot.previewImage} alt={`preview`} className='get-all-spots-img-tile'/>
           <div className='get-all-spots-rating-city'>
             <h3 className='get-all-spots-city-state'>{`${spot.city}, ${spot.state}`}</h3>
             <div className='get-all-spots-star-rating'>
@@ -51,6 +52,10 @@ export default function GetAllSpots() {
         </div>
         )
       })}
+      </div>
+        <div>
+          GOOGLE MAPS or MAPBOTS API GO HERE
+        </div>
       </div>
     </>
   )

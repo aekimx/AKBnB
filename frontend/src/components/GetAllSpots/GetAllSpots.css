@@ -1,8 +1,11 @@
-.manage-spots-div {
+.get-all-spots-overall-container {
+  border: 2px solid green;
+  display: flex;
+  flex-direction: row;
   font-family: 'Noto Sans Osage', sans-serif;
 }
 
-.img-tile {
+.get-all-spots-img-tile {
   width: 270px;
   height: 250px;
   border-radius: 10px;
@@ -13,6 +16,9 @@
   width: 1024px;
   flex-wrap: wrap;
   font-family: 'Noto Sans Osage', sans-serif;
+  justify-content: center;
+  border: 2px solid red;
+  /* MEDIA QUERIES HERE */
 }
 
 .get-all-spots-tile {
