@@ -1,22 +1,34 @@
-.manage-spots-div {
+.get-all-spots-overall-container {
+  display: flex;
+  flex-direction: row;
   font-family: 'Noto Sans Osage', sans-serif;
 }
 
-.img-tile {
+.get-all-spots-img-tile {
   width: 270px;
   height: 250px;
   border-radius: 10px;
 }
 
+<<<<<<< HEAD
 .get-all-spots {
   font-family: 'Noto Sans Osage', sans-serif;
+=======
+.get-all-spots-container {
+>>>>>>> dev
   display: flex;
   width: auto;
   flex-wrap: wrap;
+<<<<<<< HEAD
   justify-content: center;
+=======
+  font-family: 'Noto Sans Osage', sans-serif;
+  justify-content: center;
+  /* MEDIA QUERIES HERE */
+>>>>>>> dev
 }
 
-.spot-tile {
+.get-all-spots-tile {
   flex-direction: row;
   width: 280px;
   padding: 10px;
@@ -24,32 +36,32 @@
   /* justify-content: center; */
 }
 
-.rating-city {
+.get-all-spots-rating-city {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: -12px;
 }
 
-.link-spot-tile {
+.get-all-spots-link {
   text-decoration: none;
 }
 
-.star-rating {
+.get-all-spots-star-rating {
   display: flex;
   flex-direction: row;
   margin-right: 10px;
   margin-top: 5px;
 }
 
-.city-state {
+.get-all-spots-city-state {
   font-size: 15px;
 }
 
-.spot-price-night {
+.get-all-spots-price-night {
   display:flex;
   flex-direction:row;
-  margin-top: -2px;
+  margin-top: 5px;
 }
 .night-text {
   margin-left: 3px;
@@ -59,13 +71,13 @@
 
 .all-spot-price {
   font-size: 18px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 a:active {
   text-decoration: none;
 }
 
-.spots {
-  font-family: 'Noto Sans Osage', sans-serif;
+.get-all-spots-map-container {
+  border: 2px solid green;
 }

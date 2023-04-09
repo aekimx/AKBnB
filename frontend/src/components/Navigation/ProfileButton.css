@@ -31,6 +31,8 @@
   right: 35px;
   top: 61px;
   cursor: auto;
+  z-index: 9999;
+  background-color: white;
 }
 
 .profile-dropdown>li {

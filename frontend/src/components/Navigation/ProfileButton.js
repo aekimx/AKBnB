@@ -52,7 +52,6 @@ function ProfileButton({ user }) {
         <i className="fa-sharp fa-solid fa-bars" />
         <i className="fas fa-user-circle" />
         </div>
-
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -63,11 +62,11 @@ function ProfileButton({ user }) {
             <p className='user-info'>{user.firstName} {user.lastName}</p>
             <p className='user-info'>{user.email}</p>
             </div>
-            {/* NEEDS TO BE A LINE HERE TO SEPARATE */}
+
             <div className='manage-spots-div'>
             <Link to={`/spots/current`} className='manage-spots'>Manage Spots</Link>
             </div>
-            {/* NEEDS TO BE A LINE HERE TO SEPARATE */}
+
             <div className='logout-button-div'>
               <button className='logout-button' onClick={logout}>Log Out</button>
             </div>

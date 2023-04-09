@@ -15,9 +15,13 @@ export default function GetSpotDetails() {
   const {spotId}= useParams();
 
   const userId = useSelector(state => state.session.user?.id)
+<<<<<<< HEAD
 
   const spot = useSelector(state => state.spots.singleSpot);
 
+=======
+  const spot = useSelector(state => state.spots.singleSpot);
+>>>>>>> dev
   const review = useSelector(state => state.reviews.spot);
 
   const reviewArr = Object.values(review);
@@ -28,9 +32,16 @@ export default function GetSpotDetails() {
 
 
   useEffect(() => {
+<<<<<<< HEAD
     dispatch(oneSpotThunk(spotId));
     dispatch(loadReviewsThunk(spotId));
     return (() => dispatch(clearSpot()))
+=======
+      dispatch(oneSpotThunk(spotId));
+      dispatch(loadReviewsThunk(spotId));
+      return () => dispatch(clearSpot());
+
+>>>>>>> dev
     }, [spotId]);
 
 
@@ -76,43 +87,50 @@ export default function GetSpotDetails() {
 
 
   return (
+<<<<<<< HEAD
     <div className='spot-details-div'>
+=======
+    <div className='spot-detail-overall-container'>
+>>>>>>> dev
       <div className="spot-detail-container">
-        <p className='spot-name'> {spot.name} </p>
-        <div className='city-state-country'>
-        <p>{spot.city},</p>
-        <p>{spot.state},</p>
-        <p>{spot.country}</p>
+        <p className='spot-detail-name'> {spot.name} </p>
+        <div className='spot-detail-city-state-country'>
+          <p>{spot.city},</p>
+          <p>{spot.state},</p>
+          <p>{spot.country}</p>
         </div>
 
-        <div className='image-div'>
-          <img src={previewImg.url} alt='preview' className='previewImage' />
-          <div className='regular-images-div'>
-          {imagesArr.map(image => {
-            return <img src={image.url} alt="image" className='regImage' /> })}
+        <div className='spot-detail-image-div'>
+          <img src={previewImg.url} alt='preview' className='spot-detail-preview-image' />
+          <div className='spot-detail-regular-images-div'>
+            {imagesArr.map(image => {
+              return <img src={image.url} alt="house" className='spot-detail-reg-image' /> })}
           </div>
         </div>
 
-        <div className='hosted-reserve'>
-        <div className='hosted-reserve-desc'>
-          <p className='hosted-owner'>Hosted by {`${spot.Owner.firstName} ${spot.Owner.lastName}`}</p>
-          <p className='spot-description'>{`${spot.description}`}</p>
+      <div className='spot-detail-hosted-container'>
+        <div className='spot-detail-hosted-reserve-desc'>
+          <p className='spot-detail-hosted-owner'>Hosted by {`${spot.Owner.firstName} ${spot.Owner.lastName}`}</p>
+          <p className='spot-detail-description'>{`${spot.description}`}</p>
         </div>
 
-    <div className="res-price-rating-div">
-
-    <div className='night-review'>
-
-        <div className='spot-price-night'>
-              <p className='spot-price'>{`$${spot.price}`}</p> <p className='night'> night</p>
-        </div>
-
-    <div className = 'reviews-container'>
-
-        <div className='dot-reviews'>
-          <div className='star-reviews'>
-            <i class="fa-solid fa-star" /><p>{spot.avgStarRating}</p>
+        <div className="spot-detail-booking-container">
+          <div className='spot-detail-night-review'>
+            <div> ${spot.price} night</div>
+            <div> <i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
+            {spot.numReviews === 0 ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
           </div>
+          <button className='spot-detail-reserve-button'>Reserve</button>
+        </div>
+      </div>
+
+    </div>
+      <>
+        <div className='spot-detail-dot-reviews-bigger'>
+          <div className='star-reviews-bigger'>
+            <i class="fa-solid fa-star" /><p className='avg-star-rating-bigger'>{spot.avgStarRating}</p>
+          </div>
+<<<<<<< HEAD
           {spot.avgStarRating === "New" ? null : <p>{letter}</p>}
         {spot.avgStarRating === "New" ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
         </div>
@@ -135,9 +153,16 @@ export default function GetSpotDetails() {
           {spot.avgStarRating === "New" ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
           </div>
             </div>
+=======
+          <p className='dot-bigger'>{letter}</p>
+          {spot.numReviews === 0 ? null : <div className='num-reviews-bigger'>{spot.numReviews} {reviews}</div>}
+        </div>
+>>>>>>> dev
 
-
-        {+spot.ownerId === +userId || !userId || disableReview ? null : <div className="create-review-modal-spotdetails"> <OpenModalMenuItem
+          {+spot.ownerId === +userId || !userId || disableReview ?
+          null
+          :
+          <div className="create-review-modal-spotdetails"> <OpenModalMenuItem
           itemText="Post Your Review"
           modalComponent={<CreateReview reviewInfo={reviewInfo}/>}
           /> </div>}
@@ -146,18 +171,12 @@ export default function GetSpotDetails() {
             {spot.avgStarRating !== "New" || !userId || +spot.ownerId === +userId ? null : <p className='first-post-review'>Be the first to post a review!</p>}
           </div>
 
-        <div>
           <GetAllReviews />
-        </div>
-          {/* {reviews.forEach(review => {
-            <div>
-            <h3>{review.firstName}</h3>
-            <h4>{review.createdAt}</h4>
-            <h5>{review.review}</h5>
-            </div>
-          })} */}
 
-      </div>
+      </>
+
+
     </div>
+
   );
 }

@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 .spot-details-div {
   display: flex;
   flex-direction: column;
@@ -11,59 +12,84 @@
   flex-direction: column;
   justify-content: center;
   margin-left: 20px;
+=======
+
+.spot-detail-overall-container {
+  width: 1024px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+>>>>>>> dev
   font-family: 'Noto Sans Osage', sans-serif;
 }
 
-.spot-name {
+.spot-detail-container {
+  margin-left: 20px;
+  width: 1024px;
+}
+
+.spot-detail-name {
   margin-top: 15px;
   margin-bottom: 10px;
   font-size: 30px;
 }
 
-.city-state-country {
+.spot-detail-city-state-country {
   display: flex;
   flex-direction: row;
   margin-bottom: 12px;
 }
 
-.city-state-country p {
+.spot-detail-city-state-country p {
   margin-right: 8px;
 }
 
-.image-div {
+.spot-detail-image-div {
   width: 1150px;
   display:flex;
   height: 350px;
-
 }
 
-.previewImage {
+
+.spot-detail-preview-image {
   width: 50%;
   height: 410px;
   margin-right: 3px;
   height: 100%;
 }
 
-.regular-images-div {
+.spot-detail-regular-images-div {
   display: flex;
   flex-wrap: wrap;
   width: 700px;
 }
 
-.regImage {
+.spot-detail-reg-image {
   width: 220px;
   height: 175px;
   margin-left: 2px;
   margin-bottom: 2px;
 }
 
+.spot-detail-hosted-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid black;
+  width: 950px;
+}
 
-.hosted-owner {
+.spot-detail-hosted-reserve-desc {
+  width: 700px;
+}
+
+.spot-detail-hosted-owner {
   font-size: 22px;
   margin-top: 10px;
 }
 
-.spot-description {
+.spot-detail-description {
   font-size: 16px;
   margin-top: 5px;
   flex-wrap: wrap;
@@ -72,12 +98,12 @@
   width: 500px;
 }
 
-.hosted-reserve-desc {
-  width: 700px;
-}
-
-.res-price-rating-div {
+.spot-detail-booking-container {
   border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 300px;
   margin-right: 10px;
   margin-top: 15px;
@@ -89,33 +115,9 @@
   padding-bottom: 10px;
 }
 
-.spot-price {
-  font-size: 20px;
+.spot-detail-night-review {
+  width: 100%;
   margin-left: 20px;
-  font-weight:bold
-}
-
-.night {
-  font-size: 15px;
-  margin-top: 5px;
-  margin-bottom: 3px;
-  padding-left: 2px;
-}
-
-.reviews-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
-
-.star-reviews {
-  display: flex;
-  flex-direction: row;
-  margin-right: 10px;
-
-}
-
-.night-review {
   display:flex;
   flex-direction: row;
   justify-content: space-between;
@@ -123,36 +125,12 @@
   padding-right: 5px;
 }
 
-.hosted-reserve {
-  display: flex;
-  flex-direction: row;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid black;
-  width: 950px;
 
-}
-
-.fa-circle fa-solid {
-  height: 0.5px;
-}
-
-.dot-reviews {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 2px;
-}
-
-.num-reviews {
-  margin-left: 10px;
-
-}
-
-.reserve-button {
+.spot-detail-reserve-button {
   width: 250px;
   height: 25px;
-  margin-left:25px;
-  margin-top:10px;
+  margin-left: 25px;
+  margin-top: 15px;
   margin-bottom: 5px;
   background-color: rgb(228, 60, 60);
   color:white;
@@ -161,17 +139,6 @@
   border: 2px solid black;
 }
 
-
-.spot-detail-stars-review {
-  margin-left: 20px;
-  display: flex;
-  flex-direction: row;
-}
-
-.fa-star {
-  margin-top: 2px;
-  margin-right: 3px;
-}
 
 .create-review-modal-spotdetails {
   list-style: none;
@@ -188,17 +155,12 @@
   font-size: 12px;
 }
 
-
-.reviews-container-bigger {
-  /* border: 2px solid red; */
-  margin-left: 20px;
-  font-family: 'Noto Sans Osage', sans-serif;
-  margin-bottom: 15px;
-}
-
-.dot-reviews-bigger {
+.spot-detail-dot-reviews-bigger {
   display: flex;
   flex-direction: row;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  /* border: 2px solid green; */
 
 }
 
@@ -230,7 +192,6 @@
 }
 
 .first-post-review {
-  font-family: 'Noto Sans Osage', sans-serif;
   margin-left: 20px;
   font-size: 15px;
   margin-bottom: 50px;
