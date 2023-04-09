@@ -83,8 +83,12 @@ form, ::placeholder {
   border: 2px solid black;
   border-radius: 5px;
   font-size: 15px;
-
 }
+
+/* .submit-button:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+} */
 
 .error-formatting {
   display: flex;
