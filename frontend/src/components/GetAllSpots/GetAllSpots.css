@@ -1,5 +1,4 @@
 .get-all-spots-overall-container {
-  border: 2px solid green;
   display: flex;
   flex-direction: row;
   font-family: 'Noto Sans Osage', sans-serif;
@@ -17,7 +16,6 @@
   flex-wrap: wrap;
   font-family: 'Noto Sans Osage', sans-serif;
   justify-content: center;
-  border: 2px solid red;
   /* MEDIA QUERIES HERE */
 }
 
@@ -50,10 +48,10 @@
   font-size: 15px;
 }
 
-.spot-price-night {
+.get-all-spots-price-night {
   display:flex;
   flex-direction:row;
-  margin-top: -2px;
+  margin-top: 5px;
 }
 .night-text {
   margin-left: 3px;
@@ -68,4 +66,8 @@
 
 a:active {
   text-decoration: none;
+}
+
+.get-all-spots-map-container {
+  border: 2px solid green;
 }

@@ -45,7 +45,7 @@ export default function GetAllSpots() {
               <i class="fa-solid fa-star" /><p className='rating-text'>{`${spot.avgRating}`}</p>
             </div>
           </div>
-          <div className='spot-price-night'>
+          <div className='get-all-spots-price-night'>
               <text className='all-spot-price'>{`$${spot.price}`}</text> <text className='night-text'> night</text>
           </div>
           </Link>
@@ -53,7 +53,7 @@ export default function GetAllSpots() {
         )
       })}
       </div>
-        <div>
+        <div className='get-all-spots-map-container'>
           GOOGLE MAPS or MAPBOTS API GO HERE
         </div>
       </div>
