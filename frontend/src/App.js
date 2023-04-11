@@ -7,6 +7,7 @@ import GetAllSpots from "./components/GetAllSpots";
 import GetSpotDetails from './components/SpotDetails';
 import CreateSpot from './components/CreateSpot';
 import ManageSpots from "./components/ManageSpots";
+import ManageReviews from "./components/ManageReviews";
 
 import UpdateSpotInfo from "./components/UpdateSpot/updateSpotInfo";
 
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/spots/:spotId">
             <GetSpotDetails />
+          </Route>
+          <Route exact path="/reviews/current">
+            <ManageReviews />
           </Route>
           <Route>
             <h1>Unable to retrieve details. Please try again shortly.</h1>

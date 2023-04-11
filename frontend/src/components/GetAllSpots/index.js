@@ -1,8 +1,7 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { allSpots, allSpotsThunk, clearSpot } from '../../store/spotsReducer';
-import {useEffect} from 'react'
 
 
 import './GetAllSpots.css'
@@ -52,9 +51,9 @@ export default function GetAllSpots() {
         )
       })}
       </div>
-        <div className='get-all-spots-map-container'>
+        {/* <div className='get-all-spots-map-container'>
           GOOGLE MAPS or MAPBOTS API GO HERE
-        </div>
+        </div> */}
       </div>
     </>
   )
