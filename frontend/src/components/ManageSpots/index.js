@@ -18,11 +18,6 @@ export default function ManageSpots()  {
     return (() => dispatch(clearSpot()))
   },[dispatch]);
 
-  // useEffect(() => {
-  //   return dispatch(clearSpot());
-  // }, [])
-
-
   const current = useSelector(currentSpots);
   const currentSpotImages = Object.values(current);
 

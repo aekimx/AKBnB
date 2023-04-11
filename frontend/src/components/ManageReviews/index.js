@@ -22,7 +22,7 @@ export default function ManageReviews() {
   return (
     <>
     <div className='currentreviews-container'>
-      <div> Manage Reviews </div>
+      <div className='currentreviews-managereviews-text'> Manage Reviews </div>
       {reviewsArr.map(review => {
         return (
           <div className='currentreviews-inner-container'>
