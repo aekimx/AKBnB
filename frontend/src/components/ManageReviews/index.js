@@ -22,11 +22,11 @@ export default function ManageReviews() {
   return (
     <>
     <div className='currentreviews-container'>
+      <div> Manage Reviews </div>
       {reviewsArr.map(review => {
         return (
           <div className='currentreviews-inner-container'>
-            {/* <div> <img src={review.Spot.previewImage} /> </div> */}
-            <div> {review.stars} </div>
+            <div> <i class="fa-solid fa-star" /> {review.stars} </div>
             <div> {review.review} </div>
             <div>
               <div> Update Review</div>
