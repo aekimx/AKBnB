@@ -64,7 +64,11 @@ function ProfileButton({ user }) {
             </div>
 
             <div className='manage-spots-div'>
-            <Link to={`/spots/current`} className='manage-spots'>Manage Spots</Link>
+              <Link to={`/spots/current`} className='manage-spots'>Manage Spots</Link>
+            </div>
+
+            <div className='manage-spots-div'>
+              <Link to={`/reviews/current`} className='manage-spots'>Manage Reviews</Link>
             </div>
 
             <div className='logout-button-div'>
