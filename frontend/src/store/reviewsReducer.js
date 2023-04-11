@@ -155,7 +155,7 @@ export default function reviewsReducer ( state = initialState, action) {
       action.reviews.Reviews.forEach(review => {
         newState.user[review.id] = review
       })
-      return newState;s
+      return newState;
     default:
       return state
   }
