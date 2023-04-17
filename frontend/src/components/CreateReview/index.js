@@ -63,7 +63,12 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
       </div>
 
         <div className='create-review-button-div'>
-          <button disabled={review.length < 10 || stars < 1} onClick={handleSubmit}>Submit Your Review</button>
+          <button
+          disabled={review.length < 10 || stars < 1}
+          onClick={handleSubmit}
+          className='create-review-button'>
+            Submit Your Review
+          </button>
         </div>
     </div>
   )
