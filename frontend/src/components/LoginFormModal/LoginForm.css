@@ -1,7 +1,6 @@
-#modal-content {
+.login-container {
   width: 400px;
-  border-radius: 20px;
-  padding-bottom: 10px;
+  height: 300px;
 }
 
 .login-label {
@@ -14,7 +13,9 @@
 
 .login-text {
   text-align: center;
-  margin-bottom: -15px;
+  margin-bottom: -10px;
+  font-size: 30px;
+  margin-top: 10px;
 }
 
 .login-inputs {
@@ -36,6 +37,7 @@
   margin-bottom: 20px;
   border-color: black;
   color: white;
+  cursor: pointer;
 }
 
 .login-button:disabled {
@@ -43,7 +45,7 @@
   color:gray;
   box-shadow: 3px 3px gray;
   border-color: gray;
-
+  cursor: not-allowed;
 }
 
 .login-errors-ul {
@@ -76,4 +78,8 @@
 .login-error-text {
   color: red;
   margin-left: 25px;
+}
+
+.login-inputs {
+  padding-left: 3px;
 }

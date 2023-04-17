@@ -45,34 +45,38 @@ function LoginFormPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-    <h1 className='login-text'>Login</h1>
-      <ul className='login-errors-ul'>
-        {errors.map((error, idx) => <li className='login-error-text' key={idx}>{error}</li>)}
-      </ul>
-      <label className='login-label'>
-        Username or Email
-        <input
-          className='login-inputs'
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label className='login-label'>
-        Password
-        <input
-          className='login-inputs'
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button className='login-button' type="submit" disabled={(credential.length <= 4 || password.length <=6)}>Log In</button>
-      <button className='login-button' type="submit" onClick={demoUser}>Demo User</button>
-    </form>
+    <>
+    <div className='login-container'>
+      <form onSubmit={handleSubmit}>
+      <div className='login-text'>Login</div>
+        <ul className='login-errors-ul'>
+          {errors.map((error, idx) => <li className='login-error-text' key={idx}>{error}</li>)}
+        </ul>
+        <label className='login-label'>
+          Username or Email
+          <input
+            className='login-inputs'
+            type="text"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            required
+          />
+        </label>
+        <label className='login-label'>
+          Password
+          <input
+            className='login-inputs'
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <button className='login-button' type="submit" disabled={(credential.length <= 4 || password.length <=6)}>Log In</button>
+        <button className='login-button' type="submit" onClick={demoUser}>Demo User</button>
+      </form>
+      </div>
+    </>
   );
 }
 
