@@ -59,6 +59,8 @@ export default function GetSpotDetails() {
 
   return (
     <div className='spot-detail-overall-container'>
+      <div className='spot-detail-inner-container'>
+
       <div className="spot-detail-container">
         <p className='spot-detail-name'> {spot.name} </p>
         <div className='spot-detail-city-state-country'>
@@ -117,7 +119,7 @@ export default function GetSpotDetails() {
 
       </>
 
-
+      </div>
     </div>
 
   );

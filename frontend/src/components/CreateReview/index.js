@@ -10,8 +10,6 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0);
 
-  // const [errors, setErrors] = useState({});
-
   const dispatch = useDispatch();
   const {closeModal} = useModal()
 
@@ -26,8 +24,8 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
 
     dispatch(createReviewThunk(reviewData, User))
     // change the state in spot details to rerender
-    .then(dispatch(oneSpotThunk(spotId)))
-    .then(closeModal())
+    .then(() => dispatch(oneSpotThunk(spotId)))
+    .then(() => closeModal())
 
   }
 
@@ -73,21 +71,3 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
     </div>
   )
 }
-
-
-//   const handleDelete = (e) => {
-//     e.preventDefault();
-//     dispatch(deleteSpotThunk(spotId))
-//       .then(closeModal())
-//       .then(() => history.push('/spots/current'))
-//   }
-
-//   return (
-//     <div>
-//     <h2> Confirm Delete</h2>
-//     <h3> Are you sure you want to remove this spot from the listing?</h3>
-//     <button onClick={handleDelete}>Yes(Delete Spot)</button>
-//     <button onClick={closeModal}>No (Keep Spot)</button>
-//     </div>
-//   );
-// }

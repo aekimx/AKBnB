@@ -58,7 +58,7 @@
   background-color: red;
 }
 
-.modal li {
+.profile-button-modal li {
   width: 70px;
   padding-right: 10px;
   /* padding-top: 6px; */
@@ -81,7 +81,7 @@
   width: 80px;
   height: 30px;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 .logout-button-div {
@@ -102,7 +102,7 @@
   margin-left: 5px;
 }
 
-.modal {
+.profile-button-modal {
   padding: 0;
 }
 
@@ -116,10 +116,18 @@
   padding-bottom: 5px;
 }
 
-.manage-spots-div {
+.manage-spots-div, .manage-spots-div-reviews {
   width: 175px;
   margin-top: 5px;
   border-bottom: 2px solid black;
   padding-bottom: 5px;
+}
+
+.manage-spots-div-reviews {
   margin-bottom: 10px;
+}
+
+.manage-reviews {
+  text-decoration: none;
+  margin-left: 4px;
 }

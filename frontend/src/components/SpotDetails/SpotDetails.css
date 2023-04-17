@@ -1,16 +1,18 @@
-
-
 .spot-detail-overall-container {
-  width: 1024px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   font-family: 'Noto Sans Osage', sans-serif;
+}
+
+.spot-detail-inner-container {
+  /* border: 1px solid yellow; */
 }
 
 .spot-detail-container {
   margin-left: 20px;
-  width: 1024px;
+  width: 100%;
 }
 
 .spot-detail-name {
@@ -30,7 +32,6 @@
 }
 
 .spot-detail-image-div {
-  width: 1150px;
   display:flex;
   height: 350px;
 }
@@ -41,6 +42,7 @@
   height: 410px;
   margin-right: 3px;
   height: 100%;
+  object-fit: cover;
 }
 
 .spot-detail-regular-images-div {
@@ -59,10 +61,10 @@
 .spot-detail-hosted-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 10px;
   border-bottom: 2px solid black;
-  width: 950px;
 }
 
 .spot-detail-hosted-reserve-desc {
@@ -90,10 +92,8 @@
   justify-content: center;
   align-items: center;
   width: 300px;
-  margin-right: 10px;
   margin-top: 15px;
   border-radius: 10px;
-  margin-left: 10px;
   margin-bottom: 15px;
   height: 80px;
   padding-right: 25px;

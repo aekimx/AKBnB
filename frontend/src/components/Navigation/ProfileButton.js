@@ -67,8 +67,8 @@ function ProfileButton({ user }) {
               <Link to={`/spots/current`} className='manage-spots'>Manage Spots</Link>
             </div>
 
-            <div className='manage-spots-div'>
-              <Link to={`/reviews/current`} className='manage-spots'>Manage Reviews</Link>
+            <div className='manage-spots-div-reviews'>
+              <Link to={`/reviews/current`} className='manage-reviews'>Manage Reviews</Link>
             </div>
 
             <div className='logout-button-div'>
@@ -77,7 +77,7 @@ function ProfileButton({ user }) {
 
           </div>
         ) : (
-          <div className='modal'>
+          <div className='profile-button-modal'>
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
