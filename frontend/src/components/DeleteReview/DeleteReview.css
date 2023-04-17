@@ -1,0 +1,49 @@
+.delete-review-modal-container {
+  background-color: white;
+  font-family: 'Noto Sans Osage', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  border-radius: 20px;
+}
+
+.delete-review-text {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.delete-review-text-smaller {
+  font-size: 15px;
+  text-align: left;
+}
+
+.delete-review-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.delete-review-button {
+  margin-bottom: 15px;
+  background-color: gray;
+  color: white;
+  width: 250px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.delete-review-button-yes {
+  width: 250px;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  background-color: rgb(228, 60, 60);
+  color: white;
+}

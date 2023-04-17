@@ -30,20 +30,8 @@ export default function GetSpotDetails() {
       dispatch(loadReviewsThunk(spotId));
       return () => dispatch(clearSpot());
 
-    }, [spotId]);
+    }, [dispatch]);
 
-
-  // useEffect(() => {
-  //   return () => dispatch(clearSpot());
-  // }, [dispatch])
-
-
-  // is this going to be a problem? Check!!! Hits this every time - how to fix?
-  // if (!spot.name) {
-  //   return (
-  //     <h1>Unable to retrieve details. Please try again shortly.</h1>
-  //   )
-  // }
 
   if (!spot.avgStarRating) {
     spot.avgStarRating = "New";
@@ -65,11 +53,6 @@ export default function GetSpotDetails() {
   (spot.avgStarRating === "New" ? letter = null : letter = '•')
 
   const previewImg = spotImagesArr[0];
-  // if (previewImg.url === undefined) {
-  //   // console.log('preview image from spot details ', previewImg)
-  //   previewImg.url = "https://photos.zillowstatic.com/fp/ff4a7f9527ff9ddb1162b837c415ecd7-p_e.jpg";
-  // }
-
 
   const imagesArr = spotImagesArr.slice(1);
 
