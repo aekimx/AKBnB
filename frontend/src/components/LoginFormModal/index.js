@@ -24,14 +24,9 @@ function LoginFormPage() {
     e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
-      .then(() => {
-        if (sessionUser) {
-          closeModal()
-        }
-      })
+      .then(() => closeModal())
       .catch(async (res) => {
         const data = await res.json();
-        // console.log('data from loginform modal ', data);
         if (data && data.errors) setErrors(data.errors);
       });
   }
