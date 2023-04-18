@@ -13,6 +13,7 @@
   display: flex;
   flex-wrap: wrap;
   font-size: 15px;
+  word-break: break-all;
 }
 
 .firstname-review {
@@ -22,7 +23,8 @@
 
 .date-review {
   margin-bottom: 2px;
-  font-size: 20px;
+  font-size: 15px;
+  color: gray;
 }
 
 .delete-review-modal {

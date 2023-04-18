@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadCurrentReviewsThunk, deleteUserReviewThunk } from '../../store/reviewsReducer';
+import { loadCurrentReviewsThunk } from '../../store/reviewsReducer';
 import "./ManageReviews.css"
 
 export default function ManageReviews() {
@@ -15,27 +15,39 @@ export default function ManageReviews() {
   if (!reviews) return (<div> You don't have any reviews! </div>)
   const reviewsArr = Object.values(reviews)
 
-  const deleteReview = (reviewId) => {
-    dispatch(deleteUserReviewThunk(reviewId))
-  }
+  // const deleteReview = (reviewId) => {
+  //   dispatch(deleteUserReviewThunk(reviewId))
+  // }
+
+  // const updateReview = (reviewId) => {
+  //   dispatch(updateReview(reviewId))
+  // }
 
   return (
     <>
     <div className='currentreviews-container'>
       <div className='currentreviews-managereviews-text'> Manage Reviews </div>
+      <div className='currentreviews-inner-container'>
+        {reviewsArr.length ?
+        <>
       {reviewsArr.map(review => {
         return (
           <div className='currentreviews-inner-container'>
-            <div> <i class="fa-solid fa-star" /> {review.stars} </div>
+            <div> {review.Spot.name} </div>
+            <div> {review.createdAt.slice(0,10)} </div>
+            {/* <div> <i class="fa-solid fa-star" /> {review.stars} </div> */}
             <div> {review.review} </div>
-            <div>
-              <div> Update Review</div>
-              <div onClick={deleteReview(review.id)} > Delete Review</div>
+            <div className='currentreviews-buttons'>
+              <div className='currentreviews-update'> Update</div>
+              <div className='currentreviews-delete'> Delete</div>
             </div>
           </div>
         )
 
       })}
+      </> :
+        <div> No reviews yet!</div>}
+      </div>
     </div>
     </>
   )

@@ -39,6 +39,7 @@ export default function CreateReview({reviewInfo: {spotId, userId}}) {
       <textarea
         className='leave-review-here-textarea'
         placeholder='Leave your review here.'
+        maxLength='2000'
         onChange={(e) => setReview(e.target.value)} />
 
     <div className='stars-text-icons'>

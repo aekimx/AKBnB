@@ -7,7 +7,7 @@
 }
 
 .spot-detail-inner-container {
-  /* border: 1px solid yellow; */
+  /* border: 1px solid green; */
 }
 
 .spot-detail-container {
@@ -34,6 +34,7 @@
 .spot-detail-image-div {
   display:flex;
   height: 350px;
+  width: 95%;
 }
 
 
@@ -43,19 +44,25 @@
   margin-right: 3px;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .spot-detail-regular-images-div {
-  display: flex;
-  flex-wrap: wrap;
-  width: 700px;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 2px;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%);
 }
 
 .spot-detail-reg-image {
-  width: 220px;
-  height: 175px;
-  margin-left: 2px;
-  margin-bottom: 2px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .spot-detail-hosted-container {
@@ -64,6 +71,7 @@
   justify-content: space-between;
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 95%;
   border-bottom: 2px solid black;
 }
 
