@@ -33,9 +33,8 @@ export default function ManageReviews() {
       {reviewsArr.map(review => {
         return (
           <div className='currentreviews-inner-container'>
-            <div> {review.Spot.name} </div>
+            <div className='currentreviews-spot-name'> {review.Spot.name} </div>
             <div> {review.createdAt.slice(0,10)} </div>
-            {/* <div> <i class="fa-solid fa-star" /> {review.stars} </div> */}
             <div> {review.review} </div>
             <div className='currentreviews-buttons'>
               <div className='currentreviews-update'> Update</div>
