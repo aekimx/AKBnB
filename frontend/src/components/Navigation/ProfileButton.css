@@ -23,11 +23,12 @@
   list-style-type: none;
   flex-direction: column;
   width: auto;
+  height: auto;
   padding: 5px 20px 1px 10px;
-  border: 2px solid;
+  border: 1px solid black;
   border-radius: 5px;
   font-family: 'Noto Sans Osage', sans-serif;
-  font-weight: 100;
+  font-weight: lighter;
   right: 35px;
   top: 61px;
   cursor: auto;
@@ -112,14 +113,14 @@
 }
 
 .logged-in-user-info {
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid rgb(66, 65, 65);
   padding-bottom: 5px;
 }
 
 .manage-spots-div, .manage-spots-div-reviews {
   width: 175px;
   margin-top: 5px;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid rgb(66, 65, 65);
   padding-bottom: 5px;
 }
 
