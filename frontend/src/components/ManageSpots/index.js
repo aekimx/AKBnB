@@ -51,6 +51,7 @@ export default function ManageSpots()  {
                 </div>
               </div>
 
+            </Link>
               <div className='manage-spots-night-update-delete-container'>
                 <div className='manage-spots-price-night'>
                   <div className='spot-price-manage'>{`$${spot.price}`}</div> <div className='manage-spots-night'> night</div>
@@ -72,7 +73,7 @@ export default function ManageSpots()  {
 
               </div>
 
-            </Link>
+
           </div>
 
         );

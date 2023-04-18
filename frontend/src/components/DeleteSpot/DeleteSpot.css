@@ -1,5 +1,9 @@
 .delete-spot-modal-div {
   font-family: 'Noto Sans Osage', sans-serif;
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid black;
 }
 
 .confirm-delete-text {
@@ -11,7 +15,6 @@
 .confirm-delete-text-smaller {
   font-size: 15px;
   text-align: left;
-  margin-left: 20px;
 }
 
 .delete-spot-button-confirm, .delete-spot-button-confirm-no {
