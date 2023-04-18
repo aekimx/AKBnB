@@ -1,10 +1,11 @@
 ul {
   display: flex;
   justify-content: space-between;
-  border-bottom: solid rgb(175, 174, 174);
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgb(200, 197, 197);
   padding: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
+  height: 70px;
 }
 
 .home-button {
