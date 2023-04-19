@@ -20,6 +20,8 @@
   justify-content: center;
 
   /* MEDIA QUERIES HERE */
+  font-family: 'Noto Sans Osage', sans-serif;
+
 }
 
 .get-all-spots-tile {
