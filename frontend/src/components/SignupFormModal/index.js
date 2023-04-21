@@ -53,7 +53,7 @@ function SignupFormModal() {
           <ul className='signup-errors-ul'>
             {errors.map((error, idx) => <li className='signup-errors-li' key={idx}>{error}</li>)}
           </ul>
-          : null}
+          : <div className='signup-errors-div'> </div>}
 
         <label className='signup-label'>
           Email
