@@ -153,7 +153,6 @@ router.delete('/:reviewId', restoreUser, requireAuth, async (req,res) => {
       "statusCode": 404
     })
   } else {
-    // console.log(deletedReview);
     if (deletedReview.dataValues.userId === req.user.id) {
       deletedReview.destroy();
       res.status(200)

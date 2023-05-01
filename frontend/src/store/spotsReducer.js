@@ -66,7 +66,7 @@ export const allSpotsThunk = () => async dispatch => {
         // console.log('did the reassignment work ', spot.avgRating)
       }
     })
-    console.log(spotsJSON);
+
     dispatch(loadSpots(spotsJSON));
   }
 };
@@ -111,12 +111,11 @@ export const createSpotThunk = (data, imgUrlArr, owner) => async dispatch => {
 };
 
 export const loadCurrentUserSpots = () => async dispatch => {
-  console.log("load current user spots thunk running")
   const response = await csrfFetch("/api/spots/current");
 
   if (response.ok) {
     const userSpots = await response.json();
-    console.log('userSpots from loadcurrent user spots thunk ', userSpots);
+
     dispatch(currentUserSpots(userSpots));
   }
 };
@@ -138,11 +137,9 @@ export const deleteSpotThunk = spotId => async dispatch => {
   const response = await csrfFetch(`/api/spots/${+spotId}`, {
     method: "delete"
   });
-  // console.log('response from deleteSpotThunk', response);
 
   if (response.ok) {
     const successfulDelete = await response.json();
-    // console.log('if repsonse.ok', successfulDelete)
     dispatch(deleteSpot(spotId));
     return successfulDelete; // should be close modal?
   }
@@ -172,8 +169,7 @@ export default function spotsReducer(state = initialState, action) {
       newState.allSpots[action.spot.id] = action.spot;
       return newState;
     case LOAD_CURRENT:
-      newState = {...state, allSpots: { },singleSpot: { ...state.singleSpot }};
-      // console.log('action.spots from root reducer' , action.spots);
+      newState = {...state, allSpots: { }, singleSpot: { ...state.singleSpot }};
       action.spots.Spots.forEach(spot => {newState.allSpots[spot.id] = spot});
       return newState;
     case UPDATE:

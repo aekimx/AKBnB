@@ -103,7 +103,6 @@ router.get("/" , async (req, res) => {
         attributes: [[sequelize.fn("avg", sequelize.col("stars")), "avgStarRating"]],
         where: { spotId: spot.id }
       });
-      // console.log(review[0]);
       const avgRating = review[0].dataValues.avgStarRating;
       spot.avgRating = avgRating;
 
@@ -227,7 +226,6 @@ router.get("/:spotId", async (req, res) => {
       where: {spotId: id}
     })
 
-    console.log('--------------- reviews from backend', reviews)
     spot.avgStarRating = reviews[0].avgStarRating
     spot.numReviews= reviews[0].numReviews;
 
@@ -329,7 +327,6 @@ router.post("/:spotId/images", restoreUser, requireAuth, validateCreateSpotImage
 //PUT /api/spots/:spotId
 router.put("/:spotId", restoreUser, requireAuth, validateCreateSpot, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
-    // console.log(spot);
     if (!spot) {
       let error = {
         message: "Spot couldn't be found",
