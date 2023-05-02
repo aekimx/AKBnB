@@ -91,7 +91,7 @@ const spots = [
     price: 100.0
   },
     { ownerId: 2,
-      ddress: "456 Elm St",
+      address: "456 Elm St",
       city: "Los Angeles",
       state: "CA",
       country: "USA",
