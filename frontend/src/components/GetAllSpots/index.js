@@ -2,20 +2,20 @@ import React, {useEffect, useState, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { allSpots, allSpotsThunk, clearSpot } from '../../store/spotsReducer';
-import mapboxgl from 'mapbox-gl';
+// import mapboxgl from 'mapbox-gl';
 import './GetAllSpots.css'
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWVraW14IiwiYSI6ImNsZ21sMXQ2ZjA2d3Aza29sZ3Rsa2doZWcifQ.UkTPqaccmf5DuIBTLxRY3g';
+// mapboxgl.accessToken = 'pk.eyJ1IjoiYWVraW14IiwiYSI6ImNsZ21sMXQ2ZjA2d3Aza29sZ3Rsa2doZWcifQ.UkTPqaccmf5DuIBTLxRY3g';
 
 
 
 export default function GetAllSpots() {
 
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lat, setLat] = useState(40.7128);
-  const [lng, setLng] = useState(74.0060);
-  const [zoom, setZoom] = useState(4);
+  // const mapContainer = useRef(null);
+  // const map = useRef(null);
+  // const [lat, setLat] = useState(40.7128);
+  // const [lng, setLng] = useState(74.0060);
+  // const [zoom, setZoom] = useState(4);
 
   const dispatch = useDispatch();
 
@@ -24,24 +24,24 @@ export default function GetAllSpots() {
     return (() => dispatch(clearSpot()))
   }, [dispatch])
 
-  useEffect(() => {
-    if (map.current) return ; // initialize map only once
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: [lng, lat],
-      zoom: zoom
-    })
-  })
+  // useEffect(() => {
+  //   if (map.current) return ; // initialize map only once
+  //   map.current = new mapboxgl.Map({
+  //     container: mapContainer.current,
+  //     style: 'mapbox://styles/mapbox/streets-v12',
+  //     center: [lng, lat],
+  //     zoom: zoom
+  //   })
+  // })
 
-  useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
-    setLng(map.current.getCenter().lng.toFixed(4));
-    setLat(map.current.getCenter().lat.toFixed(4));
-    setZoom(map.current.getZoom().toFixed(2));
-    });
-    });
+  // useEffect(() => {
+  //   if (!map.current) return; // wait for map to initialize
+  //   map.current.on('move', () => {
+  //   setLng(map.current.getCenter().lng.toFixed(4));
+  //   setLat(map.current.getCenter().lat.toFixed(4));
+  //   setZoom(map.current.getZoom().toFixed(2));
+  //   });
+  //   });
 
   const spots = useSelector(allSpots)
 
@@ -77,9 +77,9 @@ export default function GetAllSpots() {
         )
       })}
       </div>
-      <>
+      {/* <>
         <div className='get-all-spots-map-container' ref={mapContainer} />
-      </>
+      </> */}
         </div>
     </>
   )

@@ -56,6 +56,11 @@ export default function GetSpotDetails() {
 
   const imagesArr = spotImagesArr.slice(1);
 
+  const handleReserve = (e) => {
+    e.preventDefault();
+    window.alert('Reserve Feature Coming Soon!');
+  }
+
 
   return (
     <div className='spot-detail-overall-container'>
@@ -89,7 +94,8 @@ export default function GetSpotDetails() {
             <div> <i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
             {spot.numReviews === 0 ? null : <div className='num-reviews'>{spot.numReviews} {reviews}</div>}
           </div>
-          <button className='spot-detail-reserve-button'>Reserve</button>
+          <button className='spot-detail-reserve-button'
+          onClick={handleReserve}>Reserve</button>
         </div>
       </div>
 
