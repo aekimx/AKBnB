@@ -49,6 +49,89 @@ let spotImages = [
     url: "https://photos.zillowstatic.com/fp/ff4a7f9527ff9ddb1162b837c415ecd7-p_e.jpg",
     preview: true
   },
+  {
+    spotId: 7,
+    url: "https://s3.amazonaws.com/twotreesny/mh1200x854-1647635818817.jpeg",
+    preview: true
+  },
+  {
+    spotId: 7,
+    url: "https://thumbs.cityrealty.com/assets/smart/736x/webp/2/22/22ca6350cd0dcc474556e1e06bd8144482a45135/15-central-park-west-01.jpg",
+    preview: false
+  },
+  {
+    spotId: 8,
+    url: "https://image.cnbcfm.com/api/v1/image/104885357-rsz_ten_thousand_penthouse.jpg?v=1512677265&w=1600&h=900",
+    preview: true
+  },
+  {
+    spotId: 8,
+    url: "https://lirp.cdn-website.com/dd256585/dms3rep/multi/opt/aplus_backgroundimagedesktop_1900x1267_olivedtla_2017_bdg1_self-1920w.jpg",
+    preview: false
+  },
+  {
+    spotId: 9,
+    url: "https://www.rentcafe.com/blog/wp-content/uploads/sites/62/2016/09/Catalyst_Facebook_photo.jpg",
+    preview: true
+  },
+  {
+    spotId: 9,
+    url: "https://s3-prod.chicagobusiness.com/old%20town%201.jpg",
+    preview: false
+  },
+  {
+    spotId: 10,
+    url: "https://s.hdnux.com/photos/01/26/04/23/22562022/4/rawImage.jpg",
+    preview: true
+  },
+  {
+    spotId: 10,
+    url: "https://s.hdnux.com/photos/01/25/72/31/22521471/7/1200x0.jpg",
+    preview: false
+  },
+  {
+    spotId: 11,
+    url: "https://imageio.forbes.com/blogs-images/amydobson/files/2018/12/RenzoTerrace-1200x675.jpg?format=jpg&width=1200",
+    preview: true
+  },
+  {
+    spotId: 11,
+    url: "https://www.57ocean.com/wp-content/themes/57ocean/images/57OCEAN_PH_14_Plunge-Pools.jpg",
+    preview: false
+  },
+  {
+    spotId: 12,
+    url: "https://img.gtsstatic.net/reno/imagereader.aspx?imageurl=https%3A%2F%2Fsir.azureedge.net%2F1194i215%2F108m2s70aca6meacsx7cr0ch44i215&option=N&h=472&permitphotoenlargement=false",
+    preview: true
+  },
+  {
+    spotId: 12,
+    url: "https://www.tripsavvy.com/thmb/8L6QGTBt-Y8PpTJzpTbPPqFR1VM=/2121x1414/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-200334603-001-5b875e50c9e77c0050cf2162.jpg",
+    preview: false
+  },
+  {
+    spotId: 13,
+    url: "https://www.extraspace.com/wp-content/uploads/2021/04/best-places-buy-home-philly.jpg",
+    preview: true
+  },
+  {
+    spotId: 13,
+    url: "https://images.squarespace-cdn.com/content/v1/5d9f80225151ac1b8ac3b9c2/1623770465774-MCZXPPQHEHLO6N289BNL/shutterstock_618666875.jpg",
+    preview: false
+  },
+  {
+    spotId: 14,
+    url: "https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2017/02/beautiful-suburbs-homes-2.jpg",
+    preview: true
+  },
+  {
+    spotId: 14,
+    url: "https://static1.thetravelimages.com/wordpress/wp-content/uploads/2022/12/acorn-street-boston.jpg",
+    preview: false
+  },
+
+
+
 ]
 
 
